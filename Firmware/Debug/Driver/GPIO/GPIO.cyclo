@@ -1,0 +1,13 @@
+../Inc/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../Inc/core_cm4.h:1814:22:__NVIC_SetPriority	2
+../Driver/GPIO/GPIO.c:42:6:EXTI0_IRQHandler	2
+../Driver/GPIO/GPIO.c:50:6:EXTI1_IRQHandler	2
+../Driver/GPIO/GPIO.c:58:6:EXTI2_IRQHandler	2
+../Driver/GPIO/GPIO.c:66:6:EXTI3_IRQHandler	2
+../Driver/GPIO/GPIO.c:74:6:EXTI4_IRQHandler	2
+../Driver/GPIO/GPIO.c:84:6:EXTI9_5_IRQHandler	4
+../Driver/GPIO/GPIO.c:98:6:EXTI15_10_IRQHandler	4
+../Driver/GPIO/GPIO.c:119:6:GPIO_Interrupt_Setup	20
+../Driver/GPIO/GPIO.c:163:5:GPIO_Clock_Disable	13
+../Driver/GPIO/GPIO.c:183:5:GPIO_Clock_Enable	13
+../Driver/GPIO/GPIO.c:198:13:GPIO_Pin_Init	6

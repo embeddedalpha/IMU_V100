@@ -1,0 +1,5 @@
+../Inc/core_cm4.h:1814:22:__NVIC_SetPriority	2
+../Inc/core_cm4.h:2022:26:SysTick_Config	2
+../Inc/main.h:51:22:MCU_Clock_Setup	4
+../Inc/main.h:115:26:Delay_Config	1
+../Src/main.c:8:5:main	1

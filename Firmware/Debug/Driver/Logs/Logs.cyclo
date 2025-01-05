@@ -1,0 +1,8 @@
+../Inc/core_cm4.h:2064:26:ITM_SendChar	4
+../Driver/Logs/Logs.c:11:5:_write	2
+../Driver/Logs/Logs.c:20:20:_get_log_level_string	5
+../Driver/Logs/Logs.c:35:13:_log	1
+../Driver/Logs/Logs.c:43:6:log_error	1
+../Driver/Logs/Logs.c:51:6:log_info	1
+../Driver/Logs/Logs.c:59:6:log_debug	1
+../Driver/Logs/Logs.c:72:6:log_debug_array	3
