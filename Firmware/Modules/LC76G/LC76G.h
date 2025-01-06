@@ -16,6 +16,10 @@
 
 typedef enum LC76G_Status_Flag{
 
+	Bad_String,
+	Init_Success,
+	Init_Fail,
+	Process_Success,
 	Checksum_Fail,
 	Checksum_Pass,
 
@@ -72,7 +76,7 @@ typedef struct LC76G_Data_Typedef
 
 }LC76G_Data_Typedef;
 
-LC76G_Status_Flag LC76G_Init(void);
+LC76G_Status_Flag LC76G_Init(uint32_t baudrate);
 LC76G_Status_Flag LC76G_Process_Data(LC76G_Data_Typedef *data);
 
 

@@ -33,7 +33,7 @@ void UART4_IRQHandler(void)
 	if(USART_SR & USART_SR_CTS)
 	{
 	    if (__usart_4_config__ ->ISR_Routines.CTS_ISR) {
-	    	__usart_1_config__ ->ISR_Routines.CTS_ISR();
+	    	__usart_4_config__ ->ISR_Routines.CTS_ISR();
 	    	UART4->SR &= ~USART_SR_CTS;  // Clear the Break interrupt flag
 	    }
 	}
@@ -89,6 +89,71 @@ void UART4_IRQHandler(void)
 	}
 
 }
+
+
+void USART1_IRQHandler(void)
+{
+	USART_SR = USART1 -> SR;
+	if(USART_SR & USART_SR_CTS)
+	{
+	    if (__usart_1_config__ ->ISR_Routines.CTS_ISR) {
+	    	__usart_1_config__ ->ISR_Routines.CTS_ISR();
+	    	USART1->SR &= ~USART_SR_CTS;  // Clear the Break interrupt flag
+	    }
+	}
+
+	if(USART_SR & USART_SR_LBD)
+	{
+	    if (__usart_1_config__ ->ISR_Routines.LIN_Break_Detection_ISR) {
+	    	__usart_1_config__ ->ISR_Routines.LIN_Break_Detection_ISR();
+	    	USART1->SR &= ~USART_SR_LBD;  // Clear the Break interrupt flag
+	    }
+	}
+
+	if(USART_SR & USART_SR_TXE)
+	{
+	    if (__usart_1_config__ ->ISR_Routines.Transmit_Empty_ISR) {
+	    	__usart_1_config__ ->ISR_Routines.Transmit_Empty_ISR();
+	    	USART1->SR &= ~USART_SR_TXE;  // Clear the Break interrupt flag
+	    }
+	}
+
+
+	if(USART_SR & USART_SR_TC)
+	{
+	    if (__usart_1_config__ ->ISR_Routines.Transmission_Complete_ISR) {
+	    	__usart_1_config__ ->ISR_Routines.Transmission_Complete_ISR();
+	    	USART1->SR &= ~USART_SR_TC;  // Clear the Break interrupt flag
+	    }
+	}
+
+	if(USART_SR & USART_SR_RXNE)
+	{
+	    if (__usart_1_config__ ->ISR_Routines.Receiver_Empty_ISR) {
+	    	__usart_1_config__ ->ISR_Routines.Receiver_Empty_ISR();
+	    	USART1->SR &= ~USART_SR_RXNE;  // Clear the Break interrupt flag
+	    }
+	}
+
+
+	if(USART_SR & USART_SR_IDLE)
+	{
+	    if (__usart_1_config__ ->ISR_Routines.Idle_Line_ISR) {
+	    	__usart_1_config__ ->ISR_Routines.Idle_Line_ISR();
+	    	USART1->SR &= ~USART_SR_IDLE;  // Clear the Break interrupt flag
+	    }
+	}
+
+	if(USART_SR & USART_SR_PE)
+	{
+	    if (__usart_1_config__ ->ISR_Routines.Parity_ISR) {
+	    	__usart_1_config__ ->ISR_Routines.Parity_ISR();
+	    	USART1->SR &= ~USART_SR_PE;  // Clear the Break interrupt flag
+	    }
+	}
+
+}
+
 
 
 static int8_t Get_USART_Instance_Number(USART_Config *config)

@@ -12,7 +12,6 @@ int main(void)
 	Console_Init(9600);
 
 
-
 	for(;;)
 	{
 

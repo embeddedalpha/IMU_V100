@@ -1,1 +1,5 @@
-../Modules/LC76G/LC76G.c:12:22:Ql_Check_XOR	24	static
+../Modules/LC76G/LC76G.c:24:22:Ql_Check_XOR	24	static
+../Modules/LC76G/LC76G.c:40:6:GPS_PPS_ISR	8	static
+../Modules/LC76G/LC76G.c:47:6:Get_GPS_Data_ISR	4	static,ignoring_inline_asm
+../Modules/LC76G/LC76G.c:77:19:LC76G_Init	16	static
+../Modules/LC76G/LC76G.c:98:19:LC76G_Process_Data	88	static
