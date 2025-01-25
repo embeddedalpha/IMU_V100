@@ -25,6 +25,7 @@ SUBDIRS := \
 Driver/Console \
 Driver/DMA \
 Driver/GPIO \
+Driver/I2C \
 Driver/Logs \
 Driver/Timer \
 Driver/USART \

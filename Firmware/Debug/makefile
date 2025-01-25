@@ -15,6 +15,7 @@ RM := rm -rf
 -include Driver/USART/subdir.mk
 -include Driver/Timer/subdir.mk
 -include Driver/Logs/subdir.mk
+-include Driver/I2C/subdir.mk
 -include Driver/GPIO/subdir.mk
 -include Driver/DMA/subdir.mk
 -include Driver/Console/subdir.mk

@@ -114,7 +114,7 @@ LC76G_Status_Flag LC76G_Process_Data(LC76G_Data_Typedef *data)
 		if(token == NULL) return Bad_String;
 
 		if(strcmp(token, GNGGA)){
-			Ql_Check_XOR()
+//			Ql_Check_XOR()
 		}
 		if(strcmp(token, GNVTG)){}
 		if(strcmp(token, GNRMC)){}

@@ -1,6 +1,7 @@
 "./Driver/Console/Console.o"
 "./Driver/DMA/DMA.o"
 "./Driver/GPIO/GPIO.o"
+"./Driver/I2C/I2C.o"
 "./Driver/Logs/Logs.o"
 "./Driver/Timer/Timer.o"
 "./Driver/USART/USART.o"
