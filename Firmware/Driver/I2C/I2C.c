@@ -9,8 +9,13 @@
 #include "I2C.h"
 
 
-DMA_Config xI2C_TX;
-DMA_Config xI2C_RX;
+DMA_Config xI2C0_TX;
+DMA_Config xI2C1_TX;
+DMA_Config xI2C2_TX;
+
+DMA_Config xI2C1_RX;
+DMA_Config xI2C2_RX;
+DMA_Config xI2C3_RX;
 
 static void pin_setup(I2C_Config *config)
 {
@@ -124,6 +129,59 @@ void I2C_Init(I2C_Config *config)
 		config->Port  -> TRISE = 0x8;
 	}
 
+	if(config -> DMA_Control == I2C_Configuration.DMA_Control.RX_DMA_Enable)
+	{
+		if(config->Port == I2C1)
+		{
+//			config -> Port -> CR2 |= I2C_CR2_DMAEN;
+			xI2C1_RX.Request = DMA_Configuration.Request.I2C1_RX;
+			xI2C1_RX.circular_mode = DMA_Configuration.Circular_Mode.Disable;
+			xI2C1_RX.flow_control = DMA_Configuration.Flow_Control.DMA_Control;
+			xI2C1_RX.interrupts = DMA_Configuration.DMA_Interrupts.Transfer_Complete | DMA_Configuration.DMA_Interrupts.Half_Transfer_Complete |
+					              DMA_Configuration.DMA_Interrupts.Transfer_Error | DMA_Configuration.DMA_Interrupts.Fifo_Error | DMA_Configuration.DMA_Interrupts.Direct_Mode_Error;
+			xI2C1_RX.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
+			xI2C1_RX.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;
+			xI2C1_RX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.byte;
+			xI2C1_RX.peripheral_pointer_increment = DMA_Configuration.Peripheral_Pointer_Increment.Disable;
+			xI2C1_RX.transfer_direction = DMA_Configuration.Transfer_Direction.Peripheral_to_memory;
+			xI2C1_RX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			DMA_Init(&xI2C1_RX);
+		}
+
+		else if(config->Port == I2C2)
+		{
+//			config -> Port -> CR2 |= I2C_CR2_DMAEN;
+			xI2C2_RX.Request = DMA_Configuration.Request.I2C2_RX;
+			xI2C2_RX.circular_mode = DMA_Configuration.Circular_Mode.Disable;
+			xI2C2_RX.flow_control = DMA_Configuration.Flow_Control.DMA_Control;
+			xI2C2_RX.interrupts = DMA_Configuration.DMA_Interrupts.Transfer_Complete;
+			xI2C2_RX.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
+			xI2C2_RX.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;
+			xI2C2_RX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.byte;
+			xI2C2_RX.peripheral_pointer_increment = DMA_Configuration.Peripheral_Pointer_Increment.Enable;
+			xI2C2_RX.transfer_direction = DMA_Configuration.Transfer_Direction.Peripheral_to_memory;
+			xI2C2_RX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			DMA_Init(&xI2C2_RX);
+		}
+
+		else if(config->Port == I2C3)
+		{
+//			config -> Port -> CR2 |= I2C_CR2_DMAEN;
+			xI2C3_RX.Request = DMA_Configuration.Request.I2C3_RX;
+			xI2C3_RX.circular_mode = DMA_Configuration.Circular_Mode.Disable;
+			xI2C3_RX.flow_control = DMA_Configuration.Flow_Control.DMA_Control;
+			xI2C3_RX.interrupts = DMA_Configuration.DMA_Interrupts.Transfer_Complete;
+			xI2C3_RX.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
+			xI2C3_RX.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;
+			xI2C3_RX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.byte;
+			xI2C3_RX.peripheral_pointer_increment = DMA_Configuration.Peripheral_Pointer_Increment.Enable;
+			xI2C3_RX.transfer_direction = DMA_Configuration.Transfer_Direction.Peripheral_to_memory;
+			xI2C3_RX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			DMA_Init(&xI2C3_RX);
+		}
+
+	}
+
 	config -> Port -> CR1 |= I2C_CR1_NOSTRETCH;
 	config -> Port -> CR1 |= I2C_CR1_PE;
 
@@ -188,11 +246,32 @@ void I2C_Master_Send_Buffer(I2C_Config *config, uint8_t *data, int length)
 {
 	if(config->DMA_Control == I2C_Configuration.DMA_Control.TX_DMA_Enable)
 	{
-//		xI2C_TX.memory_address = (uint32_t)&data;
-//		xI2C_TX.buffer_length = length;
-//		xI2C_TX.peripheral_address = (uint32_t)&confi->DR;
-//		DMA_Set_Target(&xI2C_TX);
-//		DMA_Trigger(&xI2C_TX);
+		if(config->Port == I2C1)
+		{
+			xI2C1_RX.memory_address = (uint32_t)&data[0];
+			xI2C1_RX.peripheral_address = (uint32_t)&config->Port->DR;
+			xI2C1_RX.buffer_length = length;
+			DMA_Set_Target(&xI2C1_RX);
+			DMA_Set_Trigger(&xI2C1_RX);
+		}
+		else if(config->Port == I2C2)
+		{
+			xI2C2_RX.memory_address = (uint32_t)&data[0];
+			xI2C2_RX.peripheral_address = (uint32_t)&config->Port->DR;
+			DMA_Set_Target(&xI2C2_RX);
+			DMA_Set_Trigger(&xI2C2_RX);
+		}
+		else if(config->Port == I2C3)
+		{
+			xI2C3_RX.memory_address = (uint32_t)&data[0];
+			xI2C3_RX.peripheral_address = (uint32_t)&config->Port->DR;
+			DMA_Set_Target(&xI2C3_RX);
+			DMA_Set_Trigger(&xI2C3_RX);
+		}
+
+
+
+
 	}
 	for(int i = 0; i < length; i++)
 	{
@@ -200,6 +279,11 @@ void I2C_Master_Send_Buffer(I2C_Config *config, uint8_t *data, int length)
 		config -> Port -> DR = data[i];
 		while((config -> Port -> SR1 & 0x80) == 0){}
 	}
+}
+
+void I2C_Master_Receive_Buffer(I2C_Config *config, uint8_t *rx_buffer, uint16_t length)
+{
+
 }
 
 void I2C_Master_NACK(I2C_Config *config)
@@ -241,3 +325,24 @@ int I2C_Master_Read_Register(I2C_Config *config, uint8_t device_address, uint8_t
 	return temp;
 }
 
+void I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address,volatile uint8_t *data, uint16_t length)
+{
+	xI2C1_RX.memory_address = (uint32_t)&data[0];
+	xI2C1_RX.peripheral_address = (uint32_t)&config->Port->DR;
+	xI2C1_RX.buffer_length = length;
+	DMA_Set_Target(&xI2C1_RX);
+	I2C_Master_Start(config);
+
+		I2C_Master_Address(config, device_address, 0);
+		I2C_Master_Send_Byte(config, reg_address);
+		I2C_Master_Stop(config);
+		I2C_Master_Start(config);
+		I2C_Master_Address(config, device_address, 1);
+		config -> Port -> CR2 |= I2C_CR2_DMAEN;
+		DMA_Set_Trigger(&xI2C1_RX);
+
+//		while((I2C1_RX_DMA_Flag.Transfer_Complete_Flag == false)){}
+
+		I2C_Master_Stop(config);
+
+}

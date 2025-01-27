@@ -495,6 +495,7 @@ void DMA1_Stream5_IRQHandler(void)
 	/************************************************************************************************************/
 	if(DMA1 -> HISR & DMA_HISR_TCIF5)
 	{
+		I2C1_RX_DMA_Flag.Transfer_Complete_Flag = true;
 		SPI3_TX_DMA_Flag.Transfer_Complete_Flag = true;
 		TIM3_TRIG_DMA_Flag.Transfer_Complete_Flag = true;
 		TIM2_CH1_DMA_Flag.Transfer_Complete_Flag =  true;

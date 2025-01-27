@@ -52,6 +52,6 @@ void I2C_Master_Stop(I2C_Config *config);
 
 void I2C_Master_Write_Register_Block(I2C_Config *config, uint8_t device_address, uint8_t reg_address, uint8_t *data, int length);
 
-
+void I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address,volatile uint8_t *data, uint16_t length);
 
 #endif /* I2C_I2C_H_ */

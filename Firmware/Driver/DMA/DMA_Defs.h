@@ -385,7 +385,7 @@ static const struct DMA_Configuration {
 
 				.I2C1_RX = {
 						.Controller = DMA1,
-						.Stream = DMA1_Stream0, // DMA1_Stream5
+						.Stream = DMA1_Stream5, // DMA1_Stream5
 						.channel = 1,
 				},
 
