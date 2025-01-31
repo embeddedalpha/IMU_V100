@@ -85,9 +85,11 @@ void I2C_Init(I2C_Config *config)
 	pin_setup(config);
 	I2C_Clock_Enable(config);
 
-	config->Port -> CR1 &= ~I2C_CR1_PE;
-	config->Port -> CR1 |= I2C_CR1_SWRST | I2C_CR1_NOSTRETCH;
+	config -> Port -> CR1 &= ~I2C_CR1_PE;
+	config -> Port -> CR1 |= I2C_CR1_SWRST;
 	config->Port -> CR1 &= ~I2C_CR1_SWRST;
+	config -> Port -> CR1 &= ~I2C_CR1_NOSTRETCH;
+
 
 	if(config -> Interrupts == I2C_Configuration.Interrupts.Disable)
 	{
@@ -131,6 +133,8 @@ void I2C_Init(I2C_Config *config)
 
 	if(config -> DMA_Control == I2C_Configuration.DMA_Control.RX_DMA_Enable)
 	{
+		config -> Port -> CR2 |= I2C_CR2_LAST;
+		config -> Port -> CR2 |= I2C_CR2_DMAEN;
 		if(config->Port == I2C1)
 		{
 //			config -> Port -> CR2 |= I2C_CR2_DMAEN;
@@ -182,7 +186,6 @@ void I2C_Init(I2C_Config *config)
 
 	}
 
-	config -> Port -> CR1 |= I2C_CR1_NOSTRETCH;
 	config -> Port -> CR1 |= I2C_CR1_PE;
 
 }
@@ -191,8 +194,18 @@ void I2C_Init(I2C_Config *config)
 int8_t I2C_Master_Start(I2C_Config *config)
 {
 	int time_out = 1000;
+
+	while(config -> Port -> SR2 & I2C_SR2_BUSY){
+		if(time_out == 0)
+		{
+			return -1;
+		}
+		time_out--;
+	}
+
+	time_out = 1000;
 	config -> Port -> CR1 |= I2C_CR1_START;
-	config -> Port -> CR1 |= I2C_CR1_START;
+//	config -> Port -> CR1 |= I2C_CR1_START;
 	while( !(config -> Port -> SR1 & I2C_SR1_SB))
 	{
 		if(time_out == 0)
@@ -201,6 +214,7 @@ int8_t I2C_Master_Start(I2C_Config *config)
 		}
 		time_out--;
 	}
+	(void)config ->  Port -> SR1;
 	return 0;
 }
 
@@ -208,7 +222,7 @@ void I2C_Master_Address(I2C_Config *config, uint8_t address, uint8_t read_write)
 {
 //	volatile int temp;
 	config -> Port -> DR = address << 1  | read_write;
-	while((config -> Port -> SR1 & 2) == 0){}
+	while((config -> Port -> SR1 & I2C_SR1_ADDR) == 0){;}
 	while((config -> Port -> SR1 & 2))
 	{
 //		temp = config -> Port -> SR1;
@@ -327,18 +341,19 @@ int I2C_Master_Read_Register(I2C_Config *config, uint8_t device_address, uint8_t
 
 void I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address,volatile uint8_t *data, uint16_t length)
 {
-	xI2C1_RX.memory_address = (uint32_t)&data[0];
-	xI2C1_RX.peripheral_address = (uint32_t)&config->Port->DR;
-	xI2C1_RX.buffer_length = length;
-	DMA_Set_Target(&xI2C1_RX);
-	I2C_Master_Start(config);
+		xI2C1_RX.memory_address = (uint32_t)&data[0];
+		xI2C1_RX.peripheral_address = (uint32_t)&config->Port->DR;
+		xI2C1_RX.buffer_length = length;
+		DMA_Set_Target(&xI2C1_RX);
+		I2C_Master_Start(config);
 
 		I2C_Master_Address(config, device_address, 0);
+		config->Port->CR1 |= I2C_CR1_ACK;
 		I2C_Master_Send_Byte(config, reg_address);
 		I2C_Master_Stop(config);
 		I2C_Master_Start(config);
 		I2C_Master_Address(config, device_address, 1);
-		config -> Port -> CR2 |= I2C_CR2_DMAEN;
+
 		DMA_Set_Trigger(&xI2C1_RX);
 
 //		while((I2C1_RX_DMA_Flag.Transfer_Complete_Flag == false)){}

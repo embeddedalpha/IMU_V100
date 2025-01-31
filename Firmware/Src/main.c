@@ -79,21 +79,21 @@ int main(void)
 //		if(mpu_data_ready_flag == 1)
 //		{
 
-			I2C_Master_Read_Registers_Bulk(&mpu6050, mpu6050_address, ACCEL_XOUT_H, &acceleration, 6);
-			I2C_Master_Read_Registers_Bulk(&mpu6050, mpu6050_address, GYRO_XOUT_H, &gyro, 6);
-//			acceleration[0] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_XOUT_H);
-//			acceleration[1] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_XOUT_L);
-//			acceleration[2] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_YOUT_H);
-//			acceleration[3] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_YOUT_L);
-//			acceleration[4] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_ZOUT_H);
-//			acceleration[5] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_ZOUT_L);
+//			I2C_Master_Read_Registers_Bulk(&mpu6050, mpu6050_address, ACCEL_XOUT_H, &acceleration, 6);
+//			I2C_Master_Read_Registers_Bulk(&mpu6050, mpu6050_address, GYRO_XOUT_H, &gyro, 6);
+			acceleration[0] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_XOUT_H);
+			acceleration[1] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_XOUT_L);
+			acceleration[2] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_YOUT_H);
+			acceleration[3] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_YOUT_L);
+			acceleration[4] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_ZOUT_H);
+			acceleration[5] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, ACCEL_ZOUT_L);
 
-//			gyro[0] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_XOUT_H);
-//			gyro[1] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_XOUT_L);
-//			gyro[2] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_YOUT_H);
-//			gyro[3] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_YOUT_L);
-//			gyro[4] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_ZOUT_H);
-//			gyro[5] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_ZOUT_L);
+			gyro[0] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_XOUT_H);
+			gyro[1] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_XOUT_L);
+			gyro[2] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_YOUT_H);
+			gyro[3] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_YOUT_L);
+			gyro[4] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_ZOUT_H);
+			gyro[5] = I2C_Master_Read_Register(&mpu6050, mpu6050_address, GYRO_ZOUT_L);
 
 			ACC[0] = ((acceleration[0] << 8) | acceleration[1])/16384.0 ;
 			ACC[1] = ((acceleration[2] << 8) | acceleration[3])/16384.0 ;
