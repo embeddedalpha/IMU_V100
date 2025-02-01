@@ -17,26 +17,28 @@ DMA_Config xI2C1_RX;
 DMA_Config xI2C2_RX;
 DMA_Config xI2C3_RX;
 
+#define I2C_TIMEOUT  0xFFFF
+
 static void pin_setup(I2C_Config *config)
 {
 	if(config->Port == I2C1)
 	{
-		if(config->SCL_Pin == I2C_Configuration.Pin.__I2C1__.SCL.PB6) GPIO_Pin_Init(GPIOB, 6, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_1);
-		else if(config->SCL_Pin == I2C_Configuration.Pin.__I2C1__.SCL.PB8) GPIO_Pin_Init(GPIOB, 8, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_1);
+		if(config->SCL_Pin == I2C_Configuration.Pin.__I2C1__.SCL.PB6) GPIO_Pin_Init(GPIOB, 6, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_1);
+		else if(config->SCL_Pin == I2C_Configuration.Pin.__I2C1__.SCL.PB8) GPIO_Pin_Init(GPIOB, 8, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_1);
 
-		if(config->SDA_Pin == I2C_Configuration.Pin.__I2C1__.SDA.PB7) GPIO_Pin_Init(GPIOB, 7, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_1);
-		else if(config->SDA_Pin == I2C_Configuration.Pin.__I2C1__.SDA.PB9) GPIO_Pin_Init(GPIOB, 9, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_1);
+		if(config->SDA_Pin == I2C_Configuration.Pin.__I2C1__.SDA.PB7) GPIO_Pin_Init(GPIOB, 7, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_1);
+		else if(config->SDA_Pin == I2C_Configuration.Pin.__I2C1__.SDA.PB9) GPIO_Pin_Init(GPIOB, 9, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_1);
 
 	}
 	else if(config->Port == I2C2)
 	{
-		if(config->SCL_Pin == I2C_Configuration.Pin.__I2C2__.SCL.PB10) GPIO_Pin_Init(GPIOB, 10, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_2);
-		if(config->SDA_Pin == I2C_Configuration.Pin.__I2C2__.SDA.PB11) GPIO_Pin_Init(GPIOB, 11, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_2);
+		if(config->SCL_Pin == I2C_Configuration.Pin.__I2C2__.SCL.PB10) GPIO_Pin_Init(GPIOB, 10, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_2);
+		if(config->SDA_Pin == I2C_Configuration.Pin.__I2C2__.SDA.PB11) GPIO_Pin_Init(GPIOB, 11, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_2);
 	}
 	else if(config->Port == I2C3)
 	{
-		if(config->SCL_Pin == I2C_Configuration.Pin.__I2C3__.SCL.PA8) GPIO_Pin_Init(GPIOA, 8, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_3);
-		if(config->SDA_Pin == I2C_Configuration.Pin.__I2C3__.SDA.PC9) GPIO_Pin_Init(GPIOC, 9, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.Pull_Up, GPIO_Configuration.Alternate_Functions.I2C_3);
+		if(config->SCL_Pin == I2C_Configuration.Pin.__I2C3__.SCL.PA8) GPIO_Pin_Init(GPIOA, 8, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_3);
+		if(config->SDA_Pin == I2C_Configuration.Pin.__I2C3__.SDA.PC9) GPIO_Pin_Init(GPIOC, 9, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Open_Drain, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.I2C_3);
 	}
 }
 
@@ -359,5 +361,131 @@ void I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, 
 //		while((I2C1_RX_DMA_Flag.Transfer_Complete_Flag == false)){}
 
 		I2C_Master_Stop(config);
+
+}
+
+
+int I2C_Read_Register(I2C_Config *config, uint16_t device_address, uint8_t reg_address)
+{
+    volatile uint32_t timeout;
+    uint8_t data;
+
+    /* 1) Wait until I2C is not busy --------------------------------------- */
+    timeout = I2C_TIMEOUT;
+    while ( (config -> Port -> SR2 & I2C_SR2_BUSY) != 0 )
+    {
+        if (--timeout == 0)
+        {
+            // Handle bus busy error
+            return -1;
+        }
+    }
+
+    config -> Port -> CR1 |= I2C_CR1_START;
+    timeout = I2C_TIMEOUT;
+	while ( (config -> Port -> SR1 & I2C_SR1_SB) == 0 )
+	{
+		if (--timeout == 0)
+		{
+			// START not generated in time
+			return -1;
+		}
+	}
+
+	config -> Port -> DR = (device_address << 1);
+	timeout = I2C_TIMEOUT;
+	while ( (config -> Port -> SR1 & I2C_SR1_ADDR) == 0 )
+	{
+		if (--timeout == 0)
+		{
+			// ADDR not set in time
+			return -1;
+		}
+		// Check for error flags (NACK, bus errors, etc.)
+		if (config -> Port -> SR1 & (I2C_SR1_AF | I2C_SR1_BERR | I2C_SR1_ARLO | I2C_SR1_OVR))
+		{
+			// Some I2C error occurred
+			return -1;
+		}
+	}
+
+	(void) config -> Port ->SR1;
+	(void) config -> Port ->SR2;
+
+	config -> Port ->DR = reg_address;
+
+	timeout = I2C_TIMEOUT;
+	while ( (config -> Port ->SR1 & I2C_SR1_TXE) == 0 )
+	{
+		if (--timeout == 0)
+		{
+			// TXE not set in time
+			return -1;
+		}
+		if (config -> Port ->SR1 & (I2C_SR1_AF | I2C_SR1_BERR | I2C_SR1_ARLO | I2C_SR1_OVR))
+		{
+			// Some I2C error occurred
+			return -1;
+		}
+	}
+
+	config -> Port ->CR1 |= I2C_CR1_START;
+
+	timeout = I2C_TIMEOUT;
+	while ( (config -> Port ->SR1 & I2C_SR1_SB) == 0 )
+	{
+		if (--timeout == 0)
+		{
+			// SB not set in time
+			return -1;
+		}
+	}
+
+	config -> Port ->DR = (device_address << 1) | 0x01; // LSB=1 for read
+
+	    /* 12) Wait for ADDR flag --------------------------------------------- */
+	    timeout = I2C_TIMEOUT;
+	    while ( (config -> Port ->SR1 & I2C_SR1_ADDR) == 0 )
+	    {
+	        if (--timeout == 0)
+	        {
+	            // ADDR not set in time
+	            return -1;
+	        }
+	        // Check for error flags
+	        if (config -> Port ->SR1 & (I2C_SR1_AF | I2C_SR1_BERR | I2C_SR1_ARLO | I2C_SR1_OVR))
+	        {
+	            return -1;
+	        }
+	    }
+
+	    config -> Port ->CR1 &= ~I2C_CR1_ACK;       // Disable ACK for single byte read
+	       (void) config -> Port ->SR1;               // Clear ADDR by reading SR1
+	       (void) config -> Port ->SR2;
+	       config -> Port ->CR1 |= I2C_CR1_STOP;      // Generate STOP
+
+	       /* 13) Wait until RXNE (data received) -------------------------------- */
+	       timeout = I2C_TIMEOUT;
+	       while ( (config -> Port ->SR1 & I2C_SR1_RXNE) == 0 )
+	       {
+	           if (--timeout == 0)
+	           {
+	               // RXNE not set in time
+	               return -1;
+	           }
+	           // Check for errors
+	           if (config -> Port ->SR1 & (I2C_SR1_AF | I2C_SR1_BERR | I2C_SR1_ARLO | I2C_SR1_OVR))
+	           {
+	               return -1;
+	           }
+	       }
+
+	       /* 14) Read the received byte ----------------------------------------- */
+	       data = (uint8_t) config -> Port ->DR;
+
+	       /* 15) Re-enable ACK (so next transfers can continue normally) -------- */
+	       config -> Port ->CR1 |= I2C_CR1_ACK;
+
+	       return data;
 
 }
