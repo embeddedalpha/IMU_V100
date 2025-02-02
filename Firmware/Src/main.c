@@ -8,10 +8,10 @@
 
 I2C_Config mpu6050;
 
-#define mpu6050_address 0x68
+#define MPU9250_ADDRESS 0x68
 #define who_am_i 0x75
 
-volatile int acceleration[6], gyro[6] ;
+volatile uint8_t data[12] ;
 volatile float ACC[3], GYRO[3];
 
 volatile bool mpu_data_ready_flag = 0;
@@ -20,7 +20,7 @@ void MPU6050_ISR(void)
 {
 //	int temp = 0;
 //
-////	temp = I2C_Read_Register(&mpu6050, mpu6050_address, INT_STATUS);
+////	temp = I2C_Read_Register(&mpu6050, MPU9250_ADDRESS, INT_STATUS);
 //
 //	if(temp & 0x01)
 //	{
@@ -46,51 +46,52 @@ int main(void)
 	I2C_Init(&mpu6050);
 
 	int temp = 0;
-	temp = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.WHO_AM_I);
+	temp = I2C_Read_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.WHO_AM_I);
+	(void)temp;
 
 
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.PWR_MGMT_1, 0x01);
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.PWR_MGMT_2, 0x00);
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.CONFIG, 0x03); //4G
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.SMPLRT_DIV, 250); //500 DPS
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.GYRO_CONFIG, 0x00);
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.ACCEL_CONFIG, 0x00);
 
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.PWR_MGMT_1, 0x01);
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.PWR_MGMT_2, 0x00);
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.CONFIG, 0x03); //4G
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.SMPLRT_DIV, 7); //500 DPS
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.GYRO_CONFIG, 0x00);
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.ACCEL_CONFIG, 0x00);
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.INT_ENABLE, 0x01);
+	I2C_Master_Write_Register(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.USER_CTRL, 0x00);
 
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.INT_ENABLE, 0x01);
-	I2C_Master_Write_Register(&mpu6050, mpu6050_address, MPU6050_Registers.USER_CTRL, 0x00);
+		GPIO_Pin_Init(GPIOB, 4,
+				GPIO_Configuration.Mode.Input,
+				GPIO_Configuration.Output_Type.None,
+				GPIO_Configuration.Speed.None,
+				GPIO_Configuration.Pull.None,
+				GPIO_Configuration.Alternate_Functions.None);
+
+		GPIO_Pin_Init(GPIOB, 5,
+				GPIO_Configuration.Mode.General_Purpose_Output,
+				GPIO_Configuration.Output_Type.Push_Pull,
+				GPIO_Configuration.Speed.Very_High_Speed,
+				GPIO_Configuration.Pull.None,
+				GPIO_Configuration.Alternate_Functions.None);
+
+		GPIO_Interrupt_Setup(GPIOB,4, GPIO_Configuration.Interrupt_Edge.RISING_EDGE, 0, MPU6050_ISR);
 
 	for(;;)
 	{
-//		if(mpu_data_ready_flag == 1)
-//		{
+		if(mpu_data_ready_flag == 1)
+		{
+			I2C_Master_Read_Registers_Bulk(&mpu6050, MPU9250_ADDRESS, MPU6050_Registers.ACCEL_XOUT_H, &data, 12);
+			GPIO_Pin_High(GPIOB, 5);
+			ACC[0] = ((data[0] << 8) | data[1])/16384.0 ;
+			ACC[1] = ((data[2] << 8) | data[3])/16384.0 ;
+			ACC[2] = ((data[4] << 8) | data[5])/16384.0  ;
 
-//			I2C_Read_Registers_Bulk(&mpu6050, mpu6050_address, ACCEL_XOUT_H, &acceleration, 6);
-//			I2C_Read_Registers_Bulk(&mpu6050, mpu6050_address, GYRO_XOUT_H, &gyro, 6);
-			acceleration[0] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.ACCEL_XOUT_H);
-			acceleration[1] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.ACCEL_XOUT_L);
-			acceleration[2] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.ACCEL_YOUT_H);
-			acceleration[3] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.ACCEL_YOUT_L);
-			acceleration[4] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.ACCEL_ZOUT_H);
-			acceleration[5] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.ACCEL_ZOUT_L);
-
-			gyro[0] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.GYRO_XOUT_H);
-			gyro[1] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.GYRO_XOUT_L);
-			gyro[2] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.GYRO_YOUT_H);
-			gyro[3] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.GYRO_YOUT_L);
-			gyro[4] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.GYRO_ZOUT_H);
-			gyro[5] = I2C_Read_Register(&mpu6050, mpu6050_address, MPU6050_Registers.GYRO_ZOUT_L);
-
-			ACC[0] = ((acceleration[0] << 8) | acceleration[1])/16384.0 ;
-			ACC[1] = ((acceleration[2] << 8) | acceleration[3])/16384.0 ;
-			ACC[2] = ((acceleration[4] << 8) | acceleration[5])/16384.0  ;
-
-			GYRO[0] = ((gyro[0] << 8) | gyro[1])/250.0 ;
-			GYRO[1] = ((gyro[2] << 8) | gyro[3])/250.0 ;
-			GYRO[2] = ((gyro[4] << 8) | gyro[5])/250.0  ;
-
+			GYRO[0] = ((data[6] << 8) | data[7])/131.0 ;
+			GYRO[1] = ((data[8] << 8) | data[9])/131.0 ;
+			GYRO[2] = ((data[10] << 8) | data[11])/131.0  ;
+			GPIO_Pin_Low(GPIOB, 5);
 			mpu_data_ready_flag = 0;
-//		}
+		}
 
 
 

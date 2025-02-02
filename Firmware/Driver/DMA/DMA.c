@@ -1203,7 +1203,16 @@ void DMA_Reset(DMA_Config *config)
  */
 int8_t DMA_Init(DMA_Config *config)
 {
+//	DMA_Clock_Disable(config);
     DMA_Clock_Enable(config);  // Enable the clock for the specified DMA controller
+
+    if (config->Request.Stream->CR & DMA_SxCR_EN)
+    {
+    	config->Request.Stream->CR &= ~DMA_SxCR_EN;
+        while (config->Request.Stream->CR & DMA_SxCR_EN);  // Wait until disabled
+    }
+
+
     config->Request.Stream->CR |= config->Request.channel << DMA_SxCR_CHSEL_Pos;  // Set the DMA channel
     config->Request.Stream->CR |= config->circular_mode;  // Configure circular mode
     config->Request.Stream->CR |= config->flow_control;  // Set flow control
@@ -1337,6 +1346,8 @@ int8_t DMA_Init(DMA_Config *config)
 void DMA_Set_Target(DMA_Config *config)
 {
 	config -> Request.Stream -> CR &= ~DMA_SxCR_EN;
+
+
 
 	if(config -> circular_mode == DMA_Configuration.Circular_Mode.Disable)
 	{

@@ -30,6 +30,7 @@ Driver/Logs \
 Driver/Timer \
 Driver/USART \
 Modules/LC76G \
+Modules/MPU6050 \
 Src \
 Startup \
 

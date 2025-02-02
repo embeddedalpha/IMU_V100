@@ -6,6 +6,7 @@
 "./Driver/Timer/Timer.o"
 "./Driver/USART/USART.o"
 "./Modules/LC76G/LC76G.o"
+"./Modules/MPU6050/MPU6050.o"
 "./Src/main.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

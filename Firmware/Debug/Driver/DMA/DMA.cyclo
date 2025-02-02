@@ -19,7 +19,7 @@
 ../Driver/DMA/DMA.c:1146:6:DMA_Clock_Enable	3
 ../Driver/DMA/DMA.c:1168:6:DMA_Clock_Disable	3
 ../Driver/DMA/DMA.c:1185:6:DMA_Reset	3
-../Driver/DMA/DMA.c:1204:8:DMA_Init	27
-../Driver/DMA/DMA.c:1337:6:DMA_Set_Target	3
-../Driver/DMA/DMA.c:1384:6:DMA_Set_Trigger	11
-../Driver/DMA/DMA.c:1441:6:DMA_Memory_To_Memory_Transfer	8
+../Driver/DMA/DMA.c:1204:8:DMA_Init	29
+../Driver/DMA/DMA.c:1346:6:DMA_Set_Target	3
+../Driver/DMA/DMA.c:1395:6:DMA_Set_Trigger	11
+../Driver/DMA/DMA.c:1452:6:DMA_Memory_To_Memory_Transfer	8

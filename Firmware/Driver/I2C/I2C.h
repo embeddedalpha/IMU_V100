@@ -59,4 +59,5 @@ void I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, 
 
 int I2C_Read_Register(I2C_Config *config, uint16_t device_address, uint8_t reg_address);
 
+//int I2C_Read_Register_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address,volatile uint8_t *data, uint16_t length);
 #endif /* I2C_I2C_H_ */
