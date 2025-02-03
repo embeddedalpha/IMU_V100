@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "LC76GABMD")(type "KiCad")(uri "${KIPRJMOD}/Library/Symbols/LC76GABMD.kicad_sym")(options "")(descr ""))
+  (lib (name "IMU_V100")(type "KiCad")(uri "${KIPRJMOD}/Library/Symbols/IMU_V100.kicad_sym")(options "")(descr ""))
+)
