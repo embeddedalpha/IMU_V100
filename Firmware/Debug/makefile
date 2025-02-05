@@ -13,6 +13,7 @@ RM := rm -rf
 -include Src/subdir.mk
 -include Modules/MPU6050/subdir.mk
 -include Modules/LC76G/subdir.mk
+-include Modules/Barometer/subdir.mk
 -include Driver/USART/subdir.mk
 -include Driver/Timer/subdir.mk
 -include Driver/Logs/subdir.mk

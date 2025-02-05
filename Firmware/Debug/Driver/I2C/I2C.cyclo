@@ -16,4 +16,4 @@
 ../Driver/I2C/I2C.c:359:6:I2C_Master_Write_Register	1
 ../Driver/I2C/I2C.c:368:5:I2C_Master_Read_Register	1
 ../Driver/I2C/I2C.c:385:5:I2C_Read_Register	19
-../Driver/I2C/I2C.c:510:6:I2C_Master_Read_Registers_Bulk	2
+../Driver/I2C/I2C.c:510:5:I2C_Master_Read_Registers_Bulk	10

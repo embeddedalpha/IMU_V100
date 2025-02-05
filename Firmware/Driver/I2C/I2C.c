@@ -507,25 +507,68 @@ int I2C_Read_Register(I2C_Config *config, uint16_t device_address, uint8_t reg_a
 
 }
 
-void I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address,volatile uint8_t *data, uint16_t length)
+int I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address, uint8_t *data, uint16_t length)
 {
 
-	xI2C1_RX.memory_address = (uint32_t)&data[0];
-	xI2C1_RX.peripheral_address = (uint32_t)&config->Port->DR;
-	xI2C1_RX.buffer_length = length;
-	DMA_Set_Target(&xI2C1_RX);
-	DMA_Set_Trigger(&xI2C1_RX);
-	I2C1->CR2 |= I2C_CR2_DMAEN;
+	if(config->Port == I2C1)
+	{
+		xI2C1_RX.memory_address = (uint32_t)&data[0];
+		xI2C1_RX.peripheral_address = (uint32_t)&config->Port->DR;
+		xI2C1_RX.buffer_length = length;
+		DMA_Set_Target(&xI2C1_RX);
+		DMA_Set_Trigger(&xI2C1_RX);
+	}
+	else if(config->Port == I2C2)
+	{
+		xI2C2_RX.memory_address = (uint32_t)&data[0];
+		xI2C2_RX.peripheral_address = (uint32_t)&config->Port->DR;
+		xI2C2_RX.buffer_length = length;
+		DMA_Set_Target(&xI2C2_RX);
+		DMA_Set_Trigger(&xI2C2_RX);
+	}
+	else if(config->Port == I2C3)
+	{
+		xI2C3_RX.memory_address = (uint32_t)&data[0];
+		xI2C3_RX.peripheral_address = (uint32_t)&config->Port->DR;
+		xI2C3_RX.buffer_length = length;
+		DMA_Set_Target(&xI2C3_RX);
+		DMA_Set_Trigger(&xI2C3_RX);
+	}
+	else
+	{
+		return -1;
+	}
+
+
+	config->Port->CR2 |= I2C_CR2_DMAEN;
 	I2C_Master_Start(config);
 	I2C_Master_Address(config, device_address, 0);
 	I2C_Master_Send_Byte(config, reg_address);
 	I2C_Master_Stop(config);
 	I2C_Master_Start(config);
 	I2C_Master_Address(config, device_address, 1);
-	while (!(xI2C1_RX.Request.Controller->HISR & DMA_HISR_TCIF5));  // Wait for transfer complete flag (Stream0)
-	xI2C1_RX.Request.Controller->HIFCR |= DMA_HIFCR_CTCIF5;
-	I2C1->CR2 &= ~I2C_CR2_DMAEN;
+
+	if(config->Port == I2C1)
+	{
+		while (!(xI2C1_RX.Request.Controller->HISR & DMA_HISR_TCIF5));  // Wait for transfer complete flag (Stream0)
+		xI2C1_RX.Request.Controller->HIFCR |= DMA_HIFCR_CTCIF5;
+	}
+	else if(config->Port == I2C2)
+	{
+		while (!(xI2C2_RX.Request.Controller->HISR & DMA_HISR_TCIF5));  // Wait for transfer complete flag (Stream0)
+		xI2C1_RX.Request.Controller->HIFCR |= DMA_HIFCR_CTCIF5;
+	}
+	else if(config->Port == I2C3)
+	{
+		while (!(xI2C3_RX.Request.Controller->HISR & DMA_HISR_TCIF5));  // Wait for transfer complete flag (Stream0)
+		xI2C1_RX.Request.Controller->HIFCR |= DMA_HIFCR_CTCIF5;
+	}
+
+
+	config->Port->CR2 &= ~I2C_CR2_DMAEN;
 	I2C_Master_Stop(config);
+
+	return 1;
 }
 
 //void I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address,volatile uint8_t *data, uint16_t length)

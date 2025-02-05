@@ -9,5 +9,13 @@
 #include "BMP280.h"
 
 
-void BMP280_Init(void);
+
+void BMP280_Init()
+{
+	//
+
+	// Calibrate Temp
+
+	// Calibrate
+}
 void BMP280_Get_Data(void);

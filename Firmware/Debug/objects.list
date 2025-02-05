@@ -5,6 +5,7 @@
 "./Driver/Logs/Logs.o"
 "./Driver/Timer/Timer.o"
 "./Driver/USART/USART.o"
+"./Modules/Barometer/BMP280.o"
 "./Modules/LC76G/LC76G.o"
 "./Modules/MPU6050/MPU6050.o"
 "./Src/main.o"

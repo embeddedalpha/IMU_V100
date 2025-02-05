@@ -29,6 +29,7 @@ Driver/I2C \
 Driver/Logs \
 Driver/Timer \
 Driver/USART \
+Modules/Barometer \
 Modules/LC76G \
 Modules/MPU6050 \
 Src \
