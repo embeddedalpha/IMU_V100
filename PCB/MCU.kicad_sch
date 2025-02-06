@@ -1829,6 +1829,18 @@
 		)
 		(uuid "4bd1db7e-422d-443a-a809-b92942fb001d")
 	)
+	(hierarchical_label "MISO_BMP280"
+		(shape input)
+		(at 52.07 215.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "502e52c9-9ab7-440f-928f-207885f03362")
+	)
 	(hierarchical_label "JAM_IND"
 		(shape input)
 		(at 167.64 219.71 0)
@@ -1876,6 +1888,18 @@
 			(justify left)
 		)
 		(uuid "6a27f29e-2b13-44a5-9cf0-2d5cfe8e9425")
+	)
+	(hierarchical_label "CLK_BMP280"
+		(shape output)
+		(at 53.34 220.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8e41c704-ef2c-4a0a-ad71-9ff8f51889cd")
 	)
 	(hierarchical_label "CAN_TX"
 		(shape output)
@@ -1949,6 +1973,18 @@
 		)
 		(uuid "b67491aa-0722-4dc9-979f-64496d2ce441")
 	)
+	(hierarchical_label "nCSS_BMP280"
+		(shape output)
+		(at 52.07 212.09 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c8897bfc-2909-41b2-baa6-7c906ea21962")
+	)
 	(hierarchical_label "CLK_MPU9250"
 		(shape output)
 		(at 20.32 87.63 0)
@@ -1984,6 +2020,18 @@
 			(justify right)
 		)
 		(uuid "e1f718a5-4c14-4d20-bcd6-b8821bf8d2de")
+	)
+	(hierarchical_label "MOSI_BMP280"
+		(shape output)
+		(at 52.07 218.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e433d790-138f-49ea-a621-19e340b6803a")
 	)
 	(hierarchical_label "GEOFENCE"
 		(shape input)
