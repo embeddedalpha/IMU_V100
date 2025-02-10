@@ -1757,6 +1757,18 @@
 			)
 		)
 	)
+	(hierarchical_label "SWO"
+		(shape bidirectional)
+		(at 109.22 236.22 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1d993dc9-6324-40b0-aeed-3755800726f4")
+	)
 	(hierarchical_label "CLK_GNSS"
 		(shape output)
 		(at 167.64 227.33 0)
@@ -1853,6 +1865,18 @@
 		)
 		(uuid "52fb9d0c-47bb-49a1-b507-c014468c45e6")
 	)
+	(hierarchical_label "SWCLK"
+		(shape input)
+		(at 109.22 231.14 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "58b4d9e8-e2f0-41d4-8cc8-4bc0d3a6b5cb")
+	)
 	(hierarchical_label "CAN_SHUTDOWN"
 		(shape output)
 		(at 168.91 184.15 180)
@@ -1876,6 +1900,18 @@
 			(justify right)
 		)
 		(uuid "64dde3f2-78fa-402c-9109-c44146549534")
+	)
+	(hierarchical_label "SWDIO"
+		(shape bidirectional)
+		(at 109.22 233.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "650593c7-4a7f-462d-973b-eba7bdde4a79")
 	)
 	(hierarchical_label "MOSI_MPU9250"
 		(shape output)
@@ -1924,6 +1960,18 @@
 			(justify left)
 		)
 		(uuid "9a4d4986-c22c-4e66-bb51-a8d6d3109c5d")
+	)
+	(hierarchical_label "RXD_RS485"
+		(shape input)
+		(at 176.53 132.08 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9af48182-c19f-4741-a808-d9fdf8656692")
 	)
 	(hierarchical_label "3D_FIX"
 		(shape input)
@@ -1996,6 +2044,30 @@
 			(justify left)
 		)
 		(uuid "cdd28f16-95b3-4241-a94e-f506e686f64c")
+	)
+	(hierarchical_label "TXD_RS485"
+		(shape output)
+		(at 176.53 154.94 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cfe1180a-3e59-4e7d-9725-c80b601fe57e")
+	)
+	(hierarchical_label "nRESET"
+		(shape input)
+		(at 109.22 226.06 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d45973c1-9f14-4795-9559-b10d57737542")
 	)
 	(hierarchical_label "MISO_GNSS"
 		(shape input)

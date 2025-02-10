@@ -414,6 +414,10 @@
     [
       "8e7c721f-4787-45c0-877a-ccbe11a9aa6f",
       "CAN_FD"
+    ],
+    [
+      "bd9088cb-f15a-411d-bc5c-97f5b7b74aa4",
+      "DEBUG"
     ]
   ],
   "text_variables": {}

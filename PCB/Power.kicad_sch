@@ -1790,7 +1790,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 71.12) (xy 231.14 71.12)
+			(xy 223.52 71.12) (xy 243.84 71.12)
 		)
 		(stroke
 			(width 0)
@@ -2032,7 +2032,7 @@
 	)
 	(hierarchical_label "3V3"
 		(shape output)
-		(at 231.14 71.12 0)
+		(at 243.84 71.12 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
