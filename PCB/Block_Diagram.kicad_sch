@@ -1,0 +1,146 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "67a1fb12-e63b-4964-a1a7-852ad583d2ca")
+	(paper "A4")
+	(lib_symbols)
+	(rectangle
+		(start 273.177 29.591)
+		(end 278.257 34.671)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 0 255 255 1)
+		)
+		(uuid 26d0208e-15b4-4e53-8ce8-ff2719e12a80)
+	)
+	(rectangle
+		(start 273.177 37.211)
+		(end 278.257 42.291)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 0 72 0 1)
+		)
+		(uuid 33f17473-b24f-4fa5-85b6-6661e53afbf8)
+	)
+	(rectangle
+		(start 273.177 53.086)
+		(end 278.257 58.166)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 128 77 0 1)
+		)
+		(uuid 80fec497-60f0-4c6e-9887-7b001e066683)
+	)
+	(rectangle
+		(start 273.177 44.831)
+		(end 278.257 49.911)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 194 0 194 1)
+		)
+		(uuid 895f7d2a-d5f5-46e7-adc6-04e706e4cdba)
+	)
+	(rectangle
+		(start 273.177 61.341)
+		(end 278.257 66.421)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 255 153 0 1)
+		)
+		(uuid 986f5de8-cffc-4070-af05-271a6c6b4fec)
+	)
+	(rectangle
+		(start 273.685 22.225)
+		(end 278.765 27.305)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 194 0 0 1)
+		)
+		(uuid e762fe4c-f78b-4ec8-8b29-53da106b674c)
+	)
+	(text "DEBUG\n"
+		(exclude_from_sim no)
+		(at 268.605 64.135 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "8275f24d-43fd-4553-b292-104bf55c1565")
+	)
+	(text "SIGNALS"
+		(exclude_from_sim no)
+		(at 268.605 40.005 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "b9c9af93-5302-4f2c-9c12-695d291ebffd")
+	)
+	(text "SPI\n"
+		(exclude_from_sim no)
+		(at 268.605 32.385 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "becb90e3-b57e-422d-888c-c264a7e8c6be")
+	)
+	(text "I2C"
+		(exclude_from_sim no)
+		(at 268.605 47.625 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "cf7468e3-e59a-4d86-b6ac-4ab6169a1022")
+	)
+	(text "UART"
+		(exclude_from_sim no)
+		(at 268.605 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "d6bd9b1d-0281-4ec8-9895-fcc6c8e62f7d")
+	)
+	(text "POWER"
+		(exclude_from_sim no)
+		(at 269.113 25.019 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ef6b4041-77ab-45b2-b008-8a50a5f787b9")
+	)
+)

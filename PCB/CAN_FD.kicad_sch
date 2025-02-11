@@ -728,7 +728,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1f2da167-5f69-454e-ac97-4c7bcf3eeb1b")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR05"
 			(at 129.54 121.92 0)
 			(effects
 				(font
@@ -773,12 +773,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "e6240c6b-ff18-440c-80ca-5b2a9bbf255a")
+			(uuid "9024267f-814d-4873-b7b9-ed33672d72a0")
 		)
 		(instances
-			(project ""
-				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/8e7c721f-4787-45c0-877a-ccbe11a9aa6f"
-					(reference "#PWR016")
+			(project "IMU_V100"
+				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/0bf2e565-c24a-4992-bfd2-1fa1b050084a"
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -794,7 +794,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "750ddb85-1858-4b82-bb11-6b94c7ac789f")
-		(property "Reference" "U5"
+		(property "Reference" "U2"
 			(at 131.7341 85.09 0)
 			(effects
 				(font
@@ -840,36 +840,36 @@
 			)
 		)
 		(pin "1"
-			(uuid "fb3b7503-bd64-44c1-a3a8-c689fddac98b")
+			(uuid "67c2fe37-12fd-4226-b347-7a67eae2a135")
 		)
 		(pin "7"
-			(uuid "cda22180-3287-4565-9bd3-49eddd23ba30")
+			(uuid "4d142218-2369-4764-ae69-7f92bbcbf994")
 		)
 		(pin "2"
-			(uuid "a0afbb6b-8886-4ba7-b8c4-2fb7c1d36230")
+			(uuid "5cedddb8-8a84-4a32-9eee-5696eabc83e9")
 		)
 		(pin "4"
-			(uuid "94840f40-44ee-493f-9b73-1dfd4f5006ba")
+			(uuid "81e52a96-7c6f-4af4-a172-f6a6c2c50c84")
 		)
 		(pin "6"
-			(uuid "aa702205-177b-4d2b-a59c-558f3c390d7a")
+			(uuid "8a3f74a7-1ebb-4fb6-ace6-5185d80aeb09")
 		)
 		(pin "3"
-			(uuid "c933afa5-662f-4eef-82aa-b85b0f00c4a1")
+			(uuid "caa046e4-c0e8-4c20-8cea-40fea45d5e3d")
 		)
 		(pin "9"
-			(uuid "35332840-c86d-4ffd-b8b0-80b4c6c848c4")
+			(uuid "772fb9cf-07db-4102-a2b5-7cdc1aa82e62")
 		)
 		(pin "5"
-			(uuid "bb52b6c3-034b-49bd-80f5-59c902fafc30")
+			(uuid "fe18e873-def0-49e1-bdee-a9c2231a9c25")
 		)
 		(pin "8"
-			(uuid "36099dbd-9753-4f11-8078-beb1bd0d372e")
+			(uuid "29eef284-5046-4ad7-acdf-5f35efb7bc26")
 		)
 		(instances
-			(project ""
-				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/8e7c721f-4787-45c0-877a-ccbe11a9aa6f"
-					(reference "U5")
+			(project "IMU_V100"
+				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/0bf2e565-c24a-4992-bfd2-1fa1b050084a"
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -885,7 +885,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a7ef5435-6f3e-4715-a257-dfa4c4364af8")
-		(property "Reference" "J3"
+		(property "Reference" "J1"
 			(at 198.12 95.2499 0)
 			(effects
 				(font
@@ -931,21 +931,21 @@
 			)
 		)
 		(pin "1"
-			(uuid "fa5b0a12-6bc8-4601-b60f-a21dca3c7228")
+			(uuid "35222948-7155-46f2-9987-1d4cf2a3328e")
 		)
 		(pin "3"
-			(uuid "a954d012-4524-4f24-a6d9-8f0f693f2bf5")
+			(uuid "2d88a4d3-5fb0-4ea3-9e30-38c061a181a8")
 		)
 		(pin "4"
-			(uuid "87a5c81f-6f64-4da6-b13d-f7722c04837a")
+			(uuid "b5b408aa-fc40-4d33-9505-9a2b1174dc1d")
 		)
 		(pin "2"
-			(uuid "67fbdee3-fc02-4214-8ce2-6da3b10e9f13")
+			(uuid "92ba0582-cbec-47bc-8854-71aa499efb97")
 		)
 		(instances
-			(project ""
-				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/8e7c721f-4787-45c0-877a-ccbe11a9aa6f"
-					(reference "J3")
+			(project "IMU_V100"
+				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/0bf2e565-c24a-4992-bfd2-1fa1b050084a"
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -961,7 +961,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fa505cff-63b3-42c7-bf04-92354e1839dd")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR06"
 			(at 182.88 118.11 0)
 			(effects
 				(font
@@ -1006,12 +1006,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "d843f3c6-b6e0-4d45-9c19-1ac2f060c33e")
+			(uuid "62d86c70-c196-4ad6-a113-2aef10c1106e")
 		)
 		(instances
-			(project ""
-				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/8e7c721f-4787-45c0-877a-ccbe11a9aa6f"
-					(reference "#PWR017")
+			(project "IMU_V100"
+				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/0bf2e565-c24a-4992-bfd2-1fa1b050084a"
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)

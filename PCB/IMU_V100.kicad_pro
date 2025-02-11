@@ -224,7 +224,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "simulation_model_issue": "ignore",
@@ -372,7 +372,7 @@
     },
     "net_format_name": "",
     "page_layout_descr_file": "",
-    "plot_directory": "",
+    "plot_directory": "PDFs/",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,
@@ -388,36 +388,44 @@
       "Root"
     ],
     [
-      "93d4a6d7-53e9-480c-99e3-973e68fe6426",
-      "MCU"
+      "2788fe48-d984-4dc4-9e05-1cad1733d82a",
+      "Block_Diagram"
     ],
     [
-      "39f78241-e6ef-41bc-bd06-8782906087b7",
-      "RS485_TRX"
+      "205555cc-3b86-4915-975e-3a7e3eed6661",
+      "Project_Architecture"
     ],
     [
-      "af1be3cc-4748-49ee-b74b-ab259917e083",
-      "Power"
-    ],
-    [
-      "d7fe4925-030e-437c-8e8d-2abff320ddc8",
-      "GPS"
-    ],
-    [
-      "26be62e2-7246-4227-8ad0-e9b977d94393",
-      "MPU9250"
-    ],
-    [
-      "38184d55-d9c0-48fd-bb15-ff1076c43a13",
+      "33aef508-2230-418a-a3ff-3a2fec798c19",
       "Barometer"
     ],
     [
-      "8e7c721f-4787-45c0-877a-ccbe11a9aa6f",
+      "0bf2e565-c24a-4992-bfd2-1fa1b050084a",
       "CAN_FD"
     ],
     [
-      "bd9088cb-f15a-411d-bc5c-97f5b7b74aa4",
+      "5b76202c-354d-4f3a-a8c9-7a4a418bf80a",
       "DEBUG"
+    ],
+    [
+      "ea59acea-8322-4969-ac03-70a626785633",
+      "GPS"
+    ],
+    [
+      "749fc824-56f7-4acb-b075-16c52a8f4b5a",
+      "MCU"
+    ],
+    [
+      "e40185c3-bbf2-4dbc-b3f3-d3826640ca57",
+      "MPU9250"
+    ],
+    [
+      "f9424131-b250-4638-a784-b5462b05c1af",
+      "Power"
+    ],
+    [
+      "84e3f5e1-ab68-44f3-8700-c3af58140fdb",
+      "RS485_TRX"
     ]
   ],
   "text_variables": {}
