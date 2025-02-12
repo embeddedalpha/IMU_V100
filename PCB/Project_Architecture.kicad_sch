@@ -852,6 +852,144 @@
 		)
 		(uuid "fd0f65ee-9af9-4a36-9694-5cac3aadbcbf")
 	)
+	(rectangle
+		(start 272.542 41.656)
+		(end 277.622 46.736)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 194 0 194 1)
+		)
+		(uuid 50891fa4-4e6a-4fcb-9cf0-377efafe9f77)
+	)
+	(rectangle
+		(start 272.542 34.036)
+		(end 277.622 39.116)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 0 72 0 1)
+		)
+		(uuid 71f01d69-6cfa-4d65-8aff-e327580821f1)
+	)
+	(rectangle
+		(start 272.542 49.911)
+		(end 277.622 54.991)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 128 77 0 1)
+		)
+		(uuid 7fcdcd56-15f4-43e4-8e5b-a4ebb98de4b1)
+	)
+	(rectangle
+		(start 272.542 26.416)
+		(end 277.622 31.496)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 0 255 255 1)
+		)
+		(uuid 912901c3-e497-46b0-80e5-9255ee09ab0c)
+	)
+	(rectangle
+		(start 273.05 19.05)
+		(end 278.13 24.13)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 194 0 0 1)
+		)
+		(uuid b67ece88-2ac4-4e02-9d4a-64be1345628e)
+	)
+	(rectangle
+		(start 272.542 58.166)
+		(end 277.622 63.246)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type color)
+			(color 255 153 0 1)
+		)
+		(uuid b7ddf770-abdc-4dde-b5f9-33e7e1b187e9)
+	)
+	(text "SPI\n"
+		(exclude_from_sim no)
+		(at 267.97 29.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "354336eb-3f99-48ec-b66a-ccb7ccedaf12")
+	)
+	(text "I2C"
+		(exclude_from_sim no)
+		(at 267.97 44.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "79d5eea1-c6b8-43f4-b06c-7dcb0078e851")
+	)
+	(text "DEBUG\n"
+		(exclude_from_sim no)
+		(at 267.97 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "9370ff47-d58c-4d55-a178-62dc8b791c15")
+	)
+	(text "UART"
+		(exclude_from_sim no)
+		(at 267.97 52.705 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "a536755c-04ca-47b8-9a38-12a711182106")
+	)
+	(text "POWER"
+		(exclude_from_sim no)
+		(at 268.478 21.844 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "a7cbd7c8-f907-4956-a8ee-234a059a5a43")
+	)
+	(text "SIGNALS"
+		(exclude_from_sim no)
+		(at 267.97 36.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "acd33c19-cab6-43db-9dad-f1ac0abe56ab")
+	)
 	(sheet
 		(at 234.95 133.35)
 		(size 25.4 24.765)
