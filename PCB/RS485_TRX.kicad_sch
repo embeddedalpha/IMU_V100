@@ -5,29 +5,49 @@
 	(uuid "9afa11b4-2e9c-4fff-8b47-18347460936a")
 	(paper "A4")
 	(lib_symbols
-		(symbol "Connector_Generic:Conn_01x04"
-			(pin_names
-				(offset 1.016) hide)
+		(symbol "IMU_V100:1-770969-0"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "J"
-				(at 0 5.08 0)
+				(at 9.398 6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left top)
 				)
 			)
-			(property "Value" "Conn_01x04"
-				(at 0 -7.62 0)
+			(property "Value" "1-770969-0"
+				(at 3.302 4.318 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left top)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Footprints:17709690"
+				(at 16.51 -94.92 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=770969&DocType=Customer%20Drawing&DocLang=English&DocFormat=pdf&PartCntxt=1-770969-0"
+				(at 16.51 -194.92 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Description" "PCB Mount Header, Right Angle, Wire-to-Board, 6 Position, 4.14 mm [.162 in] Centerline, Fully Shrouded, Tin, Mini-Universal MATE-N-LOK"
 				(at 0 0 0)
 				(effects
 					(font
@@ -36,90 +56,80 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
+			(property "Height" "11.99"
+				(at 16.51 -394.92 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left top)
 					(hide yes)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-				(at 0 0 0)
+			(property "Manufacturer_Name" "TE Connectivity"
+				(at 16.51 -494.92 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left top)
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
+			(property "Manufacturer_Part_Number" "1-770969-0"
+				(at 16.51 -594.92 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left top)
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
+			(property "Mouser Part Number" "571-1-770969-0"
+				(at 16.51 -694.92 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left top)
 					(hide yes)
 				)
 			)
-			(symbol "Conn_01x04_1_1"
-				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
-					(stroke
-						(width 0.1524)
-						(type default)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity-AMP/1-770969-0?qs=qXO2HHLAcoJbD0GMLxxebg%3D%3D"
+				(at 16.51 -794.92 0)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
-					(fill
-						(type none)
-					)
+					(justify left top)
+					(hide yes)
 				)
-				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
+			)
+			(property "Arrow Part Number" "1-770969-0"
+				(at 16.51 -894.92 0)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
-					(fill
-						(type none)
-					)
+					(justify left top)
+					(hide yes)
 				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
+			)
+			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/1-770969-0/te-connectivity?region=europe"
+				(at 16.51 -994.92 0)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
-					(fill
-						(type none)
-					)
+					(justify left top)
+					(hide yes)
 				)
+			)
+			(symbol "1-770969-0_1_1"
 				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 3.81)
-					(end 1.27 -6.35)
+					(start 5.08 2.54)
+					(end 15.24 -7.62)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -129,9 +139,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 2.54 0)
-					(length 3.81)
-					(name "Pin_1"
+					(at 20.32 -5.08 180)
+					(length 5.08)
+					(name "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -147,9 +157,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_2"
+					(at 20.32 -2.54 180)
+					(length 5.08)
+					(name "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -165,9 +175,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_3"
+					(at 20.32 0 180)
+					(length 5.08)
+					(name "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -183,9 +193,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -5.08 0)
-					(length 3.81)
-					(name "Pin_4"
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -193,6 +203,42 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2050,6 +2096,16 @@
 	)
 	(wire
 		(pts
+			(xy 173.99 71.12) (xy 220.98 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47645b55-a394-483e-8aa7-dba1acf4f381")
+	)
+	(wire
+		(pts
 			(xy 119.38 91.44) (xy 113.03 91.44)
 		)
 		(stroke
@@ -2057,6 +2113,16 @@
 			(type default)
 		)
 		(uuid "52c6a7c9-9e8e-43c8-a67f-8a2dfe75c5b4")
+	)
+	(wire
+		(pts
+			(xy 218.44 85.09) (xy 218.44 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57a58f37-ca1b-48c5-aec4-978072e5f8e3")
 	)
 	(wire
 		(pts
@@ -2090,6 +2156,16 @@
 	)
 	(wire
 		(pts
+			(xy 199.39 96.52) (xy 199.39 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "610d46bc-73bf-4069-85f6-c1a253cdaabd")
+	)
+	(wire
+		(pts
 			(xy 101.6 86.36) (xy 113.03 86.36)
 		)
 		(stroke
@@ -2097,16 +2173,6 @@
 			(type default)
 		)
 		(uuid "62529650-5834-4305-a91c-2b7b672c3a12")
-	)
-	(wire
-		(pts
-			(xy 179.07 99.06) (xy 185.42 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "658f044e-a054-420f-b6d7-a1a16f1589e3")
 	)
 	(wire
 		(pts
@@ -2140,17 +2206,17 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 105.41) (xy 179.07 99.06)
+			(xy 199.39 80.01) (xy 218.44 80.01)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7bdaf9f4-b551-4cd1-9be0-e2d7b16d2d82")
+		(uuid "7a3b1919-e3a4-4a79-9566-859c15439ad0")
 	)
 	(wire
 		(pts
-			(xy 162.56 93.98) (xy 185.42 93.98)
+			(xy 162.56 93.98) (xy 199.39 93.98)
 		)
 		(stroke
 			(width 0)
@@ -2160,13 +2226,13 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 91.44) (xy 173.99 91.44)
+			(xy 220.98 105.41) (xy 220.98 123.19)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "88c83751-20eb-4ec6-9f1e-153ecc0281c5")
+		(uuid "89b3bb5f-6389-47ad-8fd1-c5dd659bc17c")
 	)
 	(wire
 		(pts
@@ -2177,6 +2243,26 @@
 			(type default)
 		)
 		(uuid "8b956046-ce00-47a2-b177-768933f8ee51")
+	)
+	(wire
+		(pts
+			(xy 218.44 105.41) (xy 218.44 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d4ba272-7228-41c7-a0e4-ee9540189e70")
+	)
+	(wire
+		(pts
+			(xy 199.39 93.98) (xy 199.39 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e40ca9d-e6dd-43b5-8356-1f8096ae8b6f")
 	)
 	(wire
 		(pts
@@ -2217,6 +2303,16 @@
 			(type default)
 		)
 		(uuid "985c86d4-1d16-4585-a216-496242d11013")
+	)
+	(wire
+		(pts
+			(xy 220.98 71.12) (xy 220.98 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b08d3672-b37b-4436-812b-4125d25b75d3")
 	)
 	(wire
 		(pts
@@ -2310,7 +2406,17 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 60.96) (xy 173.99 91.44)
+			(xy 199.39 115.57) (xy 218.44 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee4ab8b6-ad2f-4dad-8976-ff7e3c245acb")
+	)
+	(wire
+		(pts
+			(xy 173.99 60.96) (xy 173.99 71.12)
 		)
 		(stroke
 			(width 0)
@@ -2330,7 +2436,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 96.52) (xy 167.64 96.52)
+			(xy 167.64 96.52) (xy 199.39 96.52)
 		)
 		(stroke
 			(width 0)
@@ -2685,93 +2791,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x04")
-		(at 190.5 93.98 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "631f7d9e-646d-40ec-816e-3227f54cd3e8")
-		(property "Reference" "J4"
-			(at 193.04 93.9799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Conn_01x04"
-			(at 193.04 96.5199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_XH_S4B-XH-A_1x04_P2.50mm_Horizontal"
-			(at 190.5 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 190.5 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 190.5 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "e63eb918-4a58-4599-9b2a-9ba6a6831396")
-		)
-		(pin "3"
-			(uuid "23e0d4e9-1c3f-4960-a6b9-67eeb002a250")
-		)
-		(pin "1"
-			(uuid "623101d1-0714-4efc-9b65-815bd4babe1e")
-		)
-		(pin "4"
-			(uuid "d59ffbc2-4b2f-4d4c-b74c-1120162d4ae6")
-		)
-		(instances
-			(project "IMU_V100"
-				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "J4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
-		(at 179.07 105.41 0)
+		(at 220.98 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "8654ab48-3f1e-483a-b652-6ee02cc65e01")
-		(property "Reference" "#PWR031"
-			(at 179.07 111.76 0)
+		(uuid "79902615-f1e0-49ff-811a-83d6001a7a1d")
+		(property "Reference" "#PWR035"
+			(at 220.98 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2780,7 +2810,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 179.07 110.49 0)
+			(at 220.98 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2788,7 +2818,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 179.07 105.41 0)
+			(at 220.98 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2797,7 +2827,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 179.07 105.41 0)
+			(at 220.98 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2806,7 +2836,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 179.07 105.41 0)
+			(at 220.98 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2815,12 +2845,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "7ffd4460-fe27-4e1a-af13-91d266e5b941")
+			(uuid "5d6a37e3-c061-480e-9253-a14c6ad9c13e")
 		)
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "#PWR031")
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -2977,6 +3007,160 @@
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
 					(reference "#PWR030")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "IMU_V100:1-770969-0")
+		(at 215.9 105.41 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ab857663-ca4c-4e8e-9648-a34310b38428")
+		(property "Reference" "J4"
+			(at 224.79 93.9799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1-770969-0"
+			(at 224.79 96.5199 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Footprints:17709690"
+			(at 310.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=770969&DocType=Customer%20Drawing&DocLang=English&DocFormat=pdf&PartCntxt=1-770969-0"
+			(at 410.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "PCB Mount Header, Right Angle, Wire-to-Board, 6 Position, 4.14 mm [.162 in] Centerline, Fully Shrouded, Tin, Mini-Universal MATE-N-LOK"
+			(at 215.9 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Height" "11.99"
+			(at 610.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 710.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "1-770969-0"
+			(at 810.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-1-770969-0"
+			(at 910.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity-AMP/1-770969-0?qs=qXO2HHLAcoJbD0GMLxxebg%3D%3D"
+			(at 1010.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "1-770969-0"
+			(at 1110.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/1-770969-0/te-connectivity?region=europe"
+			(at 1210.82 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "6ef1e743-549e-45dc-a77d-99652c61713e")
+		)
+		(pin "5"
+			(uuid "bcc5df29-c9e1-4c38-bbe3-54e32c68d766")
+		)
+		(pin "2"
+			(uuid "183aedee-166a-4c10-8eb1-184d957628fb")
+		)
+		(pin "1"
+			(uuid "e34d9c22-c7fc-433a-bbfb-2d8b621b209c")
+		)
+		(pin "4"
+			(uuid "a8aca745-cb25-4894-8fcb-81e11dd07bea")
+		)
+		(pin "6"
+			(uuid "53a1b9af-df8e-4e9d-bf96-9b26a6e99f25")
+		)
+		(instances
+			(project "IMU_V100"
+				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
+					(reference "J4")
 					(unit 1)
 				)
 			)
