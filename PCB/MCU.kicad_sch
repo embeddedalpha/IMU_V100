@@ -1793,6 +1793,18 @@
 		)
 		(uuid "251fec2f-aad4-4be0-a9d5-077ece1db3d8")
 	)
+	(hierarchical_label "CAN_USER1"
+		(shape bidirectional)
+		(at 161.29 58.42 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "2ce1cd28-e3e2-4d88-bb8a-09c038738d4c")
+	)
 	(hierarchical_label "MISO_MPU9250"
 		(shape input)
 		(at 20.32 83.82 0)
@@ -1804,6 +1816,30 @@
 			(justify left)
 		)
 		(uuid "2fb33371-23ab-49eb-9189-a53ab1e51c51")
+	)
+	(hierarchical_label "RS485_USER2"
+		(shape bidirectional)
+		(at 176.53 137.16 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "404b3121-5f8a-456c-9bed-4dedf8f3cee1")
+	)
+	(hierarchical_label "CAN_USER2"
+		(shape bidirectional)
+		(at 161.29 60.96 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "421a083a-f1ac-4ebd-b0b0-e6ae7f18f154")
 	)
 	(hierarchical_label "I2C_SDA_GNSS"
 		(shape bidirectional)
@@ -1879,7 +1915,7 @@
 	)
 	(hierarchical_label "CAN_SHUTDOWN"
 		(shape output)
-		(at 168.91 184.15 180)
+		(at 161.29 55.88 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1939,7 +1975,7 @@
 	)
 	(hierarchical_label "CAN_TX"
 		(shape output)
-		(at 168.91 179.07 180)
+		(at 161.29 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2047,7 +2083,7 @@
 	)
 	(hierarchical_label "TXD_RS485"
 		(shape output)
-		(at 176.53 154.94 180)
+		(at 176.53 134.62 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2129,9 +2165,21 @@
 		)
 		(uuid "ef395f8b-b21c-4997-83e3-25d5ca99bad7")
 	)
+	(hierarchical_label "RS485_USER1"
+		(shape bidirectional)
+		(at 176.53 129.54 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f7c044b5-fa62-4ae2-8525-0c7e6bd8dd02")
+	)
 	(hierarchical_label "CAN_RX"
 		(shape input)
-		(at 168.91 181.61 180)
+		(at 161.29 53.34 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
