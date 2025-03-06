@@ -874,3 +874,9 @@ uint16_t USART_RX_Single_Byte(USART_Config *config)
 	while(!(config->Port->SR & USART_SR_RXNE));
 	return data;
 }
+
+void USART_Clear_Status_Regs(USART_Config *config)
+{
+    (void)config->Port->SR; // Read the status register to clear flags
+    (void)config->Port->DR; // Read the data register to clear flags
+}

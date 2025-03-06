@@ -5,23 +5,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Modules/MPU6050/MPU6050.c 
+../Driver/CAN/CAN.c 
 
 OBJS += \
-./Modules/MPU6050/MPU6050.o 
+./Driver/CAN/CAN.o 
 
 C_DEPS += \
-./Modules/MPU6050/MPU6050.d 
+./Driver/CAN/CAN.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Modules/MPU6050/%.o Modules/MPU6050/%.su Modules/MPU6050/%.cyclo: ../Modules/MPU6050/%.c Modules/MPU6050/subdir.mk
+Driver/CAN/%.o Driver/CAN/%.su Driver/CAN/%.cyclo: ../Driver/CAN/%.c Driver/CAN/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/STM32F407_Projects/IMU_V100/Driver" -I"D:/STM32F407_Projects/IMU_V100/Modules" -I"D:/STM32F407_Projects/IMU_V100/Middleware" -I"D:/STM32F407_Projects/IMU_V100/Application_Layer" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
-clean: clean-Modules-2f-MPU6050
+clean: clean-Driver-2f-CAN
 
-clean-Modules-2f-MPU6050:
-	-$(RM) ./Modules/MPU6050/MPU6050.cyclo ./Modules/MPU6050/MPU6050.d ./Modules/MPU6050/MPU6050.o ./Modules/MPU6050/MPU6050.su
+clean-Driver-2f-CAN:
+	-$(RM) ./Driver/CAN/CAN.cyclo ./Driver/CAN/CAN.d ./Driver/CAN/CAN.o ./Driver/CAN/CAN.su
 
-.PHONY: clean-Modules-2f-MPU6050
+.PHONY: clean-Driver-2f-CAN
 

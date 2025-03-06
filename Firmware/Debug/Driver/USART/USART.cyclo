@@ -13,3 +13,4 @@
 ../Driver/USART/USART.c:776:8:USART_RX_Buffer	24
 ../Driver/USART/USART.c:864:6:USART_TX_Single_Byte	2
 ../Driver/USART/USART.c:870:10:USART_RX_Single_Byte	2
+../Driver/USART/USART.c:878:6:USART_Clear_Status_Regs	1

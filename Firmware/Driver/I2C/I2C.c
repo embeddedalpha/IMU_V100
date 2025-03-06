@@ -58,11 +58,6 @@ void I2C1_DMA_Config(uint8_t *pBuffer, uint32_t len)
 }
 
 
-static void I2C1_RX_DMA_Config(void)
-{
-
-}
-
 
 #define I2C_TIMEOUT  0xFFFF
 
@@ -159,10 +154,6 @@ void I2C_Init(I2C_Config *config)
 			config -> Port -> CR2 |= I2C_CR2_ITEVTEN;
 		}
 	}
-
-
-
-
 
 	//CCR ==> [Tr + Tw]/(1/48000000)
 	//TRISE ==> [Tr/(1/48000000)]

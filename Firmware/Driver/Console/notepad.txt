@@ -1,0 +1,29 @@
+void MODBUS_USART6_IRQ(void)
+{
+	if(Modbus6_Flag.RX_Active_Flag)
+	{
+		USART_Clear_Status_Regs(&__modbus_usart_6_device_config->UART_Device);
+
+		 __disable_irq(); // Disable interrupts to safely update DMA configurations
+
+		 __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
+
+		 Modbus6_Data_Packet.Data_Length = RX_Buffer_Length - __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
+
+		// Prevent buffer overflow
+		if ( Modbus6_Data_Packet.Data_Length > RX_Buffer_Length)
+		{
+			Modbus6_Data_Packet.Data_Length = 	Modbus6_Data_Packet.Data_Length;
+		}
+
+        // Reset DMA stream for the next reception
+        __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = RX_Buffer_Length;
+        __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
+
+        __enable_irq(); // Re-enable interrupts
+
+        Modbus6_Flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
+
+	}
+
+}

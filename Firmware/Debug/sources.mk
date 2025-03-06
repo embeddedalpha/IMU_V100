@@ -22,6 +22,8 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Application_Layer \
+Driver/CAN \
 Driver/Console \
 Driver/DMA \
 Driver/GPIO \
@@ -29,6 +31,7 @@ Driver/I2C \
 Driver/Logs \
 Driver/Timer \
 Driver/USART \
+Middleware/Modbus \
 Modules/Barometer \
 Modules/LC76G \
 Modules/MPU6050 \

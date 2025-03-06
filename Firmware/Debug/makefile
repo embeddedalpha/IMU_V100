@@ -14,6 +14,7 @@ RM := rm -rf
 -include Modules/MPU6050/subdir.mk
 -include Modules/LC76G/subdir.mk
 -include Modules/Barometer/subdir.mk
+-include Middleware/Modbus/subdir.mk
 -include Driver/USART/subdir.mk
 -include Driver/Timer/subdir.mk
 -include Driver/Logs/subdir.mk
@@ -21,6 +22,8 @@ RM := rm -rf
 -include Driver/GPIO/subdir.mk
 -include Driver/DMA/subdir.mk
 -include Driver/Console/subdir.mk
+-include Driver/CAN/subdir.mk
+-include Application_Layer/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

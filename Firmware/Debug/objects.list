@@ -1,3 +1,5 @@
+"./Application_Layer/App.o"
+"./Driver/CAN/CAN.o"
 "./Driver/Console/Console.o"
 "./Driver/DMA/DMA.o"
 "./Driver/GPIO/GPIO.o"
@@ -5,6 +7,7 @@
 "./Driver/Logs/Logs.o"
 "./Driver/Timer/Timer.o"
 "./Driver/USART/USART.o"
+"./Middleware/Modbus/Modbus.o"
 "./Modules/Barometer/BMP280.o"
 "./Modules/LC76G/LC76G.o"
 "./Modules/MPU6050/MPU6050.o"
