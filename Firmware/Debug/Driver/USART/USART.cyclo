@@ -1,0 +1,15 @@
+../Inc/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../Inc/core_cm4.h:1814:22:__NVIC_SetPriority	2
+../Inc/main.h:191:22:separateFractionAndIntegral	1
+../Driver/USART/USART.c:30:6:UART4_IRQHandler	15
+../Driver/USART/USART.c:94:6:USART1_IRQHandler	15
+../Driver/USART/USART.c:159:15:Get_USART_Instance_Number	7
+../Driver/USART/USART.c:170:6:USART_Config_Reset	1
+../Driver/USART/USART.c:180:8:USART_Clock_Enable	7
+../Driver/USART/USART.c:214:8:USART_Clock_Disable	7
+../Driver/USART/USART.c:247:13:PIN_Setup	89
+../Driver/USART/USART.c:471:8:USART_Init	32
+../Driver/USART/USART.c:688:8:USART_TX_Buffer	23
+../Driver/USART/USART.c:776:8:USART_RX_Buffer	24
+../Driver/USART/USART.c:864:6:USART_TX_Single_Byte	2
+../Driver/USART/USART.c:870:10:USART_RX_Single_Byte	2

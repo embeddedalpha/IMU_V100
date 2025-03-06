@@ -1,0 +1,181 @@
+\doxysection{GPIO.\+c}
+\hypertarget{_g_p_i_o_8c_source}{}\label{_g_p_i_o_8c_source}\mbox{\hyperlink{_g_p_i_o_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}GPIO.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00016}00016\ \textcolor{comment}{//\ Macro\ to\ map\ GPIO\ ports\ to\ their\ index\ for\ EXTI\ configuration}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00017}00017\ \textcolor{preprocessor}{\#define\ PORT\_TO\_INDEX(port)\ ((port\ ==\ GPIOA)\ ?\ 0\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00018}00018\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOB)\ ?\ 1\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00019}00019\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOC)\ ?\ 2\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00020}00020\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOD)\ ?\ 3\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00021}00021\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOE)\ ?\ 4\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00022}00022\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOF)\ ?\ 5\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00023}00023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOG)\ ?\ 6\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00024}00024\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOH)\ ?\ 7\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00025}00025\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOI)\ ?\ 8\ :\ -\/1)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00027}00027\ \textcolor{comment}{//\ Macro\ defining\ the\ split\ point\ between\ AFR[0]\ and\ AFR[1]\ registers}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00028}00028\ \textcolor{preprocessor}{\#define\ GPIO\_AF\_SPLIT\_POINT\ 8}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00030}00030\ \textcolor{comment}{//\ Macro\ to\ calculate\ the\ bit\ position\ for\ a\ GPIO\ pin}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00031}00031\ \textcolor{preprocessor}{\#define\ PIN\_POS(pin)\ ((pin)\ *\ 2)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00033}00033\ \textcolor{comment}{//\ Array\ to\ store\ function\ pointers\ for\ EXTI\ ISRs\ (Interrupt\ Service\ Routines)}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00034}00034\ void\ (*EXTI\_ISR[16])(void);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00042}\mbox{\hyperlink{_g_p_i_o_8c_a17e9789a29a87d2df54f12b94dd1a0b6}{00042}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_a17e9789a29a87d2df54f12b94dd1a0b6}{EXTI0\_IRQHandler}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (EXTI\_ISR[0])\ EXTI\_ISR[0]();\ \textcolor{comment}{//\ Invoke\ registered\ callback}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00044}00044\ \ \ \ \ EXTI-\/>PR\ |=\ EXTI\_PR\_PR0;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ interrupt\ flag}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00050}\mbox{\hyperlink{_g_p_i_o_8c_a49cfdd46eb8d0ef3e1987514aa9343dc}{00050}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_a49cfdd46eb8d0ef3e1987514aa9343dc}{EXTI1\_IRQHandler}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{if}\ (EXTI\_ISR[1])\ EXTI\_ISR[1]();}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00052}00052\ \ \ \ \ EXTI-\/>PR\ |=\ EXTI\_PR\_PR1;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00058}\mbox{\hyperlink{_g_p_i_o_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14}{00058}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14}{EXTI2\_IRQHandler}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (EXTI\_ISR[2])\ EXTI\_ISR[2]();}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00060}00060\ \ \ \ \ EXTI-\/>PR\ |=\ EXTI\_PR\_PR2;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00066}\mbox{\hyperlink{_g_p_i_o_8c_a30c045de96d18ec9c67a7b9e4350920f}{00066}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_a30c045de96d18ec9c67a7b9e4350920f}{EXTI3\_IRQHandler}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{if}\ (EXTI\_ISR[3])\ EXTI\_ISR[3]();}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00068}00068\ \ \ \ \ EXTI-\/>PR\ |=\ EXTI\_PR\_PR3;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00069}00069\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00074}\mbox{\hyperlink{_g_p_i_o_8c_a290cb997018c8d85d4b965b4a242842f}{00074}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_a290cb997018c8d85d4b965b4a242842f}{EXTI4\_IRQHandler}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (EXTI\_ISR[4])\ EXTI\_ISR[4]();}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00076}00076\ \ \ \ \ EXTI-\/>PR\ |=\ EXTI\_PR\_PR4;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00077}00077\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00084}\mbox{\hyperlink{_g_p_i_o_8c_a7b2096b8b2643286dc3a7e5110e5ae85}{00084}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_a7b2096b8b2643286dc3a7e5110e5ae85}{EXTI9\_5\_IRQHandler}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 5;\ i\ <=\ 9;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((EXTI-\/>PR\ \&\ (1\ <<\ i))\ \&\&\ EXTI\_ISR[i])\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI\_ISR[i]();\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Invoke\ callback\ for\ pin\ \`{}i`}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI-\/>PR\ |=\ (1\ <<\ i);\ \textcolor{comment}{//\ Clear\ interrupt\ flag}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00091}00091\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00098}\mbox{\hyperlink{_g_p_i_o_8c_a738473a5b43f6c92b80ce1d3d6f77ed9}{00098}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_a738473a5b43f6c92b80ce1d3d6f77ed9}{EXTI15\_10\_IRQHandler}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 10;\ i\ <=\ 15;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((EXTI-\/>PR\ \&\ (1\ <<\ i))\ \&\&\ EXTI\_ISR[i])\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI\_ISR[i]();\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Invoke\ callback\ for\ pin\ \`{}i`}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI-\/>PR\ |=\ (1\ <<\ i);\ \textcolor{comment}{//\ Clear\ interrupt\ flag}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00104}00104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00105}00105\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00119}\mbox{\hyperlink{_g_p_i_o_8c_abae7c55d2c56bbd7be4376a5df013a37}{00119}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_p_i_o_8c_abae7c55d2c56bbd7be4376a5df013a37}{GPIO\_Interrupt\_Setup}}(GPIO\_TypeDef\ *Port,\ \textcolor{keywordtype}{int}\ pin,\ \textcolor{keywordtype}{int}\ edge\_select,\ uint32\_t\ priority,\ \textcolor{keywordtype}{void}\ (*attach\_ISR))\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00120}00120\ \ \ \ \ \textcolor{keywordtype}{int}\ port\_data\ =\ PORT\_TO\_INDEX(Port);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00122}00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (port\_data\ <\ 0\ ||\ pin\ <\ 0\ ||\ pin\ >\ 15)\ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ Validate\ inputs}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00124}00124\ \ \ \ \ \textcolor{comment}{//\ Map\ GPIO\ port\ to\ EXTI\ line}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00125}00125\ \ \ \ \ SYSCFG-\/>EXTICR[pin\ /\ 4]\ |=\ port\_data\ <<\ ((pin\ \%\ 4)\ *\ 4);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00127}00127\ \ \ \ \ \textcolor{comment}{//\ Enable\ EXTI\ interrupt\ mask}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00128}00128\ \ \ \ \ EXTI-\/>IMR\ |=\ (1\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ Configure\ rising/falling\ edge\ triggers}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00131}00131\ \ \ \ \ EXTI-\/>RTSR\ \&=\ \string~(1\ <<\ pin);\ \textcolor{comment}{//\ Clear\ rising\ edge\ trigger}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00132}00132\ \ \ \ \ EXTI-\/>FTSR\ \&=\ \string~(1\ <<\ pin);\ \textcolor{comment}{//\ Clear\ falling\ edge\ trigger}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00133}00133\ \ \ \ \ \textcolor{keywordflow}{switch}\ (edge\_select)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI-\/>RTSR\ |=\ (1\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI-\/>FTSR\ |=\ (1\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI-\/>RTSR\ |=\ (1\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ EXTI-\/>FTSR\ |=\ (1\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00144}00144\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00146}00146\ \ \ \ \ \textcolor{comment}{//\ Register\ the\ callback\ function}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00147}00147\ \ \ \ \ EXTI\_ISR[pin]\ =\ attach\_ISR;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00149}00149\ \ \ \ \ \textcolor{comment}{//\ Configure\ NVIC\ for\ the\ EXTI\ line}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00150}00150\ \ \ \ \ IRQn\_Type\ irq\ =\ (pin\ <=\ 4)\ ?\ (IRQn\_Type)(EXTI0\_IRQn\ +\ pin)\ :}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (pin\ <=\ 9)\ ?\ EXTI9\_5\_IRQn\ :\ EXTI15\_10\_IRQn;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00153}00153\ \ \ \ \ NVIC\_SetPriority(irq,\ priority);\ \textcolor{comment}{//\ Set\ interrupt\ priority}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00154}00154\ \ \ \ \ NVIC\_EnableIRQ(irq);\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enable\ NVIC\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00155}00155\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00163}\mbox{\hyperlink{_g_p_i_o_8c_a3fbe31fd75292573be572f053d633e74}{00163}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_p_i_o_8c_a3fbe31fd75292573be572f053d633e74}{GPIO\_Clock\_Disable}}(GPIO\_TypeDef\ *PORT)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{switch}\ ((uint32\_t)PORT)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOA:\ RCC-\/>AHB1ENR\ \&=\ \string~RCC\_AHB1ENR\_GPIOAEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOB:\ RCC-\/>AHB1ENR\ \&=\ \string~RCC\_AHB1ENR\_GPIOBEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOC:\ RCC-\/>AHB1ENR\ \&=\ \string~RCC\_AHB1ENR\_GPIOCEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOD:\ RCC-\/>AHB1ENR\ \&=\ \string~RCC\_AHB1ENR\_GPIODEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOE:\ RCC-\/>AHB1ENR\ \&=\ \string~RCC\_AHB1ENR\_GPIOEEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOF:\ RCC-\/>AHB1ENR\ \&=\ \string~RCC\_AHB1ENR\_GPIOFEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOH:\ RCC-\/>AHB1ENR\ \&=\ \string~RCC\_AHB1ENR\_GPIOHEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{return}\ GPIO\_INVALID\_PORT;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00173}00173\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00174}00174\ \ \ \ \ \textcolor{keywordflow}{return}\ GPIO\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00175}00175\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00183}\mbox{\hyperlink{_g_p_i_o_8c_a7bff8f9cb7f776aff4556e1cc6cd9ecb}{00183}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_g_p_i_o_8c_a7bff8f9cb7f776aff4556e1cc6cd9ecb}{GPIO\_Clock\_Enable}}(GPIO\_TypeDef\ *PORT)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00184}00184\ \ \ \ \ \textcolor{keywordflow}{switch}\ ((uint32\_t)PORT)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOA:\ RCC-\/>AHB1ENR\ |=\ RCC\_AHB1ENR\_GPIOAEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOB:\ RCC-\/>AHB1ENR\ |=\ RCC\_AHB1ENR\_GPIOBEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOC:\ RCC-\/>AHB1ENR\ |=\ RCC\_AHB1ENR\_GPIOCEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOD:\ RCC-\/>AHB1ENR\ |=\ RCC\_AHB1ENR\_GPIODEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOE:\ RCC-\/>AHB1ENR\ |=\ RCC\_AHB1ENR\_GPIOEEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOF:\ RCC-\/>AHB1ENR\ |=\ RCC\_AHB1ENR\_GPIOFEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ (uint32\_t)GPIOH:\ RCC-\/>AHB1ENR\ |=\ RCC\_AHB1ENR\_GPIOHEN;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{return}\ GPIO\_INVALID\_PORT;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00193}00193\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00194}00194\ \ \ \ \ \textcolor{keywordflow}{return}\ GPIO\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00195}00195\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00198}\mbox{\hyperlink{_g_p_i_o_8c_a011e573b1622c77fcbbb315d4fe8441e}{00198}}\ GPIO\_Status\ \mbox{\hyperlink{_g_p_i_o_8c_a011e573b1622c77fcbbb315d4fe8441e}{GPIO\_Pin\_Init}}(GPIO\_TypeDef\ *Port,\ uint8\_t\ pin,\ uint8\_t\ mode,\ uint8\_t\ output\_type,\ uint8\_t\ speed,\ uint8\_t\ pull,\ uint8\_t\ alternate\_function)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{if}\ (pin\ >\ 15\ ||\ mode\ >\ 3\ ||\ speed\ >\ 3\ ||\ pull\ >\ 2)\ \textcolor{keywordflow}{return}\ GPIO\_INVALID\_PIN;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00201}00201\ \ \ \ \ \mbox{\hyperlink{_g_p_i_o_8c_a7bff8f9cb7f776aff4556e1cc6cd9ecb}{GPIO\_Clock\_Enable}}(Port);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00203}00203\ \ \ \ \ \textcolor{comment}{//\ Reset\ and\ set\ mode}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00204}00204\ \ \ \ \ Port-\/>MODER\ \&=\ \string~(3\ <<\ PIN\_POS(pin));}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00205}00205\ \ \ \ \ Port-\/>MODER\ |=\ mode\ <<\ PIN\_POS(pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00207}00207\ \ \ \ \ \textcolor{comment}{//\ Reset\ and\ set\ output\ type}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00208}00208\ \ \ \ \ Port-\/>OTYPER\ \&=\ \string~(1\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00209}00209\ \ \ \ \ \textcolor{keywordflow}{if}\ (output\_type\ !=\ GPIO\_Configuration.Output\_Type.None)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ Port-\/>OTYPER\ |=\ output\_type\ <<\ pin;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00211}00211\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00213}00213\ \ \ \ \ \textcolor{comment}{//\ Reset\ and\ set\ speed}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00214}00214\ \ \ \ \ Port-\/>OSPEEDR\ \&=\ \string~(3\ <<\ PIN\_POS(pin));}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{if}\ (speed\ !=\ GPIO\_Configuration.Speed.None)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ Port-\/>OSPEEDR\ |=\ speed\ <<\ PIN\_POS(pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00217}00217\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00219}00219\ \ \ \ \ \textcolor{comment}{//\ Reset\ and\ set\ pull-\/up/pull-\/down}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00220}00220\ \ \ \ \ Port-\/>PUPDR\ \&=\ \string~(3\ <<\ PIN\_POS(pin));}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00221}00221\ \ \ \ \ \textcolor{keywordflow}{if}\ (pull\ !=\ GPIO\_Configuration.Pull.None)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ Port-\/>PUPDR\ |=\ pull\ <<\ PIN\_POS(pin);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00223}00223\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00225}00225\ \ \ \ \ \textcolor{comment}{//\ Set\ alternate\ function}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00226}00226\ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ ==\ GPIO\_Configuration.Mode.Alternate\_Function)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pin\ <\ GPIO\_AF\_SPLIT\_POINT)\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ Port-\/>AFR[0]\ \&=\ \string~(0xF\ <<\ (pin\ *\ 4));}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ Port-\/>AFR[0]\ |=\ alternate\_function\ <<\ (pin\ *\ 4);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ Port-\/>AFR[1]\ \&=\ \string~(0xF\ <<\ ((pin\ -\/\ GPIO\_AF\_SPLIT\_POINT)\ *\ 4));}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ Port-\/>AFR[1]\ |=\ alternate\_function\ <<\ ((pin\ -\/\ GPIO\_AF\_SPLIT\_POINT)\ *\ 4);}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00234}00234\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{return}\ GPIO\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00237}00237\ \}}
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_g_p_i_o_8c_source_l00240}00240\ }
+
+\end{DoxyCode}

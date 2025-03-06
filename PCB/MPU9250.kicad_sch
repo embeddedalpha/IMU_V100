@@ -1,0 +1,74 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "253b7cf9-00f2-422b-9308-0f0da7ab1a3a")
+	(paper "A4")
+	(lib_symbols)
+	(hierarchical_label "CLK_MPU9250"
+		(shape input)
+		(at 212.09 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0efe332f-550b-43e7-8a87-da72a4734262")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 177.8 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2fe7a5b3-93f2-4792-8371-62c987fc7eb2")
+	)
+	(hierarchical_label "INT_MPU9250"
+		(shape input)
+		(at 212.09 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "39a11280-e643-470e-a3ab-b1ac2b034968")
+	)
+	(hierarchical_label "nCSS_MPU9250"
+		(shape input)
+		(at 212.09 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b107daea-2130-4279-a27d-318a7b69edfc")
+	)
+	(hierarchical_label "MOSI_MPU9250"
+		(shape input)
+		(at 212.09 76.2 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b27bd473-4a9b-4ba6-81b0-81f8ef62f45b")
+	)
+	(hierarchical_label "MISO_MPU9250"
+		(shape output)
+		(at 212.09 80.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c3e7a777-388c-439c-9623-9066f50ee047")
+	)
+)

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP LC76GABMD
+D GNSS / GPS Modules Single band, 4 GNSS, w/ LNA (Airoha 3352)
+K
+F https://www.mouser.com/pdfDocs/L76_and_LC76_series_Hardware_Comparison_V1020220515.pdf
+$ENDCMP
+#
+#End Doc Library

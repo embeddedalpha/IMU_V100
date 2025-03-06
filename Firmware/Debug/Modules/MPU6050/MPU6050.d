@@ -1,0 +1,1 @@
+Modules/MPU6050/MPU6050.o: ../Modules/MPU6050/MPU6050.c
