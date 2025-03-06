@@ -1372,7 +1372,7 @@ Discarded input sections
                 0x00000000        0x4 ./Driver/USART/USART.o
  .bss.__usart_6_config__
                 0x00000000        0x4 ./Driver/USART/USART.o
- .text.Get_USART_Instance_Number
+ .text.USART_Get_Instance_Number
                 0x00000000       0x84 ./Driver/USART/USART.o
  .text.USART_Config_Reset
                 0x00000000       0x3c ./Driver/USART/USART.o
@@ -1491,6 +1491,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./Middleware/Modbus/Modbus.o
  .data          0x00000000        0x0 ./Middleware/Modbus/Modbus.o
  .bss           0x00000000        0x0 ./Middleware/Modbus/Modbus.o
+ .text.Delay_us
+                0x00000000       0x4c ./Middleware/Modbus/Modbus.o
  .rodata.GPIO_Configuration
                 0x00000000       0x40 ./Middleware/Modbus/Modbus.o
  .rodata.USART_Configuration
@@ -1549,85 +1551,39 @@ Discarded input sections
                 0x00000000        0xa ./Middleware/Modbus/Modbus.o
  .rodata.Modbus_Function_Code
                 0x00000000        0x8 ./Middleware/Modbus/Modbus.o
- .bss.__modbus_usart_1_device_config
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.__modbus_usart_2_device_config
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.__modbus_usart_3_device_config
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.__modbus_uart_4_device_config
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.__modbus_uart_5_device_config
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.__modbus_usart_6_device_config
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.Modbus1_Flag
-                0x00000000        0x2 ./Middleware/Modbus/Modbus.o
- .bss.Modbus2_Flag
-                0x00000000        0x2 ./Middleware/Modbus/Modbus.o
- .bss.Modbus3_Flag
-                0x00000000        0x2 ./Middleware/Modbus/Modbus.o
- .bss.Modbus4_Flag
-                0x00000000        0x2 ./Middleware/Modbus/Modbus.o
- .bss.Modbus5_Flag
-                0x00000000        0x2 ./Middleware/Modbus/Modbus.o
- .bss.Modbus6_Flag
-                0x00000000        0x2 ./Middleware/Modbus/Modbus.o
- .bss.Modbus1_Data_Packet
-                0x00000000      0x102 ./Middleware/Modbus/Modbus.o
- .bss.Modbus2_Data_Packet
-                0x00000000      0x102 ./Middleware/Modbus/Modbus.o
- .bss.Modbus3_Data_Packet
-                0x00000000      0x102 ./Middleware/Modbus/Modbus.o
- .bss.Modbus4_Data_Packet
-                0x00000000      0x102 ./Middleware/Modbus/Modbus.o
- .bss.Modbus5_Data_Packet
-                0x00000000      0x102 ./Middleware/Modbus/Modbus.o
- .bss.Modbus6_Data_Packet
-                0x00000000      0x102 ./Middleware/Modbus/Modbus.o
- .bss.modbus_txget_flag
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.modbus_txflag
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.Modbus_RX_Length
-                0x00000000        0x4 ./Middleware/Modbus/Modbus.o
- .bss.Modbus_TRX_Buffer
-                0x00000000       0xc8 ./Middleware/Modbus/Modbus.o
- .text.CRC16    0x00000000       0x54 ./Middleware/Modbus/Modbus.o
- .text.Modbus_Packet_Validate
-                0x00000000       0x76 ./Middleware/Modbus/Modbus.o
+ .bss.modbus_Instance
+                0x00000000      0x630 ./Middleware/Modbus/Modbus.o
+ .text.CRC16    0x00000000       0x5c ./Middleware/Modbus/Modbus.o
  .text.Modbus_Slave_Packet_Processor
-                0x00000000      0x104 ./Middleware/Modbus/Modbus.o
+                0x00000000      0x116 ./Middleware/Modbus/Modbus.o
+ .text.Modbus_USART_IRQ_Handler
+                0x00000000       0x98 ./Middleware/Modbus/Modbus.o
+ .text.Modbus_Packet_Validate
+                0x00000000       0x7a ./Middleware/Modbus/Modbus.o
  .text.MODBUS_USART1_IRQ
-                0x00000000       0xac ./Middleware/Modbus/Modbus.o
+                0x00000000       0x14 ./Middleware/Modbus/Modbus.o
  .text.MODBUS_USART2_IRQ
-                0x00000000       0xac ./Middleware/Modbus/Modbus.o
+                0x00000000       0x14 ./Middleware/Modbus/Modbus.o
  .text.MODBUS_USART3_IRQ
-                0x00000000       0xac ./Middleware/Modbus/Modbus.o
+                0x00000000       0x14 ./Middleware/Modbus/Modbus.o
  .text.MODBUS_UART4_IRQ
-                0x00000000       0x94 ./Middleware/Modbus/Modbus.o
+                0x00000000       0x14 ./Middleware/Modbus/Modbus.o
  .text.MODBUS_UART5_IRQ
-                0x00000000       0x94 ./Middleware/Modbus/Modbus.o
+                0x00000000       0x14 ./Middleware/Modbus/Modbus.o
  .text.MODBUS_USART6_IRQ
-                0x00000000       0x94 ./Middleware/Modbus/Modbus.o
+                0x00000000       0x14 ./Middleware/Modbus/Modbus.o
  .text.Modbus_Init
-                0x00000000      0x208 ./Middleware/Modbus/Modbus.o
+                0x00000000      0x128 ./Middleware/Modbus/Modbus.o
  .text.Modbus_Read_Coil
-                0x00000000       0xfc ./Middleware/Modbus/Modbus.o
- .text.Modbus_Read_Discrete_Inputs
-                0x00000000       0x8e ./Middleware/Modbus/Modbus.o
- .text.Modbus_Read_Holding_Registers
-                0x00000000       0x8e ./Middleware/Modbus/Modbus.o
- .text.Modbus_Read_Input_Registers
-                0x00000000       0x8e ./Middleware/Modbus/Modbus.o
+                0x00000000      0x294 ./Middleware/Modbus/Modbus.o
  .rodata.wCRCTable.0
                 0x00000000      0x200 ./Middleware/Modbus/Modbus.o
- .debug_info    0x00000000     0x2450 ./Middleware/Modbus/Modbus.o
- .debug_abbrev  0x00000000      0x2d5 ./Middleware/Modbus/Modbus.o
+ .debug_info    0x00000000     0x1f85 ./Middleware/Modbus/Modbus.o
+ .debug_abbrev  0x00000000      0x2ea ./Middleware/Modbus/Modbus.o
  .debug_aranges
-                0x00000000       0x88 ./Middleware/Modbus/Modbus.o
+                0x00000000       0x80 ./Middleware/Modbus/Modbus.o
  .debug_rnglists
-                0x00000000       0x6d ./Middleware/Modbus/Modbus.o
+                0x00000000       0x5f ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000      0x2aa ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000      0xaba ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x2f ./Middleware/Modbus/Modbus.o
@@ -1676,10 +1632,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x4c ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x22 ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x10 ./Middleware/Modbus/Modbus.o
- .debug_line    0x00000000      0xec3 ./Middleware/Modbus/Modbus.o
- .debug_str     0x00000000    0x8eea1 ./Middleware/Modbus/Modbus.o
+ .debug_line    0x00000000      0xbc7 ./Middleware/Modbus/Modbus.o
+ .debug_str     0x00000000    0x8ec6d ./Middleware/Modbus/Modbus.o
  .comment       0x00000000       0x44 ./Middleware/Modbus/Modbus.o
- .debug_frame   0x00000000      0x1dc ./Middleware/Modbus/Modbus.o
+ .debug_frame   0x00000000      0x1c0 ./Middleware/Modbus/Modbus.o
  .ARM.attributes
                 0x00000000       0x34 ./Middleware/Modbus/Modbus.o
  .group         0x00000000        0xc ./Modules/Barometer/BMP280.o
@@ -3940,25 +3896,25 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000     0xbd1f
+.debug_info     0x00000000     0xbd1d
  .debug_info    0x00000000     0x1a0a ./Driver/DMA/DMA.o
  .debug_info    0x00001a0a      0xfca ./Driver/GPIO/GPIO.o
  .debug_info    0x000029d4     0x1907 ./Driver/I2C/I2C.o
  .debug_info    0x000042db     0x2532 ./Driver/Timer/Timer.o
- .debug_info    0x0000680d     0x2543 ./Driver/USART/USART.o
- .debug_info    0x00008d50     0x2a94 ./Src/main.o
- .debug_info    0x0000b7e4      0x50b ./Src/system_stm32f4xx.o
- .debug_info    0x0000bcef       0x30 ./Startup/startup_stm32f407vgtx.o
+ .debug_info    0x0000680d     0x2541 ./Driver/USART/USART.o
+ .debug_info    0x00008d4e     0x2a94 ./Src/main.o
+ .debug_info    0x0000b7e2      0x50b ./Src/system_stm32f4xx.o
+ .debug_info    0x0000bced       0x30 ./Startup/startup_stm32f407vgtx.o
 
-.debug_abbrev   0x00000000     0x12ae
+.debug_abbrev   0x00000000     0x1293
  .debug_abbrev  0x00000000      0x23f ./Driver/DMA/DMA.o
  .debug_abbrev  0x0000023f      0x275 ./Driver/GPIO/GPIO.o
  .debug_abbrev  0x000004b4      0x32e ./Driver/I2C/I2C.o
  .debug_abbrev  0x000007e2      0x30c ./Driver/Timer/Timer.o
- .debug_abbrev  0x00000aee      0x36c ./Driver/USART/USART.o
- .debug_abbrev  0x00000e5a      0x316 ./Src/main.o
- .debug_abbrev  0x00001170      0x11a ./Src/system_stm32f4xx.o
- .debug_abbrev  0x0000128a       0x24 ./Startup/startup_stm32f407vgtx.o
+ .debug_abbrev  0x00000aee      0x351 ./Driver/USART/USART.o
+ .debug_abbrev  0x00000e3f      0x316 ./Src/main.o
+ .debug_abbrev  0x00001155      0x11a ./Src/system_stm32f4xx.o
+ .debug_abbrev  0x0000126f       0x24 ./Startup/startup_stm32f407vgtx.o
 
 .debug_aranges  0x00000000      0x4b0
  .debug_aranges

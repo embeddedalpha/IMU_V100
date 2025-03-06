@@ -3,7 +3,7 @@
 ../Inc/main.h:191:22:separateFractionAndIntegral	1
 ../Driver/USART/USART.c:30:6:UART4_IRQHandler	15
 ../Driver/USART/USART.c:94:6:USART1_IRQHandler	15
-../Driver/USART/USART.c:159:15:Get_USART_Instance_Number	7
+../Driver/USART/USART.c:159:8:USART_Get_Instance_Number	7
 ../Driver/USART/USART.c:170:6:USART_Config_Reset	1
 ../Driver/USART/USART.c:180:8:USART_Clock_Enable	7
 ../Driver/USART/USART.c:214:8:USART_Clock_Disable	7

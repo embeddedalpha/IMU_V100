@@ -156,7 +156,7 @@ void USART1_IRQHandler(void)
 
 
 
-static int8_t Get_USART_Instance_Number(USART_Config *config)
+int8_t USART_Get_Instance_Number(USART_Config *config)
 {
 	if(config->Port == USART1) {return 0;}
 	else if(config->Port == USART2) {return 1;}
@@ -473,7 +473,7 @@ int8_t USART_Init(USART_Config *config)
 	USART_Clock_Enable(config);
 	PIN_Setup(config);
 
-	usart_dma_instance_number = Get_USART_Instance_Number(config);
+	usart_dma_instance_number = USART_Get_Instance_Number(config);
 	if(usart_dma_instance_number == -1) return -1;
 
 //	USART1 -> CR1 |= USART_CR1_UE;

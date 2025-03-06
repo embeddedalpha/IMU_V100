@@ -8,51 +8,30 @@
 
 #include "Modbus.h"
 
-typedef struct Modbus_Flag_Struct{
+#define Modbus_RX_Buffer_Length 256 // Length of the reception buffer
+
+typedef struct {
 
 	volatile bool RX_Active_Flag;
 	volatile bool RX_Complete_Flag;
 }Modbus_Flag_Struct;
 
-typedef struct Modbus_Data_Packet_Struct{
+typedef struct {
 	volatile uint16_t Data_Length;
-	volatile uint8_t RX_Buffer[256];
+	volatile uint8_t RX_Buffer[Modbus_RX_Buffer_Length];
 }Modbus_Data_Packet_Struct;
 
-Modbus_Config *__modbus_usart_1_device_config;
-Modbus_Config *__modbus_usart_2_device_config;
-Modbus_Config *__modbus_usart_3_device_config;
-Modbus_Config *__modbus_uart_4_device_config;
-Modbus_Config *__modbus_uart_5_device_config;
-Modbus_Config *__modbus_usart_6_device_config;
 
-Modbus_Flag_Struct Modbus1_Flag;
-Modbus_Flag_Struct Modbus2_Flag;
-Modbus_Flag_Struct Modbus3_Flag;
-Modbus_Flag_Struct Modbus4_Flag;
-Modbus_Flag_Struct Modbus5_Flag;
-Modbus_Flag_Struct Modbus6_Flag;
-
-Modbus_Data_Packet_Struct Modbus1_Data_Packet;
-Modbus_Data_Packet_Struct Modbus2_Data_Packet;
-Modbus_Data_Packet_Struct Modbus3_Data_Packet;
-Modbus_Data_Packet_Struct Modbus4_Data_Packet;
-Modbus_Data_Packet_Struct Modbus5_Data_Packet;
-Modbus_Data_Packet_Struct Modbus6_Data_Packet;
+typedef struct {
+    Modbus_Config *config;
+    Modbus_Flag_Struct flag;
+    Modbus_Data_Packet_Struct data_packet;
+} Modbus_Instance;
 
 
-// Flags to control and monitor UART reception
-volatile int modbus_txget_flag = 0; // Indicates if the reception is active
-volatile int modbus_txflag = 0;     // Indicates if data reception is complete
+volatile Modbus_Instance modbus_Instance[6];
 
-#define RX_Buffer_Length 200 // Length of the reception buffer
-
-// Variables to track the length of received data and the reception buffer
-volatile int Modbus_RX_Length = 0;
-volatile char Modbus_TRX_Buffer[RX_Buffer_Length]; // Buffer for received and transmitted data
-
-
-static uint16_t CRC16 ( uint8_t *nData, uint16_t wLength)
+static uint16_t CRC16 (volatile uint8_t *nData, volatile uint16_t wLength)
 {
 static const uint16_t wCRCTable[] = {
    0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
@@ -100,87 +79,69 @@ uint16_t wCRCWord = 0xFFFF;
    return wCRCWord;
 }
 
-bool Modbus_Packet_Validate(Modbus_Config *device_config,Modbus_Data_Packet_Struct *Packet)
+bool Modbus_Slave_Packet_Processor(volatile Modbus_Instance *instance)
 {
-	if(Packet->RX_Buffer[0] == device_config->Device_Address)
+	if(instance->data_packet.RX_Buffer[0] == instance->config->Device_Address)
 	{
-		uint16_t calc_crc = CRC16(Packet->RX_Buffer, Packet->Data_Length-2);
+		uint16_t received_crc = instance->data_packet.RX_Buffer[instance->data_packet.Data_Length - 2] |
+		                        (instance->data_packet.RX_Buffer[instance->data_packet.Data_Length - 1] << 8);
 
-		uint16_t temp_crc = (Packet->RX_Buffer[Packet->Data_Length-1] << 8) | (Packet->RX_Buffer[Packet->Data_Length-2] << 0);
+		uint16_t calculated_crc = CRC16(instance->data_packet.RX_Buffer, instance->data_packet.Data_Length - 2);
 
-		if(calc_crc == temp_crc)
+		if(received_crc == calculated_crc)
 		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-}
-
-bool Modbus_Slave_Packet_Processor(Modbus_Config *device_config,Modbus_Data_Packet_Struct *Packet)
-{
-	if(Packet->RX_Buffer[0] == device_config->Device_Address)
-	{
-		uint16_t calc_crc = CRC16(Packet->RX_Buffer, Packet->Data_Length-2);
-
-		uint16_t temp_crc = (Packet->RX_Buffer[Packet->Data_Length-1] << 8) | (Packet->RX_Buffer[Packet->Data_Length-2] << 0);
-
-		if(calc_crc == temp_crc)
-		{
-			if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Coils)
+			if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Coils)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
 				{
 					// Don't know how to implement this
 				}
 			}
-			else if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Discrete_Inputs)
+			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Discrete_Inputs)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Read_Discrete_Inputs)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Discrete_Inputs)
 				{
 					// Don't know how to implement this
 				}
 			}
-			else if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers)
+			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Read_Holding_Registers)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Holding_Registers)
 				{
 					// Don't know how to implement this
 				}
 			}
-			else if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Input_Registers)
+			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Input_Registers)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Read_Input_Registers)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Input_Registers)
 				{
 					// Don't know how to implement this
 				}
 			}
-			else if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Single_Coil)
+			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Single_Coil)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Write_Single_Coil)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Single_Coil)
 				{
 					// Don't know how to implement this
 				}
 			}
-			else if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Single_Register)
+			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Single_Register)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Write_Single_Register)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Single_Register)
 				{
 					// Don't know how to implement this
 				}
 			}
-			else if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Multiple_Coils)
+			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Multiple_Coils)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Write_Multiple_Coils)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Multiple_Coils)
 				{
 					// Don't know how to implement this
 				}
 			}
-			else if(device_config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Multiple_Registers)
+			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Multiple_Registers)
 			{
-				if(Packet->RX_Buffer[1] == Modbus_Function_Code.Write_Multiple_Registers)
+				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Multiple_Registers)
 				{
 					// Don't know how to implement this
 				}
@@ -189,8 +150,6 @@ bool Modbus_Slave_Packet_Processor(Modbus_Config *device_config,Modbus_Data_Pack
 			{
 				// Need to implement this
 			}
-
-
 
 		}
 		else
@@ -205,212 +164,72 @@ bool Modbus_Slave_Packet_Processor(Modbus_Config *device_config,Modbus_Data_Pack
 	return 1;
 }
 
-void MODBUS_USART1_IRQ(void)
+void Modbus_USART_IRQ_Handler(volatile Modbus_Instance *instance)
 {
-	if(Modbus1_Flag.RX_Active_Flag)
+	if(instance->flag.RX_Active_Flag)
 	{
-		USART_Clear_Status_Regs(&__modbus_usart_1_device_config->UART_Device);
+		USART_Clear_Status_Regs(&instance->config->UART_Device);
 
 		 __disable_irq(); // Disable interrupts to safely update DMA configurations
 
-		 __modbus_usart_1_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
+		 instance->config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
 
-		 Modbus1_Data_Packet.Data_Length = RX_Buffer_Length - __modbus_usart_1_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
+		 instance->data_packet.Data_Length = Modbus_RX_Buffer_Length - instance->config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
 
 		// Prevent buffer overflow
-		if ( Modbus1_Data_Packet.Data_Length > RX_Buffer_Length)
+		if ( instance->data_packet.Data_Length > Modbus_RX_Buffer_Length)
 		{
-			Modbus1_Data_Packet.Data_Length = 	Modbus1_Data_Packet.Data_Length;
+			instance->data_packet.Data_Length = 	Modbus_RX_Buffer_Length;
 		}
 
         // Reset DMA stream for the next reception
-        __modbus_usart_1_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = RX_Buffer_Length;
-        __modbus_usart_1_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
+		instance->config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = Modbus_RX_Buffer_Length;
+		instance->config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
 
-        Modbus1_Flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
+		instance->flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
 
         //Process the incoming packet.
 
-        if(__modbus_usart_1_device_config->Device_Type == Modbus_Configuration.Device_Type.Slave)
+        if(instance->config->Device_Type == Modbus_Configuration.Device_Type.Slave)
         {
-        	Modbus_Slave_Packet_Processor(__modbus_usart_1_device_config, &Modbus1_Data_Packet);
+        	Modbus_Slave_Packet_Processor(instance);
         }
 
 
         __enable_irq(); // Re-enable interrupts
 
-
-
-
-
-
-
 	}
-
 }
 
-void MODBUS_USART2_IRQ(void)
+
+
+bool Modbus_Packet_Validate(volatile Modbus_Instance *instance)
 {
-	if(Modbus2_Flag.RX_Active_Flag)
+	if(instance->data_packet.RX_Buffer[0] == instance->config->Device_Address)
 	{
-		USART_Clear_Status_Regs(&__modbus_usart_2_device_config->UART_Device);
+		uint16_t received_crc = instance->data_packet.RX_Buffer[instance->data_packet.Data_Length - 2] |
+		                        (instance->data_packet.RX_Buffer[instance->data_packet.Data_Length - 1] << 8);
 
-		 __disable_irq(); // Disable interrupts to safely update DMA configurations
+		uint16_t calculated_crc = CRC16(instance->data_packet.RX_Buffer, instance->data_packet.Data_Length - 2);
 
-		 __modbus_usart_2_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
-
-		 Modbus2_Data_Packet.Data_Length = RX_Buffer_Length - __modbus_usart_2_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
-
-		// Prevent buffer overflow
-		if ( Modbus2_Data_Packet.Data_Length > RX_Buffer_Length)
-		{
-			Modbus2_Data_Packet.Data_Length = 	Modbus2_Data_Packet.Data_Length;
+		if (calculated_crc != received_crc) {
+		    return false;  // Invalid CRC
 		}
 
-        // Reset DMA stream for the next reception
-        __modbus_usart_2_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = RX_Buffer_Length;
-        __modbus_usart_2_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
-
-
-        Modbus2_Flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
-
-        if(__modbus_usart_2_device_config->Device_Type == Modbus_Configuration.Device_Type.Slave)
-        {
-        	Modbus_Slave_Packet_Processor(__modbus_usart_2_device_config, &Modbus2_Data_Packet);
-        }
-
-        __enable_irq(); // Re-enable interrupts
-
-	}
-}
-
-void MODBUS_USART3_IRQ(void)
-{
-	if(Modbus3_Flag.RX_Active_Flag)
-	{
-		USART_Clear_Status_Regs(&__modbus_usart_3_device_config->UART_Device);
-
-		 __disable_irq(); // Disable interrupts to safely update DMA configurations
-
-		 __modbus_usart_3_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
-
-		 Modbus3_Data_Packet.Data_Length = RX_Buffer_Length - __modbus_usart_3_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
-
-		// Prevent buffer overflow
-		if ( Modbus3_Data_Packet.Data_Length > RX_Buffer_Length)
-		{
-			Modbus3_Data_Packet.Data_Length = 	Modbus3_Data_Packet.Data_Length;
-		}
-
-        // Reset DMA stream for the next reception
-        __modbus_usart_3_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = RX_Buffer_Length;
-        __modbus_usart_3_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
-
-        Modbus3_Flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
-
-
-        if(__modbus_usart_3_device_config->Device_Type == Modbus_Configuration.Device_Type.Slave)
-        {
-        	Modbus_Slave_Packet_Processor(__modbus_usart_3_device_config, &Modbus3_Data_Packet);
-        }
-
-        __enable_irq(); // Re-enable interrupts
-
-
-
+		return true;
 	}
 
+	return 0;
 }
 
-void MODBUS_UART4_IRQ(void)
-{
-	if(Modbus4_Flag.RX_Active_Flag)
-	{
-		USART_Clear_Status_Regs(&__modbus_uart_4_device_config->UART_Device);
 
-		 __disable_irq(); // Disable interrupts to safely update DMA configurations
 
-		 __modbus_uart_4_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
-
-		 Modbus4_Data_Packet.Data_Length = RX_Buffer_Length - __modbus_uart_4_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
-
-		// Prevent buffer overflow
-		if ( Modbus4_Data_Packet.Data_Length > RX_Buffer_Length)
-		{
-			Modbus4_Data_Packet.Data_Length = 	Modbus4_Data_Packet.Data_Length;
-		}
-
-        // Reset DMA stream for the next reception
-        __modbus_uart_4_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = RX_Buffer_Length;
-        __modbus_uart_4_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
-
-        __enable_irq(); // Re-enable interrupts
-
-        Modbus4_Flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
-
-	}
-
-}
-
-void MODBUS_UART5_IRQ(void)
-{
-	if(Modbus5_Flag.RX_Active_Flag)
-	{
-		USART_Clear_Status_Regs(&__modbus_uart_5_device_config->UART_Device);
-
-		 __disable_irq(); // Disable interrupts to safely update DMA configurations
-
-		 __modbus_uart_5_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
-
-		 Modbus5_Data_Packet.Data_Length = RX_Buffer_Length - __modbus_uart_5_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
-
-		// Prevent buffer overflow
-		if ( Modbus5_Data_Packet.Data_Length > RX_Buffer_Length)
-		{
-			Modbus5_Data_Packet.Data_Length = 	Modbus5_Data_Packet.Data_Length;
-		}
-
-        // Reset DMA stream for the next reception
-        __modbus_uart_5_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = RX_Buffer_Length;
-        __modbus_uart_5_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
-
-        __enable_irq(); // Re-enable interrupts
-
-        Modbus5_Flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
-
-	}
-
-}
-
-void MODBUS_USART6_IRQ(void)
-{
-	if(Modbus6_Flag.RX_Active_Flag)
-	{
-		USART_Clear_Status_Regs(&__modbus_usart_6_device_config->UART_Device);
-
-		 __disable_irq(); // Disable interrupts to safely update DMA configurations
-
-		 __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR &= ~DMA_SxCR_EN;
-
-		 Modbus6_Data_Packet.Data_Length = RX_Buffer_Length - __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR;
-
-		// Prevent buffer overflow
-		if ( Modbus6_Data_Packet.Data_Length > RX_Buffer_Length)
-		{
-			Modbus6_Data_Packet.Data_Length = 	Modbus6_Data_Packet.Data_Length;
-		}
-
-        // Reset DMA stream for the next reception
-        __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->NDTR = RX_Buffer_Length;
-        __modbus_usart_6_device_config->UART_Device.USART_DMA_Instance_RX.Request.Stream->CR |= DMA_SxCR_EN;
-
-        __enable_irq(); // Re-enable interrupts
-
-        Modbus6_Flag.RX_Complete_Flag = 1; // Set the flag indicating data reception is complete
-
-	}
-
-}
+void MODBUS_USART1_IRQ(void){ Modbus_USART_IRQ_Handler(&modbus_Instance[0]); }
+void MODBUS_USART2_IRQ(void){ Modbus_USART_IRQ_Handler(&modbus_Instance[1]); }
+void MODBUS_USART3_IRQ(void){ Modbus_USART_IRQ_Handler(&modbus_Instance[2]); }
+void MODBUS_UART4_IRQ(void) { Modbus_USART_IRQ_Handler(&modbus_Instance[3]); }
+void MODBUS_UART5_IRQ(void) { Modbus_USART_IRQ_Handler(&modbus_Instance[4]); }
+void MODBUS_USART6_IRQ(void){ Modbus_USART_IRQ_Handler(&modbus_Instance[5]); }
 
 
 
@@ -418,37 +237,21 @@ void MODBUS_USART6_IRQ(void)
 
 Modbus_Flag Modbus_Init(Modbus_Config *device_config)
 {
-	if(device_config->UART_Device.Port == USART1)
-	{
-		__modbus_usart_1_device_config = device_config;
-		device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART1_IRQ;
 
-	}
-	if(device_config->UART_Device.Port == USART2)
-	{
-		__modbus_usart_2_device_config = device_config;
-		device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART2_IRQ;
-	}
-	if(device_config->UART_Device.Port == USART3)
-	{
-		__modbus_usart_3_device_config = device_config;
-		device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART3_IRQ;
-	}
-	if(device_config->UART_Device.Port == UART4)
-	{
-		__modbus_uart_4_device_config = device_config;
-		device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_UART4_IRQ;
-	}
-	if(device_config->UART_Device.Port == UART5)
-	{
-		__modbus_uart_5_device_config = device_config;
-		device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_UART5_IRQ;
-	}
-	if(device_config->UART_Device.Port == USART6)
-	{
-		__modbus_usart_6_device_config = device_config;
-		device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART6_IRQ;
-	}
+	int usart_index = USART_Get_Instance_Number(&device_config->UART_Device);
+	if (usart_index < 0 || usart_index > 5) return Init_Fail;  // Invalid USART instance
+
+	modbus_Instance[usart_index].config = device_config;
+
+    switch (usart_index)
+    {
+        case 0: device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART1_IRQ; break;
+        case 1: device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART2_IRQ; break;
+        case 2: device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART3_IRQ; break;
+        case 3:  device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_UART4_IRQ; break;
+        case 4:  device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_UART5_IRQ; break;
+        case 5: device_config->UART_Device.ISR_Routines.Idle_Line_ISR = MODBUS_USART6_IRQ; break;
+    }
 
 
     if (USART_Init(&device_config->UART_Device) != true) {
@@ -458,192 +261,170 @@ Modbus_Flag Modbus_Init(Modbus_Config *device_config)
 
 	if(device_config->Device_Type == Modbus_Configuration.Device_Type.Slave)
 	{
-
-		if(device_config->UART_Device.Port == USART1)
-		{
-			Modbus1_Flag.RX_Active_Flag = 1;
-			USART_RX_Buffer(&__modbus_usart_1_device_config->UART_Device, (uint8_t *)Modbus1_Data_Packet.RX_Buffer, RX_Buffer_Length, 0);
-		}
-		else if(device_config->UART_Device.Port == USART2)
-		{
-			Modbus2_Flag.RX_Active_Flag = 1;
-			USART_RX_Buffer(&__modbus_usart_2_device_config->UART_Device, (uint8_t *)Modbus2_Data_Packet.RX_Buffer, RX_Buffer_Length, 0);
-		}
-		else if(device_config->UART_Device.Port == USART3)
-		{
-			Modbus3_Flag.RX_Active_Flag = 1;
-			USART_RX_Buffer(&__modbus_usart_2_device_config->UART_Device, (uint8_t *)Modbus3_Data_Packet.RX_Buffer, RX_Buffer_Length, 0);
-		}
-		else if(device_config->UART_Device.Port == UART4)
-		{
-			Modbus4_Flag.RX_Active_Flag = 1;
-			USART_RX_Buffer(&__modbus_uart_4_device_config->UART_Device, (uint8_t *)Modbus4_Data_Packet.RX_Buffer, RX_Buffer_Length, 0);
-		}
-		else if(device_config->UART_Device.Port == UART5)
-		{
-			Modbus5_Flag.RX_Active_Flag = 1;
-			USART_RX_Buffer(&__modbus_uart_5_device_config->UART_Device, (uint8_t *)Modbus5_Data_Packet.RX_Buffer, RX_Buffer_Length, 0);
-		}
-		else if(device_config->UART_Device.Port == USART6)
-		{
-			Modbus6_Flag.RX_Active_Flag = 1;
-			USART_RX_Buffer(&__modbus_usart_6_device_config->UART_Device, (uint8_t *)Modbus6_Data_Packet.RX_Buffer, RX_Buffer_Length, 0);
-		}
-
-
+		modbus_Instance[usart_index].flag.RX_Active_Flag = 1;
+		USART_RX_Buffer(&modbus_Instance[usart_index].config->UART_Device, (uint8_t *)modbus_Instance[usart_index].data_packet.RX_Buffer, Modbus_RX_Buffer_Length, 0);
 	}
-
 
 	return Init_Success;
 }
 
 
-Modbus_Flag Modbus_Read_Coil(Modbus_Config *device_config, Modbus_Read_Coils_Request *Request,Modbus_Read_Coils_Response *Response)
+Modbus_Flag Modbus_Read_Coil(Modbus_Config *device_config, Modbus_Read_Coils_Request *Request, Modbus_Read_Coils_Response *Response)
 {
+    uint16_t crc;
+    uint8_t buffer[8];
 
-	uint16_t crc;
-	uint8_t buffer[8];
+    int usart_index = USART_Get_Instance_Number(&device_config->UART_Device);
+    if (usart_index < 0 || usart_index > 5) return Init_Fail;  // Invalid USART instance
 
-	buffer[0] = Request->Slave_Address;
-	buffer[1]  = Modbus_Function_Code.Read_Coils;
-	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
-	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
-	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
-	buffer[5] = (Request->Quantity_Of_Inputs & 0x00FF) >> 0;
+    // Build Modbus Request Packet
+    buffer[0] = Request->Slave_Address;
+    buffer[1] = Modbus_Function_Code.Read_Coils;
+    buffer[2] = (Request->Starting_Address >> 8) & 0xFF;
+    buffer[3] = Request->Starting_Address & 0xFF;
+    buffer[4] = (Request->Quantity_Of_Inputs >> 8) & 0xFF;
+    buffer[5] = Request->Quantity_Of_Inputs & 0xFF;
 
-	crc = CRC16(buffer, 6);
+    // Correct CRC Byte Order
+    crc = CRC16(buffer, 6);
+    buffer[6] = crc & 0xFF;  // LSB First
+    buffer[7] = (crc >> 8) & 0xFF;  // MSB Second
 
-	buffer[6] = (crc & 0x00FF) >> 0;
-	buffer[7] = (crc & 0xFF00) >> 8;
+    // Transmit Modbus Request
+    for(int i = 0; i < 8; i++)
+    {
+        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+    }
 
-	for(int i =0 ; i < 8; i++)
-	{
-		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
-	}
+    // Start RX Process
+    modbus_Instance[usart_index].flag.RX_Active_Flag = 1;
+    USART_RX_Buffer(&modbus_Instance[usart_index].config->UART_Device,
+                    (uint8_t *)modbus_Instance[usart_index].data_packet.RX_Buffer,
+                    Modbus_RX_Buffer_Length, 0);
 
-	if(device_config->UART_Device.Port == USART1)
-	{
-		Modbus1_Flag.RX_Active_Flag = 1;
-		USART_RX_Buffer(&__modbus_usart_1_device_config->UART_Device, (uint8_t *)Modbus1_Data_Packet.RX_Buffer, RX_Buffer_Length, 0);
+    uint32_t timeout = 5000;  // 5ms timeout
+    while (modbus_Instance[usart_index].flag.RX_Complete_Flag == 0 && timeout > 0) {
+        timeout--;
+        Delay_us(1);  // Wait 1 microsecond
+    }
+    if (timeout == 0) return Command_Transfer_Unsuccessful;
 
-	    while (Modbus1_Flag.RX_Complete_Flag == 0) {
-	        // Wait loop
-	    }
+    // Validate Response Length
+    uint16_t expected_length = 5 + (Request->Quantity_Of_Inputs / 8) + ((Request->Quantity_Of_Inputs % 8) ? 1 : 0);
+    if (modbus_Instance[usart_index].data_packet.Data_Length < expected_length) {
+        modbus_Instance[usart_index].flag.RX_Active_Flag = 0;
+        modbus_Instance[usart_index].flag.RX_Complete_Flag = 0;
+        return Command_Transfer_Unsuccessful;
+    }
 
-	    // Check for valid input length
-	    if (Modbus1_Data_Packet.Data_Length < 2) {
-	        // Reset flags and return error
-	    	Modbus1_Flag.RX_Active_Flag = 0;
-	    	Modbus1_Flag.RX_Complete_Flag = 0;
-	        return -1;
-	    }
+    // Validate CRC
+    if (!Modbus_Packet_Validate(&modbus_Instance[usart_index])) return Command_Transfer_Unsuccessful;
 
+    // Parse Response
+    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+    {
+        Response->Byte_Count = modbus_Instance[usart_index].data_packet.RX_Buffer[2];
 
+        int total_coils = Request->Quantity_Of_Inputs;
+        for (int i = 0; i < total_coils; i++)
+        {
+            int byte_index = i / 8;
+            int bit_index = i % 8;
+            Response->Data[i] = (modbus_Instance[usart_index].data_packet.RX_Buffer[3 + byte_index] >> bit_index) & 0x01;
+        }
+    }
 
+    modbus_Instance[usart_index].flag.RX_Active_Flag = 0;
+    modbus_Instance[usart_index].flag.RX_Complete_Flag = 0;
 
-	    if(Modbus_Packet_Validate(device_config, Modbus1_Data_Packet) == 1)
-	    {
-	    	if(Modbus1_Data_Packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
-	    	{
-	    		Response->Byte_Count = Modbus1_Data_Packet.RX_Buffer[3];
-
-
-	    	}
-
-	    }
-
-
-
-
-
-		Modbus1_Flag.RX_Active_Flag = 0;
-		Modbus1_Flag.RX_Complete_Flag = 0;
-	}
-
-
-
-	return Command_Transfer_Successful;
-}
-
-Modbus_Flag Modbus_Read_Discrete_Inputs(Modbus_Config *device_config, Modbus_Read_Discrete_Inputs_Request *Request,Modbus_Read_Discrete_Inputs_Response *Response)
-{
-	uint16_t crc;
-	uint8_t buffer[8];
-
-	buffer[0] = Request->Slave_Address;
-	buffer[1]  = Modbus_Function_Code.Read_Discrete_Inputs;
-	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
-	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
-	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
-	buffer[5] = (Request->Quantity_Of_Inputs & 0x00FF) >> 0;
-
-	crc = CRC16(buffer, 6);
-
-	buffer[6] = (crc & 0x00FF) >> 0;
-	buffer[7] = (crc & 0xFF00) >> 8;
-
-	for(int i =0 ; i < 8; i++)
-	{
-		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
-	}
-
-
-	return Command_Transfer_Successful;
-}
-
-Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Read_Holding_Registers_Request *Request ,Modbus_Read_Holding_Registers_Response *Response)
-{
-	uint16_t crc;
-	uint8_t buffer[8];
-
-	buffer[0] = Request->Slave_Address;
-	buffer[1]  = Modbus_Function_Code.Read_Holding_Registers;
-	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
-	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
-	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
-	buffer[5] = (Request->Quantity_Of_Inputs & 0x00FF) >> 0;
-
-	crc = CRC16(buffer, 6);
-
-	buffer[6] = (crc & 0x00FF) >> 0;
-	buffer[7] = (crc & 0xFF00) >> 8;
-
-	for(int i =0 ; i < 8; i++)
-	{
-		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
-	}
-
-
-
-
-	return Command_Transfer_Successful;
-}
-
-Modbus_Flag Modbus_Read_Input_Registers(Modbus_Config *device_config,Modbus_Read_Input_Registers_Request *Request ,Modbus_Read_Input_Registers_Response *Response)
-{
-	uint16_t crc;
-	uint8_t buffer[8];
-
-	buffer[0] = Request->Slave_Address;
-	buffer[1]  = Modbus_Function_Code.Read_Input_Registers;
-	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
-	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
-	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
-	buffer[5] = (Request->Quantity_Of_Inputs & 0x00FF) >> 0;
-
-	crc = CRC16(buffer, 6);
-
-	buffer[6] = (crc & 0x00FF) >> 0;
-	buffer[7] = (crc & 0xFF00) >> 8;
-
-	for(int i =0 ; i < 8; i++)
-	{
-		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
-	}
-
-
-	return Command_Transfer_Successful;
+    return Command_Transfer_Successful;
 }
 
 
 
+
+
+
+//
+//Modbus_Flag Modbus_Read_Discrete_Inputs(Modbus_Config *device_config, Modbus_Read_Discrete_Inputs_Request *Request,Modbus_Read_Discrete_Inputs_Response *Response)
+//{
+//	uint16_t crc;
+//	uint8_t buffer[8];
+//
+//	buffer[0] = Request->Slave_Address;
+//	buffer[1]  = Modbus_Function_Code.Read_Discrete_Inputs;
+//	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
+//	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
+//	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
+//	buffer[5] = (Request->Quantity_Of_Inputs & 0x00FF) >> 0;
+//
+//	crc = CRC16(buffer, 6);
+//
+//	buffer[6] = (crc & 0x00FF) >> 0;
+//	buffer[7] = (crc & 0xFF00) >> 8;
+//
+//	for(int i =0 ; i < 8; i++)
+//	{
+//		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+//	}
+//
+//
+//	return Command_Transfer_Successful;
+//}
+//
+//Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Read_Holding_Registers_Request *Request ,Modbus_Read_Holding_Registers_Response *Response)
+//{
+//	uint16_t crc;
+//	uint8_t buffer[8];
+//
+//	buffer[0] = Request->Slave_Address;
+//	buffer[1]  = Modbus_Function_Code.Read_Holding_Registers;
+//	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
+//	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
+//	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
+//	buffer[5] = (Request->Quantity_Of_Inputs & 0x00FF) >> 0;
+//
+//	crc = CRC16(buffer, 6);
+//
+//	buffer[6] = (crc & 0x00FF) >> 0;
+//	buffer[7] = (crc & 0xFF00) >> 8;
+//
+//	for(int i =0 ; i < 8; i++)
+//	{
+//		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+//	}
+//
+//
+//
+//
+//	return Command_Transfer_Successful;
+//}
+//
+//Modbus_Flag Modbus_Read_Input_Registers(Modbus_Config *device_config,Modbus_Read_Input_Registers_Request *Request ,Modbus_Read_Input_Registers_Response *Response)
+//{
+//	uint16_t crc;
+//	uint8_t buffer[8];
+//
+//	buffer[0] = Request->Slave_Address;
+//	buffer[1]  = Modbus_Function_Code.Read_Input_Registers;
+//	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
+//	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
+//	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
+//	buffer[5] = (Request->Quantity_Of_Inputs & 0x00FF) >> 0;
+//
+//	crc = CRC16(buffer, 6);
+//
+//	buffer[6] = (crc & 0x00FF) >> 0;
+//	buffer[7] = (crc & 0xFF00) >> 8;
+//
+//	for(int i =0 ; i < 8; i++)
+//	{
+//		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+//	}
+//
+//
+//	return Command_Transfer_Successful;
+//}
+//
+//
+//

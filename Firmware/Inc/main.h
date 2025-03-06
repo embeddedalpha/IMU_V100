@@ -128,7 +128,7 @@ __STATIC_INLINE void Delay_DeInit(void)
 }
 
 
-__STATIC_INLINE uint32_t Delay_us(float us)
+__STATIC_INLINE uint32_t Delay_us(volatile float us)
 {
 
 	SysTick->LOAD = 168 * us;
@@ -137,7 +137,7 @@ __STATIC_INLINE uint32_t Delay_us(float us)
 	return (0UL);                                                     /* Function successful */
 }
 
-__STATIC_INLINE uint32_t Delay_ms(float ms)
+__STATIC_INLINE uint32_t Delay_ms(volatile float ms)
 {
 	unsigned long x =0x29040 * (ms);
 	SysTick->LOAD =  x ;

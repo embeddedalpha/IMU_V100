@@ -50,7 +50,7 @@ int8_t USART_Clock_Enable(USART_Config *config);
 int8_t USART_Clock_Disable(USART_Config *config);
 
 void USART_Config_Reset(USART_Config *config);
-
+int8_t USART_Get_Instance_Number(USART_Config *config);
 int8_t USART_Init(USART_Config *config);
 void USART_TX_Byte(USART_Config *config, uint16_t data);
 uint16_t USART_RX_Byte(USART_Config *config);

@@ -63,8 +63,6 @@ typedef struct Modbus_Read_Coils_Request{
 
 typedef struct Modbus_Read_Coils_Response{
 
-	uint8_t Slave_Address;
-	uint8_t Function_Code;
 	uint8_t Byte_Count;
 	uint8_t Data[250];
 	uint16_t Error_Check;
