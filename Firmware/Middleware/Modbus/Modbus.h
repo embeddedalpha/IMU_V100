@@ -84,11 +84,8 @@ typedef struct Modbus_Read_Discrete_Inputs_Request{
 
 typedef struct Modbus_Read_Discrete_Inputs_Response{
 
-	uint8_t Slave_Address;
-	uint8_t Function_Code;
 	uint8_t Byte_Count;
-	uint8_t Data_Lo;
-	uint8_t Data_Hi;
+	uint8_t Data[250];
 	uint16_t Error_Check;
 
 }Modbus_Read_Discrete_Inputs_Response;
@@ -119,31 +116,6 @@ typedef struct Modbus_Read_Holding_Registers_Response{
 
 Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Read_Holding_Registers_Request *Request ,Modbus_Read_Holding_Registers_Response *Response);
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-typedef struct Modbus_Read_Input_Registers_Request{
-
-	uint8_t Slave_Address;
-	uint8_t Function_Code;
-	uint16_t Starting_Address;
-	uint16_t Quantity_Of_Inputs;
-	uint16_t Error_Check;
-
-}Modbus_Read_Input_Registers_Request;
-
-typedef struct Modbus_Read_Input_Registers_Response{
-
-	uint8_t Slave_Address;
-	uint8_t Function_Code;
-	uint8_t Byte_Count;
-	uint16_t Data[250];
-	uint16_t Error_Check;
-
-}Modbus_Read_Input_Registers_Response;
-
-Modbus_Flag Modbus_Read_Input_Registers(Modbus_Config *device_config,Modbus_Read_Input_Registers_Request *Request ,Modbus_Read_Input_Registers_Response *Response);
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 
 
 

@@ -11,3 +11,5 @@
 ../Middleware/Modbus/Modbus.c:232:6:MODBUS_USART6_IRQ	1
 ../Middleware/Modbus/Modbus.c:238:13:Modbus_Init	11
 ../Middleware/Modbus/Modbus.c:272:13:Modbus_Read_Coil	12
+../Middleware/Modbus/Modbus.c:344:13:Modbus_Read_Discrete_Inputs	11
+../Middleware/Modbus/Modbus.c:405:13:Modbus_Read_Holding_Registers	4

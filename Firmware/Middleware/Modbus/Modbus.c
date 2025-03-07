@@ -341,8 +341,113 @@ Modbus_Flag Modbus_Read_Coil(Modbus_Config *device_config, Modbus_Read_Coils_Req
 }
 
 
+Modbus_Flag Modbus_Read_Discrete_Inputs(Modbus_Config *device_config, Modbus_Read_Discrete_Inputs_Request *Request,Modbus_Read_Discrete_Inputs_Response *Response)
+{
+    uint16_t crc;
+    uint8_t buffer[8];
+
+    int usart_index = USART_Get_Instance_Number(&device_config->UART_Device);
+    if (usart_index < 0 || usart_index > 5) return Init_Fail;  // Invalid USART instance
+
+    buffer[0] = Request->Slave_Address;
+    buffer[1] = Modbus_Function_Code.Read_Discrete_Inputs;
+    buffer[2] = (Request->Starting_Address >> 8) & 0xFF;
+    buffer[3] = Request->Starting_Address & 0xFF;
+    buffer[4] = (Request->Quantity_Of_Inputs >> 8) & 0xFF;
+    buffer[5] = Request->Quantity_Of_Inputs & 0xFF;
+
+    crc = CRC16(buffer, 6);
+    buffer[6] = crc & 0xFF;  // LSB First
+    buffer[7] = (crc >> 8) & 0xFF;  // MSB Second
+
+    // Transmit Modbus Request
+    for(int i = 0; i < 8; i++)
+    {
+        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+    }
+
+    // Start RX Process
+    modbus_Instance[usart_index].flag.RX_Active_Flag = 1;
+    USART_RX_Buffer(&modbus_Instance[usart_index].config->UART_Device,
+                    (uint8_t *)modbus_Instance[usart_index].data_packet.RX_Buffer,
+                    Modbus_RX_Buffer_Length, 0);
+
+    uint32_t timeout = 5000;  // 5ms timeout
+    while (modbus_Instance[usart_index].flag.RX_Complete_Flag == 0 && timeout > 0) {
+        timeout--;
+        Delay_us(1);  // Wait 1 microsecond
+    }
+    if (timeout == 0) return Command_Transfer_Unsuccessful;
+
+    // Validate CRC
+    if (!Modbus_Packet_Validate(&modbus_Instance[usart_index])) return Command_Transfer_Unsuccessful;
+
+    // Parse Response
+    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+    {
+        Response->Byte_Count = modbus_Instance[usart_index].data_packet.RX_Buffer[2];
+
+        int total_coils = Request->Quantity_Of_Inputs;
+        for (int i = 0; i < total_coils; i++)
+        {
+            int byte_index = i / 8;
+            int bit_index = i % 8;
+            Response->Data[i] = (modbus_Instance[usart_index].data_packet.RX_Buffer[3 + byte_index] >> bit_index) & 0x01;
+        }
+    }
+
+    modbus_Instance[usart_index].flag.RX_Active_Flag = 0;
+    modbus_Instance[usart_index].flag.RX_Complete_Flag = 0;
+
+    return Command_Transfer_Successful;
+}
+
+Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Read_Holding_Registers_Request *Request ,Modbus_Read_Holding_Registers_Response *Response)
+{
+    uint16_t crc;
+    uint8_t buffer[8];
+
+    int usart_index = USART_Get_Instance_Number(&device_config->UART_Device);
+    if (usart_index < 0 || usart_index > 5) return Init_Fail;  // Invalid USART instance
+
+    buffer[0] = Request->Slave_Address;
+    buffer[1] = Modbus_Function_Code.Read_Holding_Registers;
+    buffer[2] = (Request->Starting_Address >> 8) & 0xFF;
+    buffer[3] = Request->Starting_Address & 0xFF;
+    buffer[4] = (Request->Quantity_Of_Inputs >> 8) & 0xFF;
+    buffer[5] = Request->Quantity_Of_Inputs & 0xFF;
+
+    crc = CRC16(buffer, 6);
+    buffer[6] = crc & 0xFF;  // LSB First
+    buffer[7] = (crc >> 8) & 0xFF;  // MSB Second
+
+    // Transmit Modbus Request
+    for(int i = 0; i < 8; i++)
+    {
+        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+    }
+
+    // Start RX Process
+    modbus_Instance[usart_index].flag.RX_Active_Flag = 1;
+    USART_RX_Buffer(&modbus_Instance[usart_index].config->UART_Device,
+                    (uint8_t *)modbus_Instance[usart_index].data_packet.RX_Buffer,
+                    Modbus_RX_Buffer_Length, 0);
+
+    uint32_t timeout = 5000;  // 5ms timeout
+    while (modbus_Instance[usart_index].flag.RX_Complete_Flag == 0 && timeout > 0) {
+        timeout--;
+        Delay_us(1);  // Wait 1 microsecond
+    }
+    if (timeout == 0) return Command_Transfer_Unsuccessful;
+
+    // Validate CRC
+    if (!Modbus_Packet_Validate(&modbus_Instance[usart_index])) return Command_Transfer_Unsuccessful;
 
 
+
+
+    return Command_Transfer_Successful;
+}
 
 
 //

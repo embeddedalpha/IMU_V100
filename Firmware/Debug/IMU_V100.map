@@ -1576,14 +1576,18 @@ Discarded input sections
                 0x00000000      0x128 ./Middleware/Modbus/Modbus.o
  .text.Modbus_Read_Coil
                 0x00000000      0x294 ./Middleware/Modbus/Modbus.o
+ .text.Modbus_Read_Discrete_Inputs
+                0x00000000      0x228 ./Middleware/Modbus/Modbus.o
+ .text.Modbus_Read_Holding_Registers
+                0x00000000       0xac ./Middleware/Modbus/Modbus.o
  .rodata.wCRCTable.0
                 0x00000000      0x200 ./Middleware/Modbus/Modbus.o
- .debug_info    0x00000000     0x1f85 ./Middleware/Modbus/Modbus.o
- .debug_abbrev  0x00000000      0x2ea ./Middleware/Modbus/Modbus.o
+ .debug_info    0x00000000     0x22b0 ./Middleware/Modbus/Modbus.o
+ .debug_abbrev  0x00000000      0x2e8 ./Middleware/Modbus/Modbus.o
  .debug_aranges
-                0x00000000       0x80 ./Middleware/Modbus/Modbus.o
+                0x00000000       0x90 ./Middleware/Modbus/Modbus.o
  .debug_rnglists
-                0x00000000       0x5f ./Middleware/Modbus/Modbus.o
+                0x00000000       0x6d ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000      0x2aa ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000      0xaba ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x2f ./Middleware/Modbus/Modbus.o
@@ -1632,10 +1636,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x4c ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x22 ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x10 ./Middleware/Modbus/Modbus.o
- .debug_line    0x00000000      0xbc7 ./Middleware/Modbus/Modbus.o
- .debug_str     0x00000000    0x8ec6d ./Middleware/Modbus/Modbus.o
+ .debug_line    0x00000000      0xd71 ./Middleware/Modbus/Modbus.o
+ .debug_str     0x00000000    0x8ed4b ./Middleware/Modbus/Modbus.o
  .comment       0x00000000       0x44 ./Middleware/Modbus/Modbus.o
- .debug_frame   0x00000000      0x1c0 ./Middleware/Modbus/Modbus.o
+ .debug_frame   0x00000000      0x20c ./Middleware/Modbus/Modbus.o
  .ARM.attributes
                 0x00000000       0x34 ./Middleware/Modbus/Modbus.o
  .group         0x00000000        0xc ./Modules/Barometer/BMP280.o
