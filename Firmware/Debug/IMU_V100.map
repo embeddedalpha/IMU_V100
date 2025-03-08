@@ -194,6 +194,7 @@ Discarded input sections
  .group         0x00000000        0xc ./Application_Layer/App.o
  .group         0x00000000        0xc ./Application_Layer/App.o
  .group         0x00000000        0xc ./Application_Layer/App.o
+ .group         0x00000000        0xc ./Application_Layer/App.o
  .text          0x00000000        0x0 ./Application_Layer/App.o
  .data          0x00000000        0x0 ./Application_Layer/App.o
  .bss           0x00000000        0x0 ./Application_Layer/App.o
@@ -257,15 +258,19 @@ Discarded input sections
                 0x00000000        0x8 ./Application_Layer/App.o
  .bss.IMU_Register_Map
                 0x00000000      0x1d4 ./Application_Layer/App.o
+ .bss.IMUv100_Modbus
+                0x00000000       0xac ./Application_Layer/App.o
  .text.Modbus_Register_Map_Setup
                 0x00000000      0x178 ./Application_Layer/App.o
- .debug_info    0x00000000     0x1852 ./Application_Layer/App.o
- .debug_abbrev  0x00000000      0x17e ./Application_Layer/App.o
+ .text.Modbus_Comm_Setup
+                0x00000000       0x7c ./Application_Layer/App.o
+ .debug_info    0x00000000     0x1bb8 ./Application_Layer/App.o
+ .debug_abbrev  0x00000000      0x1e3 ./Application_Layer/App.o
  .debug_aranges
-                0x00000000       0x20 ./Application_Layer/App.o
+                0x00000000       0x28 ./Application_Layer/App.o
  .debug_rnglists
-                0x00000000       0x14 ./Application_Layer/App.o
- .debug_macro   0x00000000      0x2ae ./Application_Layer/App.o
+                0x00000000       0x1a ./Application_Layer/App.o
+ .debug_macro   0x00000000      0x2b3 ./Application_Layer/App.o
  .debug_macro   0x00000000      0xaba ./Application_Layer/App.o
  .debug_macro   0x00000000       0x2f ./Application_Layer/App.o
  .debug_macro   0x00000000       0x22 ./Application_Layer/App.o
@@ -313,10 +318,11 @@ Discarded input sections
  .debug_macro   0x00000000       0x4c ./Application_Layer/App.o
  .debug_macro   0x00000000       0x22 ./Application_Layer/App.o
  .debug_macro   0x00000000       0x10 ./Application_Layer/App.o
- .debug_line    0x00000000      0x833 ./Application_Layer/App.o
- .debug_str     0x00000000    0x8e7e5 ./Application_Layer/App.o
+ .debug_macro   0x00000000       0x10 ./Application_Layer/App.o
+ .debug_line    0x00000000      0x898 ./Application_Layer/App.o
+ .debug_str     0x00000000    0x8eb1d ./Application_Layer/App.o
  .comment       0x00000000       0x44 ./Application_Layer/App.o
- .debug_frame   0x00000000       0x30 ./Application_Layer/App.o
+ .debug_frame   0x00000000       0x4c ./Application_Layer/App.o
  .ARM.attributes
                 0x00000000       0x34 ./Application_Layer/App.o
  .group         0x00000000        0xc ./Driver/CAN/CAN.o
@@ -1579,11 +1585,11 @@ Discarded input sections
  .text.Modbus_Read_Discrete_Inputs
                 0x00000000      0x228 ./Middleware/Modbus/Modbus.o
  .text.Modbus_Read_Holding_Registers
-                0x00000000       0xac ./Middleware/Modbus/Modbus.o
+                0x00000000      0x1d0 ./Middleware/Modbus/Modbus.o
  .rodata.wCRCTable.0
                 0x00000000      0x200 ./Middleware/Modbus/Modbus.o
- .debug_info    0x00000000     0x22b0 ./Middleware/Modbus/Modbus.o
- .debug_abbrev  0x00000000      0x2e8 ./Middleware/Modbus/Modbus.o
+ .debug_info    0x00000000     0x2248 ./Middleware/Modbus/Modbus.o
+ .debug_abbrev  0x00000000      0x2ea ./Middleware/Modbus/Modbus.o
  .debug_aranges
                 0x00000000       0x90 ./Middleware/Modbus/Modbus.o
  .debug_rnglists
@@ -1636,7 +1642,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x4c ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x22 ./Middleware/Modbus/Modbus.o
  .debug_macro   0x00000000       0x10 ./Middleware/Modbus/Modbus.o
- .debug_line    0x00000000      0xd71 ./Middleware/Modbus/Modbus.o
+ .debug_line    0x00000000      0xdfe ./Middleware/Modbus/Modbus.o
  .debug_str     0x00000000    0x8ed4b ./Middleware/Modbus/Modbus.o
  .comment       0x00000000       0x44 ./Middleware/Modbus/Modbus.o
  .debug_frame   0x00000000      0x20c ./Middleware/Modbus/Modbus.o
@@ -2065,6 +2071,12 @@ Discarded input sections
                 0x00000000       0x20 ./Src/main.o
  .rodata.MPU6050_Registers
                 0x00000000       0x72 ./Src/main.o
+ .rodata.Modbus_Register_Map_configuration
+                0x00000000        0x2 ./Src/main.o
+ .rodata.Modbus_Configuration
+                0x00000000        0xa ./Src/main.o
+ .rodata.Modbus_Function_Code
+                0x00000000        0x8 ./Src/main.o
  .debug_macro   0x00000000      0xaba ./Src/main.o
  .debug_macro   0x00000000       0x22 ./Src/main.o
  .debug_macro   0x00000000       0x8e ./Src/main.o
@@ -3900,15 +3912,15 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000     0xbd1d
+.debug_info     0x00000000     0xbee1
  .debug_info    0x00000000     0x1a0a ./Driver/DMA/DMA.o
  .debug_info    0x00001a0a      0xfca ./Driver/GPIO/GPIO.o
  .debug_info    0x000029d4     0x1907 ./Driver/I2C/I2C.o
  .debug_info    0x000042db     0x2532 ./Driver/Timer/Timer.o
  .debug_info    0x0000680d     0x2541 ./Driver/USART/USART.o
- .debug_info    0x00008d4e     0x2a94 ./Src/main.o
- .debug_info    0x0000b7e2      0x50b ./Src/system_stm32f4xx.o
- .debug_info    0x0000bced       0x30 ./Startup/startup_stm32f407vgtx.o
+ .debug_info    0x00008d4e     0x2c58 ./Src/main.o
+ .debug_info    0x0000b9a6      0x50b ./Src/system_stm32f4xx.o
+ .debug_info    0x0000beb1       0x30 ./Startup/startup_stm32f407vgtx.o
 
 .debug_abbrev   0x00000000     0x1293
  .debug_abbrev  0x00000000      0x23f ./Driver/DMA/DMA.o
@@ -3957,29 +3969,29 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x00000386       0x19 ./Startup/startup_stm32f407vgtx.o
 
-.debug_macro    0x00000000     0x10e7
+.debug_macro    0x00000000     0x10fb
  .debug_macro   0x00000000      0x268 ./Driver/DMA/DMA.o
  .debug_macro   0x00000268      0x27a ./Driver/GPIO/GPIO.o
  .debug_macro   0x000004e2      0x296 ./Driver/I2C/I2C.o
  .debug_macro   0x00000778      0x290 ./Driver/Timer/Timer.o
  .debug_macro   0x00000a08      0x290 ./Driver/USART/USART.o
- .debug_macro   0x00000c98      0x2c3 ./Src/main.o
- .debug_macro   0x00000f5b       0x17 ./Src/main.o
- .debug_macro   0x00000f72       0xda ./Src/system_stm32f4xx.o
- .debug_macro   0x0000104c       0x2e ./Src/system_stm32f4xx.o
- .debug_macro   0x0000107a       0x6d ./Src/system_stm32f4xx.o
+ .debug_macro   0x00000c98      0x2d7 ./Src/main.o
+ .debug_macro   0x00000f6f       0x17 ./Src/main.o
+ .debug_macro   0x00000f86       0xda ./Src/system_stm32f4xx.o
+ .debug_macro   0x00001060       0x2e ./Src/system_stm32f4xx.o
+ .debug_macro   0x0000108e       0x6d ./Src/system_stm32f4xx.o
 
-.debug_line     0x00000000     0x8614
+.debug_line     0x00000000     0x8662
  .debug_line    0x00000000     0x15dc ./Driver/DMA/DMA.o
  .debug_line    0x000015dc      0xb7b ./Driver/GPIO/GPIO.o
  .debug_line    0x00002157     0x117b ./Driver/I2C/I2C.o
  .debug_line    0x000032d2     0x23ff ./Driver/Timer/Timer.o
  .debug_line    0x000056d1     0x1ead ./Driver/USART/USART.o
- .debug_line    0x0000757e      0xaea ./Src/main.o
- .debug_line    0x00008068      0x531 ./Src/system_stm32f4xx.o
- .debug_line    0x00008599       0x7b ./Startup/startup_stm32f407vgtx.o
+ .debug_line    0x0000757e      0xb38 ./Src/main.o
+ .debug_line    0x000080b6      0x531 ./Src/system_stm32f4xx.o
+ .debug_line    0x000085e7       0x7b ./Startup/startup_stm32f407vgtx.o
 
-.debug_str      0x00000000    0x91049
+.debug_str      0x00000000    0x91198
  .debug_str     0x00000000    0x8eb84 ./Driver/DMA/DMA.o
                               0x8eead (size before relaxing)
  .debug_str     0x0008eb84      0x5eb ./Driver/GPIO/GPIO.o
@@ -3990,11 +4002,11 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                               0x8f51c (size before relaxing)
  .debug_str     0x00090126      0x6fb ./Driver/USART/USART.o
                               0x8f24a (size before relaxing)
- .debug_str     0x00090821      0x75a ./Src/main.o
-                              0x8f575 (size before relaxing)
- .debug_str     0x00090f7b       0x8f ./Src/system_stm32f4xx.o
+ .debug_str     0x00090821      0x8a9 ./Src/main.o
+                              0x8f6c4 (size before relaxing)
+ .debug_str     0x000910ca       0x8f ./Src/system_stm32f4xx.o
                               0x88582 (size before relaxing)
- .debug_str     0x0009100a       0x3f ./Startup/startup_stm32f407vgtx.o
+ .debug_str     0x00091159       0x3f ./Startup/startup_stm32f407vgtx.o
                                  0x64 (size before relaxing)
 
 .comment        0x00000000       0x43

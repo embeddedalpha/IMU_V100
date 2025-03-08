@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00006004  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0000bd1d  00000000  00000000  00006034  2**0
+ 13 .debug_info   0000bee1  00000000  00000000  00006034  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00001293  00000000  00000000  00011d51  2**0
+ 14 .debug_abbrev 00001293  00000000  00000000  00011f15  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 000004b0  00000000  00000000  00012fe8  2**3
+ 15 .debug_aranges 000004b0  00000000  00000000  000131a8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 0000039f  00000000  00000000  00013498  2**0
+ 16 .debug_rnglists 0000039f  00000000  00000000  00013658  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  000010e7  00000000  00000000  00013837  2**0
+ 17 .debug_macro  000010fb  00000000  00000000  000139f7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00008614  00000000  00000000  0001491e  2**0
+ 18 .debug_line   00008662  00000000  00000000  00014af2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00091049  00000000  00000000  0001cf32  2**0
+ 19 .debug_str    00091198  00000000  00000000  0001d154  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  000adf7b  2**0
+ 20 .comment      00000043  00000000  00000000  000ae2ec  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  0000134c  00000000  00000000  000adfc0  2**2
+ 21 .debug_frame  0000134c  00000000  00000000  000ae330  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000048  00000000  00000000  000af30c  2**0
+ 22 .debug_line_str 00000048  00000000  00000000  000af67c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -9451,6 +9451,7 @@ int main(void)
 	Delay_Config();
  800412a:	f7ff ffab 	bl	8004084 <Delay_Config>
 //	Console_Init(9600);
+
 
 
 	mpu6050.Port = I2C1;

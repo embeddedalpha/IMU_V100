@@ -443,6 +443,17 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
     // Validate CRC
     if (!Modbus_Packet_Validate(&modbus_Instance[usart_index])) return Command_Transfer_Unsuccessful;
 
+    // Parse Response
+    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+    {
+        Response->Byte_Count = modbus_Instance[usart_index].data_packet.RX_Buffer[2];
+
+        for (int i = 0; i < Response->Byte_Count; i++)
+        {
+            Response->Data[i] = (modbus_Instance[usart_index].data_packet.RX_Buffer[3 + i]);
+        }
+
+    }
 
 
 

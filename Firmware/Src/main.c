@@ -5,6 +5,12 @@
 #include "I2C/I2C.h"
 #include "GPIO/GPIO.h"
 #include "MPU6050/MPU6050_Regs.h"
+#include "Modbus/Modbus.h"
+
+
+
+
+
 
 I2C_Config mpu6050;
 
@@ -26,6 +32,7 @@ int main(void)
 	MCU_Clock_Setup();
 	Delay_Config();
 //	Console_Init(9600);
+
 
 
 	mpu6050.Port = I2C1;

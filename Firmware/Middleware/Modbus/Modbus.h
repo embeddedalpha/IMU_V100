@@ -18,6 +18,7 @@
 typedef struct Modbus_Register_Map_Instance
 {
 	bool Access_Type;
+	uint8_t Registered_Function_Code;
 	uint16_t Register_Address;
 	uint8_t Number_Of_Registers;
 	uint16_t Data[10];
@@ -41,11 +42,7 @@ typedef struct Modbus_Config
 	uint8_t Device_Address;
 	USART_Config UART_Device;
 	uint8_t Device_Type;
-
 	uint8_t Acceptable_Functions;
-
-
-
 }Modbus_Config;
 
 Modbus_Flag Modbus_Init(Modbus_Config *device_config);
@@ -65,7 +62,6 @@ typedef struct Modbus_Read_Coils_Response{
 
 	uint8_t Byte_Count;
 	uint8_t Data[250];
-	uint16_t Error_Check;
 
 }Modbus_Read_Coils_Response;
 
@@ -86,7 +82,6 @@ typedef struct Modbus_Read_Discrete_Inputs_Response{
 
 	uint8_t Byte_Count;
 	uint8_t Data[250];
-	uint16_t Error_Check;
 
 }Modbus_Read_Discrete_Inputs_Response;
 
@@ -106,11 +101,8 @@ typedef struct Modbus_Read_Holding_Registers_Request{
 
 typedef struct Modbus_Read_Holding_Registers_Response{
 
-	uint8_t Slave_Address;
-	uint8_t Function_Code;
 	uint8_t Byte_Count;
-	uint16_t Data[250];
-	uint16_t Error_Check;
+	uint8_t Data[250];
 
 }Modbus_Read_Holding_Registers_Response;
 

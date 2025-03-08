@@ -11,6 +11,17 @@
 #include "main.h"
 #include "Modbus/Modbus.h"
 
+#define Modbus_Device_Address 15
+#define Modbus_Baudrate 9600
+
+
+
+
+
+
+
+
+
 struct IMU_Register_Map{
 
 	Modbus_Register_Map_Instance Device_Version; //R
@@ -37,16 +48,9 @@ struct IMU_Register_Map{
 	Modbus_Register_Map_Instance Angular_Velocity_Data; //R
 
 
-
-
-
-
-
-
-
-
 }IMU_Register_Map;
 
 void Modbus_Register_Map_Setup(void);
+void Modbus_Comm_Setup(void);
 
 #endif /* APP_H_ */
