@@ -92,56 +92,56 @@ bool Modbus_Slave_Packet_Processor(volatile Modbus_Instance *instance)
 		{
 			if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Coils)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+				if(instance->data_packet.RX_Buffer[1] == Read_Coil_Registers)
 				{
 					// Don't know how to implement this
 				}
 			}
 			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Discrete_Inputs)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Discrete_Inputs)
+				if(instance->data_packet.RX_Buffer[1] == Read_Discrete_Inputs)
 				{
 					// Don't know how to implement this
 				}
 			}
 			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Holding_Registers)
+				if(instance->data_packet.RX_Buffer[1] == Read_Holding_Registers)
 				{
 					// Don't know how to implement this
 				}
 			}
 			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Read_Input_Registers)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Input_Registers)
+				if(instance->data_packet.RX_Buffer[1] == Read_Input_Registers)
 				{
 					// Don't know how to implement this
 				}
 			}
 			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Single_Coil)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Single_Coil)
+				if(instance->data_packet.RX_Buffer[1] == Write_Single_Coil)
 				{
 					// Don't know how to implement this
 				}
 			}
 			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Single_Register)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Single_Register)
+				if(instance->data_packet.RX_Buffer[1] == Write_Single_Register)
 				{
 					// Don't know how to implement this
 				}
 			}
 			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Multiple_Coils)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Multiple_Coils)
+				if(instance->data_packet.RX_Buffer[1] == Write_Multiple_Coils)
 				{
 					// Don't know how to implement this
 				}
 			}
 			else if(instance->config->Acceptable_Functions == Modbus_Configuration.Acceptable_Function_Codes.Write_Multiple_Registers)
 			{
-				if(instance->data_packet.RX_Buffer[1] == Modbus_Function_Code.Write_Multiple_Registers)
+				if(instance->data_packet.RX_Buffer[1] == Write_Multiple_Registers)
 				{
 					// Don't know how to implement this
 				}
@@ -192,6 +192,7 @@ void Modbus_USART_IRQ_Handler(volatile Modbus_Instance *instance)
 
         if(instance->config->Device_Type == Modbus_Configuration.Device_Type.Slave)
         {
+        	instance->config->Modbus_Slave_Processor_Flag = true;
         	Modbus_Slave_Packet_Processor(instance);
         }
 
@@ -268,6 +269,31 @@ Modbus_Flag Modbus_Init(Modbus_Config *device_config)
 	return Init_Success;
 }
 
+void Modbus_Slave_Command_Processor(Modbus_Config *device_config)
+{
+	device_config->Modbus_Slave_Processor();
+}
+
+Modbus_Flag Modbus_Send_Slave_Packet(Modbus_Config *device_config, uint8_t *buffer, int length)
+{
+    uint16_t crc;
+
+    int usart_index = USART_Get_Instance_Number(&device_config->UART_Device);
+    if (usart_index < 0 || usart_index > 5) return Init_Fail;  // Invalid USART instance
+
+    // Correct CRC Byte Order
+    crc = CRC16(buffer, length);
+
+    // Transmit Modbus Request
+    for(int i = 0; i < length; i++)
+    {
+        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+    }
+    USART_TX_Byte(&device_config->UART_Device, crc & 0xFF);
+    USART_TX_Byte(&device_config->UART_Device, (crc >> 8) & 0xFF);
+
+    return Command_Transfer_Successful;
+}
 
 Modbus_Flag Modbus_Read_Coil(Modbus_Config *device_config, Modbus_Read_Coils_Request *Request, Modbus_Read_Coils_Response *Response)
 {
@@ -279,7 +305,7 @@ Modbus_Flag Modbus_Read_Coil(Modbus_Config *device_config, Modbus_Read_Coils_Req
 
     // Build Modbus Request Packet
     buffer[0] = Request->Slave_Address;
-    buffer[1] = Modbus_Function_Code.Read_Coils;
+    buffer[1] = Read_Coil_Registers;
     buffer[2] = (Request->Starting_Address >> 8) & 0xFF;
     buffer[3] = Request->Starting_Address & 0xFF;
     buffer[4] = (Request->Quantity_Of_Inputs >> 8) & 0xFF;
@@ -321,7 +347,7 @@ Modbus_Flag Modbus_Read_Coil(Modbus_Config *device_config, Modbus_Read_Coils_Req
     if (!Modbus_Packet_Validate(&modbus_Instance[usart_index])) return Command_Transfer_Unsuccessful;
 
     // Parse Response
-    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Read_Coil_Registers)
     {
         Response->Byte_Count = modbus_Instance[usart_index].data_packet.RX_Buffer[2];
 
@@ -350,7 +376,7 @@ Modbus_Flag Modbus_Read_Discrete_Inputs(Modbus_Config *device_config, Modbus_Rea
     if (usart_index < 0 || usart_index > 5) return Init_Fail;  // Invalid USART instance
 
     buffer[0] = Request->Slave_Address;
-    buffer[1] = Modbus_Function_Code.Read_Discrete_Inputs;
+    buffer[1] = Read_Discrete_Inputs;
     buffer[2] = (Request->Starting_Address >> 8) & 0xFF;
     buffer[3] = Request->Starting_Address & 0xFF;
     buffer[4] = (Request->Quantity_Of_Inputs >> 8) & 0xFF;
@@ -383,7 +409,7 @@ Modbus_Flag Modbus_Read_Discrete_Inputs(Modbus_Config *device_config, Modbus_Rea
     if (!Modbus_Packet_Validate(&modbus_Instance[usart_index])) return Command_Transfer_Unsuccessful;
 
     // Parse Response
-    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Read_Coil_Registers)
     {
         Response->Byte_Count = modbus_Instance[usart_index].data_packet.RX_Buffer[2];
 
@@ -411,7 +437,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
     if (usart_index < 0 || usart_index > 5) return Init_Fail;  // Invalid USART instance
 
     buffer[0] = Request->Slave_Address;
-    buffer[1] = Modbus_Function_Code.Read_Holding_Registers;
+    buffer[1] = Read_Holding_Registers;
     buffer[2] = (Request->Starting_Address >> 8) & 0xFF;
     buffer[3] = Request->Starting_Address & 0xFF;
     buffer[4] = (Request->Quantity_Of_Inputs >> 8) & 0xFF;
@@ -444,7 +470,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
     if (!Modbus_Packet_Validate(&modbus_Instance[usart_index])) return Command_Transfer_Unsuccessful;
 
     // Parse Response
-    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Modbus_Function_Code.Read_Coils)
+    if (modbus_Instance[usart_index].data_packet.RX_Buffer[1] == Read_Coil_Registers)
     {
         Response->Byte_Count = modbus_Instance[usart_index].data_packet.RX_Buffer[2];
 
@@ -468,7 +494,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 //	uint8_t buffer[8];
 //
 //	buffer[0] = Request->Slave_Address;
-//	buffer[1]  = Modbus_Function_Code.Read_Discrete_Inputs;
+//	buffer[1]  = Read_Discrete_Inputs;
 //	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
 //	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
 //	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
@@ -494,7 +520,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 //	uint8_t buffer[8];
 //
 //	buffer[0] = Request->Slave_Address;
-//	buffer[1]  = Modbus_Function_Code.Read_Holding_Registers;
+//	buffer[1]  = Read_Holding_Registers;
 //	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
 //	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
 //	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;
@@ -522,7 +548,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 //	uint8_t buffer[8];
 //
 //	buffer[0] = Request->Slave_Address;
-//	buffer[1]  = Modbus_Function_Code.Read_Input_Registers;
+//	buffer[1]  = Read_Input_Registers;
 //	buffer[2] = (Request->Starting_Address & 0xFF00) >> 8;
 //	buffer[3] = (Request->Starting_Address & 0x00FF) >> 0;
 //	buffer[4] = (Request->Quantity_Of_Inputs & 0xFF00) >> 8;

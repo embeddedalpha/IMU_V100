@@ -6,7 +6,7 @@
  */
 
 #ifndef MODBUS_MODBUS_DEFS_H_
-#define MODBUS_MODBUS_DEFS_H_
+#define  MODBUS_MODBUS_DEFS_H_
 
 #include "main.h"
 
@@ -74,31 +74,6 @@ static const struct Modbus_Configuration
 
 
 
-
-
-
-static const struct Modbus_Function_Code
-{
-	uint8_t Read_Coils;
-	uint8_t Read_Discrete_Inputs;
-	uint8_t Read_Holding_Registers;
-	uint8_t Read_Input_Registers;
-	uint8_t Write_Single_Coil;
-	uint8_t Write_Single_Register;
-	uint8_t Write_Multiple_Coils;
-	uint8_t Write_Multiple_Registers;
-
-}Modbus_Function_Code =
-{
-		.Read_Coils = 0x01,
-		.Read_Discrete_Inputs  = 0x02,
-		.Read_Holding_Registers  = 0x03,
-		.Read_Input_Registers  = 0x04,
-		.Write_Single_Coil  = 0x05,
-		.Write_Single_Register  = 0x06,
-		.Write_Multiple_Coils  = 0x0f,
-		.Write_Multiple_Registers  = 0x10,
-};
 
 
 

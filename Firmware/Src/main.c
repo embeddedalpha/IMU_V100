@@ -10,7 +10,17 @@
 
 
 
+typedef enum IMUV100_States{
 
+	Compute_Data = 0,
+	Process_Modbus_Command,
+	Send_Data,
+	Send_Diagnostic_Data,
+
+
+}IMUV100_States;
+
+IMUV100_States State;
 
 I2C_Config mpu6050;
 
@@ -76,19 +86,34 @@ int main(void)
 
 	for(;;)
 	{
-		if(mpu_data_ready_flag == 1)
-		{
-			I2C_Master_Read_Registers_Bulk(&mpu6050, MPU6250_ADDRESS, MPU6050_Registers.ACCEL_XOUT_H, &data, 12);
-			GPIO_Pin_High(GPIOB, 5);
-			ACC[0] = ((data[0] << 8) | data[1])/16384.0 ;
-			ACC[1] = ((data[2] << 8) | data[3])/16384.0 ;
-			ACC[2] = ((data[4] << 8) | data[5])/16384.0  ;
+		switch (State) {
+			case Compute_Data:
+			{
+				// Get Accelerometer Data
 
-			GYRO[0] = ((data[6] << 8) | data[7])/131.0 ;
-			GYRO[1] = ((data[8] << 8) | data[9])/131.0 ;
-			GYRO[2] = ((data[10] << 8) | data[11])/131.0  ;
-			GPIO_Pin_Low(GPIOB, 5);
-			mpu_data_ready_flag = 0;
+				// Get Gyroscope Data
+
+				// Get Magnetometer Data
+
+				// Get Barometer Data
+
+				// Get GNSS Data
+
+				// Compute Quaternions
+
+				// Compute Euler Angles
+
+				// Compute Linear Velocity
+
+				// Compute Angular Velocity
+
+			}
+				break;
+
+			case Process_Modbus_Command:
+			{
+
+			}
 		}
 	}
 }

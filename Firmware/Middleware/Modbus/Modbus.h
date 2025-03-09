@@ -14,6 +14,26 @@
 #include "GPIO/GPIO.h"
 #include "Modbus_Defs.h"
 
+typedef enum {
+	Read_Coil_Registers = 0x01,
+	Read_Discrete_Inputs = 0x02,
+    Read_Holding_Registers = 0x03,
+    Read_Input_Registers = 0x04,
+	Write_Single_Coil = 0x05,
+    Write_Single_Register = 0x06,
+	Write_Multiple_Coils = 0x0F,
+    Write_Multiple_Registers = 0x10
+} Modbus_FunctionCodes;
+
+typedef struct Modbus_Payload_Template
+{
+	Modbus_FunctionCodes Function_Code;
+	uint16_t Register_Address;
+	uint8_t Payload_Length;
+	uint16_t Data[250];
+
+}Modbus_Payload_Template;
+
 
 typedef struct Modbus_Register_Map_Instance
 {
@@ -22,6 +42,7 @@ typedef struct Modbus_Register_Map_Instance
 	uint16_t Register_Address;
 	uint8_t Number_Of_Registers;
 	uint16_t Data[10];
+
 }Modbus_Register_Map_Instance;
 
 
@@ -43,6 +64,10 @@ typedef struct Modbus_Config
 	USART_Config UART_Device;
 	uint8_t Device_Type;
 	uint8_t Acceptable_Functions;
+	void (*Modbus_Slave_Processor)(void);
+	bool Modbus_Slave_Processor_Flag;
+	Modbus_Payload_Template Payload;
+
 }Modbus_Config;
 
 Modbus_Flag Modbus_Init(Modbus_Config *device_config);
@@ -109,7 +134,7 @@ typedef struct Modbus_Read_Holding_Registers_Response{
 Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Read_Holding_Registers_Request *Request ,Modbus_Read_Holding_Registers_Response *Response);
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+void Modbus_Slave_Command_Processor(Modbus_Config *device_config);
 
-
-
+Modbus_Flag Modbus_Send_Slave_Packet(Modbus_Config *device_config, uint8_t *buffer, int length);
 #endif /* MODBUS_MODBUS_H_ */
