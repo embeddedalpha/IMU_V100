@@ -23,11 +23,24 @@ typedef enum {
     Write_Single_Register = 0x06,
 	Write_Multiple_Coils = 0x0F,
     Write_Multiple_Registers = 0x10
-} Modbus_FunctionCodes;
+} Modbus_Function_Codes;
+
+typedef enum {
+
+	Illegal_Function = 0x01,
+	Illegal_Data_Address = 0x02,
+	Illegal_Data_Value = 0x03,
+	Slave_Device_Failure = 0x04,
+	Accepted_but_Delayed_Processing = 0x05,
+	Slave_Device_Busy = 0x06,
+	NAK = 0x07,
+	Memory_Parity_Error = 0x08,
+
+}Modbus_Error_Codes;
 
 typedef struct Modbus_Payload_Template
 {
-	Modbus_FunctionCodes Function_Code;
+	Modbus_Function_Codes Function_Code;
 	uint16_t Register_Address;
 	uint8_t Payload_Length;
 	uint16_t Data[250];

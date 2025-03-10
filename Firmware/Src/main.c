@@ -10,13 +10,12 @@
 
 
 
-typedef enum IMUV100_States{
-
+typedef enum IMUV100_States
+{
 	Compute_Data = 0,
 	Process_Modbus_Command,
 	Send_Data,
 	Send_Diagnostic_Data,
-
 
 }IMUV100_States;
 
@@ -114,6 +113,19 @@ int main(void)
 			{
 
 			}
+			break;
+
+			case Send_Data:
+			{
+
+			}
+			break;
+
+			case Send_Diagnostic_Data:
+			{
+
+			}
+			break;
 		}
 	}
 }
