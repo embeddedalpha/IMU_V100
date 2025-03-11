@@ -15,3 +15,5 @@
 ../Middleware/Modbus/Modbus.c:298:13:Modbus_Read_Coil	64	static
 ../Middleware/Modbus/Modbus.c:370:13:Modbus_Read_Discrete_Inputs	64	static
 ../Middleware/Modbus/Modbus.c:431:13:Modbus_Read_Holding_Registers	56	static
+../Middleware/Modbus/Modbus.c:575:5:Compare_Commands	32	static
+../Middleware/Modbus/Modbus.c:585:31:Search_Commands	56	static

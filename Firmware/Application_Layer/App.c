@@ -12,67 +12,6 @@ Modbus_Config IMUv100_Modbus;
 
 void IMUV100_Modbus_Register_Map_Setup(void)
 {
-	IMU_Register_Map.Device_Address.Access_Type = Modbus_Register_Map_configuration.Access.Read;
-	IMU_Register_Map.Device_Address.Registered_Function_Code = Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers;
-	IMU_Register_Map.Device_Address.Register_Address = 0x0100;
-	IMU_Register_Map.Device_Address.Number_Of_Registers = 1;
-	IMU_Register_Map.Device_Address.Data[0] = 0x0010;
-
-	IMU_Register_Map.Device_Version.Access_Type = Modbus_Register_Map_configuration.Access.Read;
-	IMU_Register_Map.Device_Version.Registered_Function_Code = Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers;
-	IMU_Register_Map.Device_Version.Register_Address = 0x0101;
-	IMU_Register_Map.Device_Version.Number_Of_Registers = 1;
-	IMU_Register_Map.Device_Version.Data[0] = 0x0001;
-
-	IMU_Register_Map.Firmware_Version.Access_Type = Modbus_Register_Map_configuration.Access.Read;
-	IMU_Register_Map.Device_Version.Registered_Function_Code = Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers;
-	IMU_Register_Map.Firmware_Version.Register_Address = 0x0102;
-	IMU_Register_Map.Firmware_Version.Number_Of_Registers = 1;
-	IMU_Register_Map.Firmware_Version.Data[0] = 0x0001;
-
-	IMU_Register_Map.Reset_Device.Access_Type = Modbus_Register_Map_configuration.Access.Write;
-	IMU_Register_Map.Device_Version.Registered_Function_Code = Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers;
-	IMU_Register_Map.Reset_Device.Register_Address = 0x0103;
-	IMU_Register_Map.Reset_Device.Number_Of_Registers = 1;
-	IMU_Register_Map.Reset_Device.Data[0] = 0x0000;
-
-	IMU_Register_Map.System_Up_Time.Access_Type = Modbus_Register_Map_configuration.Access.Write;
-	IMU_Register_Map.Device_Version.Registered_Function_Code = Modbus_Configuration.Acceptable_Function_Codes.Read_Holding_Registers;
-	IMU_Register_Map.System_Up_Time.Register_Address = 0x0103;
-	IMU_Register_Map.System_Up_Time.Number_Of_Registers = 1;
-	IMU_Register_Map.System_Up_Time.Data[0] = 0x0000;
-
-
-/**********************************************************************************************************/
-	IMU_Register_Map.Accelerometer.Access_Type = Modbus_Register_Map_configuration.Access.Read;
-	IMU_Register_Map.Accelerometer.Register_Address = 0x0103;
-	IMU_Register_Map.Accelerometer.Number_Of_Registers = 3;
-	IMU_Register_Map.Accelerometer.Data[0] = 0x0000;
-	IMU_Register_Map.Accelerometer.Data[1] = 0x0000;
-	IMU_Register_Map.Accelerometer.Data[2] = 0x0000;
-
-	IMU_Register_Map.Gyroscope.Access_Type = Modbus_Register_Map_configuration.Access.Read;
-	IMU_Register_Map.Gyroscope.Register_Address = 0x010D;
-	IMU_Register_Map.Gyroscope.Number_Of_Registers = 3;
-	IMU_Register_Map.Gyroscope.Data[0] = 0x0000;
-	IMU_Register_Map.Gyroscope.Data[1] = 0x0000;
-	IMU_Register_Map.Gyroscope.Data[2] = 0x0000;
-
-	IMU_Register_Map.Magnetometer.Access_Type = Modbus_Register_Map_configuration.Access.Read;
-	IMU_Register_Map.Magnetometer.Register_Address = 0x010E;
-	IMU_Register_Map.Magnetometer.Number_Of_Registers = 3;
-	IMU_Register_Map.Magnetometer.Data[0] = 0x0000;
-	IMU_Register_Map.Magnetometer.Data[1] = 0x0000;
-	IMU_Register_Map.Magnetometer.Data[2] = 0x0000;
-
-	IMU_Register_Map.Quaternions.Access_Type = Modbus_Register_Map_configuration.Access.Read;
-	IMU_Register_Map.Quaternions.Register_Address = 0x010F;
-	IMU_Register_Map.Quaternions.Number_Of_Registers = 4;
-	IMU_Register_Map.Quaternions.Data[0] = 0x0000;
-	IMU_Register_Map.Quaternions.Data[1] = 0x0000;
-	IMU_Register_Map.Quaternions.Data[2] = 0x0000;
-	IMU_Register_Map.Quaternions.Data[3] = 0x0000;
-/**********************************************************************************************************/
 
 }
 

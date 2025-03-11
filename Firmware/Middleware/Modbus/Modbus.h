@@ -50,10 +50,8 @@ typedef struct Modbus_Payload_Template
 
 typedef struct Modbus_Register_Map_Instance
 {
-	bool Access_Type;
-	uint8_t Registered_Function_Code;
+	Modbus_Function_Codes Function_Code;
 	uint16_t Register_Address;
-	uint8_t Number_Of_Registers;
 	uint16_t Data[10];
 
 }Modbus_Register_Map_Instance;
@@ -80,6 +78,7 @@ typedef struct Modbus_Config
 	void (*Modbus_Slave_Processor)(void);
 	bool Modbus_Slave_Processor_Flag;
 	Modbus_Payload_Template Payload;
+	uint16_t readCount;
 
 }Modbus_Config;
 
@@ -150,4 +149,11 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 void Modbus_Slave_Command_Processor(Modbus_Config *device_config);
 
 Modbus_Flag Modbus_Send_Slave_Packet(Modbus_Config *device_config, uint8_t *buffer, int length);
+
+
+
+
+
+int compareRecords(const void* a, const void* b);
+
 #endif /* MODBUS_MODBUS_H_ */

@@ -287,10 +287,10 @@ Modbus_Flag Modbus_Send_Slave_Packet(Modbus_Config *device_config, uint8_t *buff
     // Transmit Modbus Request
     for(int i = 0; i < length; i++)
     {
-        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+    	USART_TX_Single_Byte(&device_config->UART_Device, buffer[i]);
     }
-    USART_TX_Byte(&device_config->UART_Device, crc & 0xFF);
-    USART_TX_Byte(&device_config->UART_Device, (crc >> 8) & 0xFF);
+    USART_TX_Single_Byte(&device_config->UART_Device, crc & 0xFF);
+    USART_TX_Single_Byte(&device_config->UART_Device, (crc >> 8) & 0xFF);
 
     return Command_Transfer_Successful;
 }
@@ -319,7 +319,7 @@ Modbus_Flag Modbus_Read_Coil(Modbus_Config *device_config, Modbus_Read_Coils_Req
     // Transmit Modbus Request
     for(int i = 0; i < 8; i++)
     {
-        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+        USART_TX_Single_Byte(&device_config->UART_Device, buffer[i]);
     }
 
     // Start RX Process
@@ -389,7 +389,7 @@ Modbus_Flag Modbus_Read_Discrete_Inputs(Modbus_Config *device_config, Modbus_Rea
     // Transmit Modbus Request
     for(int i = 0; i < 8; i++)
     {
-        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+        USART_TX_Single_Byte(&device_config->UART_Device, buffer[i]);
     }
 
     // Start RX Process
@@ -450,7 +450,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
     // Transmit Modbus Request
     for(int i = 0; i < 8; i++)
     {
-        USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+        USART_TX_Single_Byte(&device_config->UART_Device, buffer[i]);
     }
 
     // Start RX Process
@@ -507,7 +507,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 //
 //	for(int i =0 ; i < 8; i++)
 //	{
-//		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+//		USART_TX_Single_Byte(&device_config->UART_Device, buffer[i]);
 //	}
 //
 //
@@ -533,7 +533,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 //
 //	for(int i =0 ; i < 8; i++)
 //	{
-//		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+//		USART_TX_Single_Byte(&device_config->UART_Device, buffer[i]);
 //	}
 //
 //
@@ -561,7 +561,7 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 //
 //	for(int i =0 ; i < 8; i++)
 //	{
-//		USART_TX_Byte(&device_config->UART_Device, buffer[i]);
+//		USART_TX_Single_Byte(&device_config->UART_Device, buffer[i]);
 //	}
 //
 //
@@ -570,3 +570,24 @@ Modbus_Flag Modbus_Read_Holding_Registers(Modbus_Config *device_config,Modbus_Re
 //
 //
 //
+
+
+int Compare_Commands(Modbus_Config *config, const void* a, const void* b)
+{
+	Modbus_Register_Map_Instance* recA = (Modbus_Register_Map_Instance*)a;
+	Modbus_Register_Map_Instance* recB  = (Modbus_Register_Map_Instance*)b;
+
+    if (recA->Function_Code != recB->Function_Code)
+        return recA->Function_Code - recB->Function_Code;
+    return recA->Register_Address - recB->Register_Address;
+}
+
+Modbus_Register_Map_Instance* Search_Commands(Modbus_Config *config,int Function_Code, int Register_Address, Modbus_Register_Map_Instance *table) {
+	Modbus_Register_Map_Instance key = {Function_Code, Register_Address, {0}};  // Search key
+    return (Modbus_Register_Map_Instance*)bsearch(&key, table, config->readCount, sizeof(Modbus_Register_Map_Instance), Compare_Commands);
+}
+
+
+//void sortTable() {
+//    qsort(table, recordCount, sizeof(Modbus_Register_Map_Instance), compareRecords);
+//}

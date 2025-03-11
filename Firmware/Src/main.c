@@ -6,7 +6,7 @@
 #include "GPIO/GPIO.h"
 #include "MPU6050/MPU6050_Regs.h"
 #include "Modbus/Modbus.h"
-
+#include "App.h"
 
 
 
@@ -40,6 +40,7 @@ int main(void)
 {
 	MCU_Clock_Setup();
 	Delay_Config();
+
 //	Console_Init(9600);
 
 
@@ -111,7 +112,7 @@ int main(void)
 
 			case Process_Modbus_Command:
 			{
-
+				IMUV100_Modbus_Command_Process();
 			}
 			break;
 
