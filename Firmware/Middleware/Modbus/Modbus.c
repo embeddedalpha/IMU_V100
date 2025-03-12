@@ -587,6 +587,30 @@ Modbus_Register_Map_Instance* Search_Commands(Modbus_Config *config,int Function
     return (Modbus_Register_Map_Instance*)bsearch(&key, table, config->readCount, sizeof(Modbus_Register_Map_Instance), Compare_Commands);
 }
 
+int Add_Command(Modbus_Config *config,Modbus_Register_Map_Instance* table,  int functionCode, int registerAddress, int *data, int length)
+{
+    if (config->readCount >= MAX_RECORDS)
+    {
+        return -1;
+    }
+
+    table[config->readCount].Function_Code = functionCode;
+    table[config->readCount].Register_Address = registerAddress;
+
+    for (int i = 0; i < length; i++)
+        table[config->readCount].Data[i] = data[i];  // Default all to NA
+
+
+    return  config->readCount++;
+
+
+}
+
+Modbus_Register_Map_Instance* searchRecord(Modbus_Config *config, Modbus_Register_Map_Instance *table,int commandType, int registerAddress) {
+	Modbus_Register_Map_Instance key = {commandType, registerAddress, {0}};  // Search key
+    return (Modbus_Register_Map_Instance*)bsearch(&key, table, config->readCount, sizeof(Modbus_Register_Map_Instance), Compare_Commands);
+}
+
 
 //void sortTable() {
 //    qsort(table, recordCount, sizeof(Modbus_Register_Map_Instance), compareRecords);

@@ -12,6 +12,9 @@ Modbus_Config IMUv100_Modbus;
 
 void IMUV100_Modbus_Register_Map_Setup(void)
 {
+	int data[10];
+
+
 
 }
 

@@ -14,6 +14,9 @@
 #include "GPIO/GPIO.h"
 #include "Modbus_Defs.h"
 
+
+#define MAX_RECORDS 50
+
 typedef enum {
 	Read_Coil_Registers = 0x01,
 	Read_Discrete_Inputs = 0x02,
@@ -153,7 +156,8 @@ Modbus_Flag Modbus_Send_Slave_Packet(Modbus_Config *device_config, uint8_t *buff
 
 
 
+int Compare_Commands(Modbus_Config *config, const void* a, const void* b);
+int Add_Command(Modbus_Config *config,Modbus_Register_Map_Instance* table,  int functionCode, int registerAddress, int *data, int length);
 
-int compareRecords(const void* a, const void* b);
 
 #endif /* MODBUS_MODBUS_H_ */
