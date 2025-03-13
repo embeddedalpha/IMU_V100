@@ -112,7 +112,7 @@ int main(void)
 
 			case Process_Modbus_Command:
 			{
-				IMUV100_Modbus_Command_Process();
+//				IMUV100_Modbus_Command_Process();
 			}
 			break;
 

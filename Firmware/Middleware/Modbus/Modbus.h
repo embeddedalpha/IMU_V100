@@ -157,7 +157,7 @@ Modbus_Flag Modbus_Send_Slave_Packet(Modbus_Config *device_config, uint8_t *buff
 
 
 int Compare_Commands(Modbus_Config *config, const void* a, const void* b);
-int Add_Command(Modbus_Config *config,Modbus_Register_Map_Instance* table,  int functionCode, int registerAddress, int *data, int length);
+int Add_Command(Modbus_Config *config,Modbus_Register_Map_Instance* table,  Modbus_Function_Codes functionCode, int registerAddress, int *data, int length);
 
 
 #endif /* MODBUS_MODBUS_H_ */

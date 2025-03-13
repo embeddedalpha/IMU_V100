@@ -587,7 +587,7 @@ Modbus_Register_Map_Instance* Search_Commands(Modbus_Config *config,int Function
     return (Modbus_Register_Map_Instance*)bsearch(&key, table, config->readCount, sizeof(Modbus_Register_Map_Instance), Compare_Commands);
 }
 
-int Add_Command(Modbus_Config *config,Modbus_Register_Map_Instance* table,  int functionCode, int registerAddress, int *data, int length)
+int Add_Command(Modbus_Config *config,Modbus_Register_Map_Instance* table,  Modbus_Function_Codes functionCode, int registerAddress, int *data, int length)
 {
     if (config->readCount >= MAX_RECORDS)
     {
