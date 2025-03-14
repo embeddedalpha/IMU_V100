@@ -1,2 +1,2 @@
-../Application_Layer/App.c:13:6:IMUV100_Modbus_Register_Map_Setup	56	static
-../Application_Layer/App.c:216:6:IMUV100_Modbus_Comm_Setup	8	static
+../Application_Layer/App.c:35:6:IMUV100_Modbus_Register_Map_Setup	56	static
+../Application_Layer/App.c:238:6:IMUV100_Modbus_Comm_Setup	8	static

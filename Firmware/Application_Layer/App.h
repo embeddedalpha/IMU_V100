@@ -25,10 +25,13 @@ extern volatile uint32_t Life_Time_Counter_Value;
 
 
 
+
+
+
 extern Modbus_Register_Map_Instance Register_Table[MAX_Registers];
 
 #define		Device_Version						(0x101)
-#define		Device_Address_						(0x102)
+#define		IMUV100_Address						(0x102)
 #define		Firmware_Version					(0x103)
 #define		Power_Health_Check					(0x104)
 #define		Life_Time_Counter					(0x105)
@@ -50,6 +53,9 @@ extern Modbus_Register_Map_Instance Register_Table[MAX_Registers];
 #define		Accelerometer_Scaling_Factor		(0x114)
 #define		Gyroscope_Scaling_Factor			(0x115)
 #define		Magnetometer_Scaling_Factor			(0x116)
+
+extern Modbus_Register_Map_Instance RTable[MAX_Registers];
+
 
 // struct IMU_Register_Map{
 //

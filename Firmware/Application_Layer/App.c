@@ -10,6 +10,28 @@
 
 Modbus_Config IMUv100_Modbus;
 
+Modbus_Register_Map_Instance RTable[] = {
+
+		{Read_Holding_Registers, Device_Version, {0x0001}},
+		{Read_Holding_Registers, Firmware_Version, {0x0001}},
+		{Read_Holding_Registers, Life_Time_Counter, {0x0000,0x0000}},
+		{Read_Holding_Registers, System_Up_Time, {0x0000,0x0000}},
+		{Read_Holding_Registers, Device_Health_Check, {0x0001}},
+		{Read_Holding_Registers, Scaling_Factors_Accelerometer, {0x0000,0x0000,0x0000}},
+		{Read_Holding_Registers, Scaling_Factors_Gyroscope, {0x0000,0x0000,0x0000}},
+		{Read_Holding_Registers, Scaling_Factors_Magnetometer, {0x0000,0x0000,0x0000}},
+
+		{Read_Input_Registers, Accelerometer_Data, {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000}},
+		{Read_Input_Registers, Gyroscope_Data, {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000}},
+		{Read_Input_Registers, Magnetometer_Data, {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000}},
+		{Read_Input_Registers, Quaternions_Data, {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000}},
+		{Read_Input_Registers, Euler_Angles_Data, {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000}},
+		{Read_Input_Registers, Linear_Velocity_Data, {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000}},
+		{Read_Input_Registers, Angular_Velocity_Data, {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000}},
+
+
+};
+
 void IMUV100_Modbus_Register_Map_Setup(void)
 {
 	int data[10];
@@ -17,7 +39,7 @@ void IMUV100_Modbus_Register_Map_Setup(void)
 	data[0] = 0x0001;
 	Add_Command(&IMUv100_Modbus,Register_Table,Read_Holding_Registers,Device_Version,data,1);
 	data[0] = 0x0001;
-	Add_Command(&IMUv100_Modbus,Register_Table,Read_Holding_Registers,Device_Address_,data,1);
+	Add_Command(&IMUv100_Modbus,Register_Table,Read_Holding_Registers,IMUV100_Address,data,1);
 	data[0] = 0x0001;
 	Add_Command(&IMUv100_Modbus,Register_Table,Read_Holding_Registers,Firmware_Version,data,1);
 	data[0] = 0x0000;

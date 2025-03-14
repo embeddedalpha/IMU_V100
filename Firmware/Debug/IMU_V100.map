@@ -256,12 +256,13 @@ Discarded input sections
                 0x00000000        0xa ./Application_Layer/App.o
  .bss.IMUv100_Modbus
                 0x00000000      0x2b0 ./Application_Layer/App.o
+ .data.RTable   0x00000000      0x1e0 ./Application_Layer/App.o
  .text.IMUV100_Modbus_Register_Map_Setup
                 0x00000000      0x2c0 ./Application_Layer/App.o
  .text.IMUV100_Modbus_Comm_Setup
                 0x00000000       0x7c ./Application_Layer/App.o
- .debug_info    0x00000000     0x1b5e ./Application_Layer/App.o
- .debug_abbrev  0x00000000      0x213 ./Application_Layer/App.o
+ .debug_info    0x00000000     0x1b74 ./Application_Layer/App.o
+ .debug_abbrev  0x00000000      0x224 ./Application_Layer/App.o
  .debug_aranges
                 0x00000000       0x28 ./Application_Layer/App.o
  .debug_rnglists
@@ -316,7 +317,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 ./Application_Layer/App.o
  .debug_macro   0x00000000       0xa6 ./Application_Layer/App.o
  .debug_line    0x00000000      0x8a9 ./Application_Layer/App.o
- .debug_str     0x00000000    0x8ed0b ./Application_Layer/App.o
+ .debug_str     0x00000000    0x8ed12 ./Application_Layer/App.o
  .comment       0x00000000       0x44 ./Application_Layer/App.o
  .debug_frame   0x00000000       0x54 ./Application_Layer/App.o
  .ARM.attributes
