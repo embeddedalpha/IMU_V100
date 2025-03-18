@@ -153,7 +153,7 @@ void Modbus_Slave_Command_Processor(Modbus_Config *device_config);
 
 Modbus_Flag Modbus_Send_Slave_Packet(Modbus_Config *device_config, uint8_t *buffer, int length);
 
-
+Modbus_Register_Map_Instance* Search_Commands(Modbus_Config *config,int Function_Code, int Register_Address, Modbus_Register_Map_Instance *table);
 
 
 int Compare_Commands(Modbus_Config *config, const void* a, const void* b);
