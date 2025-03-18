@@ -30,9 +30,9 @@ extern volatile uint32_t Life_Time_Counter_Value;
 
 extern Modbus_Register_Map_Instance Register_Table[MAX_Registers];
 
-#define		Device_Version						(0x101)
+#define		IMU_Device_Version						(0x101)
 #define		IMUV100_Address						(0x102)
-#define		Firmware_Version					(0x103)
+#define		IMU_Firmware_Version					(0x103)
 #define		Power_Health_Check					(0x104)
 #define		Life_Time_Counter					(0x105)
 #define		System_Up_Time						(0x106)
