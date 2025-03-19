@@ -257,12 +257,12 @@ Discarded input sections
  .bss.IMUv100_Modbus
                 0x00000000      0x2b0 ./Application_Layer/App.o
  .data.RTable   0x00000000      0x1e0 ./Application_Layer/App.o
- .text.IMUV100_Modbus_Register_Map_Setup
-                0x00000000      0x2c0 ./Application_Layer/App.o
+ .text.IMUV100_Modbus_Command_Process
+                0x00000000      0x1f0 ./Application_Layer/App.o
  .text.IMUV100_Modbus_Comm_Setup
                 0x00000000       0x7c ./Application_Layer/App.o
- .debug_info    0x00000000     0x1b74 ./Application_Layer/App.o
- .debug_abbrev  0x00000000      0x224 ./Application_Layer/App.o
+ .debug_info    0x00000000     0x1b9c ./Application_Layer/App.o
+ .debug_abbrev  0x00000000      0x22b ./Application_Layer/App.o
  .debug_aranges
                 0x00000000       0x28 ./Application_Layer/App.o
  .debug_rnglists
@@ -316,10 +316,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x22 ./Application_Layer/App.o
  .debug_macro   0x00000000       0x10 ./Application_Layer/App.o
  .debug_macro   0x00000000       0xa6 ./Application_Layer/App.o
- .debug_line    0x00000000      0x8a9 ./Application_Layer/App.o
- .debug_str     0x00000000    0x8ed12 ./Application_Layer/App.o
+ .debug_line    0x00000000      0x914 ./Application_Layer/App.o
+ .debug_str     0x00000000    0x8ed2d ./Application_Layer/App.o
  .comment       0x00000000       0x44 ./Application_Layer/App.o
- .debug_frame   0x00000000       0x54 ./Application_Layer/App.o
+ .debug_frame   0x00000000       0x50 ./Application_Layer/App.o
  .ARM.attributes
                 0x00000000       0x34 ./Application_Layer/App.o
  .group         0x00000000        0xc ./Driver/CAN/CAN.o
@@ -3970,7 +3970,7 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x0000802c      0x531 ./Src/system_stm32f4xx.o
  .debug_line    0x0000855d       0x7b ./Startup/startup_stm32f407vgtx.o
 
-.debug_str      0x00000000    0x9149d
+.debug_str      0x00000000    0x914a5
  .debug_str     0x00000000    0x8eb89 ./Driver/DMA/DMA.o
                               0x8eead (size before relaxing)
  .debug_str     0x0008eb89      0x5eb ./Driver/GPIO/GPIO.o
@@ -3981,11 +3981,11 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                               0x8f51c (size before relaxing)
  .debug_str     0x0009012b      0x6fb ./Driver/USART/USART.o
                               0x8f24a (size before relaxing)
- .debug_str     0x00090826      0xba9 ./Src/main.o
-                              0x8f9a5 (size before relaxing)
- .debug_str     0x000913cf       0x8f ./Src/system_stm32f4xx.o
+ .debug_str     0x00090826      0xbb1 ./Src/main.o
+                              0x8f9ad (size before relaxing)
+ .debug_str     0x000913d7       0x8f ./Src/system_stm32f4xx.o
                               0x88582 (size before relaxing)
- .debug_str     0x0009145e       0x3f ./Startup/startup_stm32f407vgtx.o
+ .debug_str     0x00091466       0x3f ./Startup/startup_stm32f407vgtx.o
                                  0x64 (size before relaxing)
 
 .comment        0x00000000       0x43

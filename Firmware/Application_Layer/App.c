@@ -53,7 +53,8 @@ void IMUV100_Modbus_Command_Process(void){
 
 		if(found)
 		{
-			switch (found->Function_Code) {
+			switch (found->Function_Code)
+			{
 				case Read_Holding_Registers:
 				{
 					switch (found->Register_Address) {
@@ -64,6 +65,7 @@ void IMUV100_Modbus_Command_Process(void){
 							buffer[2] = 1;
 							buffer[3] = (found->Data[0] & 0xFF00)>>8;
 							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
 
@@ -74,6 +76,7 @@ void IMUV100_Modbus_Command_Process(void){
 							buffer[2] = 1;
 							buffer[3] = (found->Data[0] & 0xFF00)>>8;
 							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
 
@@ -84,6 +87,7 @@ void IMUV100_Modbus_Command_Process(void){
 							buffer[2] = 1;
 							buffer[3] = (found->Data[0] & 0xFF00)>>8;
 							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
 
@@ -94,6 +98,7 @@ void IMUV100_Modbus_Command_Process(void){
 							buffer[2] = 1;
 							buffer[3] = (found->Data[0] & 0xFF00)>>8;
 							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
 
@@ -106,131 +111,165 @@ void IMUV100_Modbus_Command_Process(void){
 							buffer[4] = (found->Data[0] & 0x00FF)>>0;
 							buffer[5] = (found->Data[1] & 0xFF00)>>8;
 							buffer[6] = (found->Data[1] & 0x00FF)>>0;
+							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 7);
 						}
 							break;
 						default:
+						{
+
+						}
 							break;
 					}
 
 				}
 					break;
+
+
+				case Read_Input_Registers:
+				{
+					switch (found->Register_Address) {
+						case Accelerometer_Data:
+						{
+							buffer[0] = IMUv100_Modbus.Device_Address;
+							buffer[1] = Read_Input_Registers;
+							buffer[2] = 6;
+							buffer[3] = (found->Data[0] & 0xFF00)>>8;
+							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							buffer[5] = (found->Data[1] & 0xFF00)>>8;
+							buffer[6] = (found->Data[1] & 0x00FF)>>0;
+							buffer[7] = (found->Data[2] & 0xFF00)>>8;
+							buffer[8] = (found->Data[2] & 0x00FF)>>0;
+							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
+
+						}
+							break;
+						default:
+						{
+
+						}
+							break;
+					}
+
+				}
+				break;
+
 				default:
 //					return -1;
 					break;
 			}
 		}
 
-		switch (IMUv100_Modbus.Payload.Function_Code) {
-			case Read_Holding_Registers:
-			{
-				switch ((int)IMUv100_Modbus.Payload.Register_Address)
-				{
-					case (IMU_Device_Version):
-					{
-						// Modbus Send Response;
-						buffer[0] = IMUv100_Modbus.Device_Address;
-						buffer[1] = Read_Holding_Registers;
-						buffer[2] = 1;
-						buffer[3] = (IMU_Register_Map.Device_Version.Data[0] & 0xFF00)>>8;
-						buffer[4] = (IMU_Register_Map.Device_Version.Data[0] & 0x00FF)>>0;
-
-						Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
-
-					}
-						break;
-
-					case (Device_Address_Addr):
-					{
-						// Modbus Send Response;
-						buffer[0] = IMUv100_Modbus.Device_Address;
-						buffer[1] = Read_Holding_Registers;
-						buffer[2] = 1;
-						buffer[3] = (IMU_Register_Map.Device_Address.Data[0] & 0xFF00)>>8;
-						buffer[4] = (IMU_Register_Map.Device_Address.Data[0] & 0x00FF)>>0;
-						Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
-
-					}
-						break;
-
-					case (Firmware_Version_Addr):
-					{
-						// Modbus Send Response;
-						buffer[0] = IMUv100_Modbus.Device_Address;
-						buffer[1] = Read_Holding_Registers;
-						buffer[2] = 1;
-						buffer[3] = (IMU_Register_Map.Firmware_Version.Data[0] & 0xFF00)>>8;
-						buffer[4] = (IMU_Register_Map.Firmware_Version.Data[0] & 0x00FF)>>0;
-						Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
-
-					}
-						break;
-
-
-				}
-
-			}
-				break;
-
-			case Read_Input_Registers:
-			{
-
-			}
-				break;
-
-			case Write_Single_Register:
-			{
-
-			}
-				break;
-
-			case Write_Multiple_Registers:
-			{
-
-			}
-				break;
-
-			case Read_Coil_Registers:
-			{
-				buffer[0] = IMUv100_Modbus.Device_Address;
-				buffer[1] =  0x80;
-				buffer[2] = 1;
-				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
-			}
-			break;
-
-
-
-			case Write_Single_Coil:
-			{
-				buffer[0] = IMUv100_Modbus.Device_Address;
-				buffer[1] =  Write_Single_Coil| 0x80;
-				buffer[2] = 1;
-				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
-			}
-			break;
-
-			case Read_Discrete_Inputs:
-			{
-				buffer[0] = IMUv100_Modbus.Device_Address;
-				buffer[1] =  Read_Discrete_Inputs| 0x80;
-				buffer[2] = 1;
-				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
-			}
-			break;
-
-			case Write_Multiple_Coils:
-			{
-				buffer[0] = IMUv100_Modbus.Device_Address;
-				buffer[1] =  Write_Multiple_Coils| 0x80;
-				buffer[2] = 1;
-				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
-			}
-			break;
-
-
-
-
-		}
+//		switch (IMUv100_Modbus.Payload.Function_Code) {
+//			case Read_Holding_Registers:
+//			{
+//				switch ((int)IMUv100_Modbus.Payload.Register_Address)
+//				{
+//					case (IMU_Device_Version):
+//					{
+//						// Modbus Send Response;
+//						buffer[0] = IMUv100_Modbus.Device_Address;
+//						buffer[1] = Read_Holding_Registers;
+//						buffer[2] = 1;
+//						buffer[3] = (IMU_Register_Map.Device_Version.Data[0] & 0xFF00)>>8;
+//						buffer[4] = (IMU_Register_Map.Device_Version.Data[0] & 0x00FF)>>0;
+//
+//						Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
+//
+//					}
+//						break;
+//
+//					case (Device_Address_Addr):
+//					{
+//						// Modbus Send Response;
+//						buffer[0] = IMUv100_Modbus.Device_Address;
+//						buffer[1] = Read_Holding_Registers;
+//						buffer[2] = 1;
+//						buffer[3] = (IMU_Register_Map.Device_Address.Data[0] & 0xFF00)>>8;
+//						buffer[4] = (IMU_Register_Map.Device_Address.Data[0] & 0x00FF)>>0;
+//						Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
+//
+//					}
+//						break;
+//
+//					case (Firmware_Version_Addr):
+//					{
+//						// Modbus Send Response;
+////						buffer[0] = IMUv100_Modbus.Device_Address;
+////						buffer[1] = Read_Holding_Registers;
+////						buffer[2] = 1;
+////						buffer[3] = (IMU_Register_Map.Firmware_Version.Data[0] & 0xFF00)>>8;
+////						buffer[4] = (IMU_Register_Map.Firmware_Version.Data[0] & 0x00FF)>>0;
+////						Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
+//
+//					}
+//						break;
+//
+//
+//				}
+//
+//			}
+//				break;
+//
+//			case Read_Input_Registers:
+//			{
+//
+//			}
+//				break;
+//
+//			case Write_Single_Register:
+//			{
+//
+//			}
+//				break;
+//
+//			case Write_Multiple_Registers:
+//			{
+//
+//			}
+//				break;
+//
+//			case Read_Coil_Registers:
+//			{
+//				buffer[0] = IMUv100_Modbus.Device_Address;
+//				buffer[1] =  0x80;
+//				buffer[2] = 1;
+//				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
+//			}
+//			break;
+//
+//
+//
+//			case Write_Single_Coil:
+//			{
+//				buffer[0] = IMUv100_Modbus.Device_Address;
+//				buffer[1] =  Write_Single_Coil| 0x80;
+//				buffer[2] = 1;
+//				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
+//			}
+//			break;
+//
+//			case Read_Discrete_Inputs:
+//			{
+//				buffer[0] = IMUv100_Modbus.Device_Address;
+//				buffer[1] =  Read_Discrete_Inputs| 0x80;
+//				buffer[2] = 1;
+//				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
+//			}
+//			break;
+//
+//			case Write_Multiple_Coils:
+//			{
+//				buffer[0] = IMUv100_Modbus.Device_Address;
+//				buffer[1] =  Write_Multiple_Coils| 0x80;
+//				buffer[2] = 1;
+//				Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 3);
+//			}
+//			break;
+//
+//
+//
+//
+//		}
 
 	}
 }
