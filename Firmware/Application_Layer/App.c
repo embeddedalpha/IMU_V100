@@ -62,9 +62,9 @@ void IMUV100_Modbus_Command_Process(void){
 						{
 							buffer[0] = IMUv100_Modbus.Device_Address;
 							buffer[1] = Read_Holding_Registers;
-							buffer[2] = 1;
-							buffer[3] = (found->Data[0] & 0xFF00)>>8;
-							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							buffer[2] = 2;
+							buffer[3] = found->Data[0] ;
+							buffer[4] = found->Data[1] ;
 							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
@@ -73,9 +73,9 @@ void IMUV100_Modbus_Command_Process(void){
 						{
 							buffer[0] = IMUv100_Modbus.Device_Address;
 							buffer[1] = Read_Holding_Registers;
-							buffer[2] = 1;
-							buffer[3] = (found->Data[0] & 0xFF00)>>8;
-							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							buffer[2] = 2;
+							buffer[3] = found->Data[0] ;
+							buffer[4] = found->Data[1] ;
 							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
@@ -84,9 +84,9 @@ void IMUV100_Modbus_Command_Process(void){
 						{
 							buffer[0] = IMUv100_Modbus.Device_Address;
 							buffer[1] = Read_Holding_Registers;
-							buffer[2] = 1;
-							buffer[3] = (found->Data[0] & 0xFF00)>>8;
-							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							buffer[2] = 2;
+							buffer[3] = found->Data[0] ;
+							buffer[4] = found->Data[1] ;
 							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
@@ -95,9 +95,9 @@ void IMUV100_Modbus_Command_Process(void){
 						{
 							buffer[0] = IMUv100_Modbus.Device_Address;
 							buffer[1] = Read_Holding_Registers;
-							buffer[2] = 1;
-							buffer[3] = (found->Data[0] & 0xFF00)>>8;
-							buffer[4] = (found->Data[0] & 0x00FF)>>0;
+							buffer[2] = 2;
+							buffer[3] = found->Data[0] ;
+							buffer[4] = found->Data[1] ;
 							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 5);
 						}
 							break;
@@ -106,11 +106,11 @@ void IMUV100_Modbus_Command_Process(void){
 						{
 							buffer[0] = IMUv100_Modbus.Device_Address;
 							buffer[1] = Read_Holding_Registers;
-							buffer[2] = 2;
-							buffer[3] = (found->Data[0] & 0xFF00)>>8;
-							buffer[4] = (found->Data[0] & 0x00FF)>>0;
-							buffer[5] = (found->Data[1] & 0xFF00)>>8;
-							buffer[6] = (found->Data[1] & 0x00FF)>>0;
+							buffer[2] = 4;
+							buffer[3] = found->Data[0] ;
+							buffer[4] = found->Data[1] ;
+							buffer[5] = found->Data[2] ;
+							buffer[6] = found->Data[3] ;
 							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 7);
 						}
 							break;
@@ -133,16 +133,129 @@ void IMUV100_Modbus_Command_Process(void){
 							buffer[0] = IMUv100_Modbus.Device_Address;
 							buffer[1] = Read_Input_Registers;
 							buffer[2] = 6;
-							buffer[3] = (found->Data[0] & 0xFF00)>>8;
-							buffer[4] = (found->Data[0] & 0x00FF)>>0;
-							buffer[5] = (found->Data[1] & 0xFF00)>>8;
-							buffer[6] = (found->Data[1] & 0x00FF)>>0;
-							buffer[7] = (found->Data[2] & 0xFF00)>>8;
-							buffer[8] = (found->Data[2] & 0x00FF)>>0;
+							buffer[3] = found->Data[0] ;
+							buffer[4] = found->Data[1] ;
+							buffer[5] = found->Data[2] ;
+							buffer[6] = found->Data[3] ;
+							buffer[7] = found->Data[4] ;
+							buffer[8] = found->Data[5] ;
 							Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
 
 						}
 							break;
+						case Gyroscope_Data:
+							{
+								buffer[0] = IMUv100_Modbus.Device_Address;
+								buffer[1] = Read_Input_Registers;
+								buffer[2] = 6;
+								buffer[3] = found->Data[0] ;
+								buffer[4] = found->Data[1] ;
+								buffer[5] = found->Data[2] ;
+								buffer[6] = found->Data[3] ;
+								buffer[7] = found->Data[4] ;
+								buffer[8] = found->Data[5] ;
+								Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
+
+							}
+								break;
+
+						case Gyroscope_Data:
+							{
+								buffer[0] = IMUv100_Modbus.Device_Address;
+								buffer[1] = Read_Input_Registers;
+								buffer[2] = 6;
+								buffer[3] = found->Data[0] ;
+								buffer[4] = found->Data[1] ;
+								buffer[5] = found->Data[2] ;
+								buffer[6] = found->Data[3] ;
+								buffer[7] = found->Data[4] ;
+								buffer[8] = found->Data[5] ;
+								Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
+
+							}
+								break;
+
+						case Magnetometer_Data:
+							{
+								buffer[0] = IMUv100_Modbus.Device_Address;
+								buffer[1] = Read_Input_Registers;
+								buffer[2] = 6;
+								buffer[3] = found->Data[0] ;
+								buffer[4] = found->Data[1] ;
+								buffer[5] = found->Data[2] ;
+								buffer[6] = found->Data[3] ;
+								buffer[7] = found->Data[4] ;
+								buffer[8] = found->Data[5] ;
+								Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
+
+							}
+								break;
+
+						case Quaternions_Data:
+							{
+								buffer[0] = IMUv100_Modbus.Device_Address;
+								buffer[1] = Read_Input_Registers;
+								buffer[2] = 8;
+								buffer[3] = found->Data[0] ;
+								buffer[4] = found->Data[1] ;
+								buffer[5] = found->Data[2] ;
+								buffer[6] = found->Data[3] ;
+								buffer[7] = found->Data[4] ;
+								buffer[8] = found->Data[5] ;
+								buffer[9] = found->Data[6] ;
+								buffer[10] = found->Data[7] ;
+								Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 11);
+
+							}
+								break;
+
+						case Euler_Angles_Data:
+							{
+								buffer[0] = IMUv100_Modbus.Device_Address;
+								buffer[1] = Read_Input_Registers;
+								buffer[2] = 6;
+								buffer[3] = found->Data[0] ;
+								buffer[4] = found->Data[1] ;
+								buffer[5] = found->Data[2] ;
+								buffer[6] = found->Data[3] ;
+								buffer[7] = found->Data[4] ;
+								buffer[8] = found->Data[5] ;
+								Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
+
+							}
+								break;
+
+						case Linear_Velocity_Data:
+							{
+								buffer[0] = IMUv100_Modbus.Device_Address;
+								buffer[1] = Read_Input_Registers;
+								buffer[2] = 6;
+								buffer[3] = found->Data[0] ;
+								buffer[4] = found->Data[1] ;
+								buffer[5] = found->Data[2] ;
+								buffer[6] = found->Data[3] ;
+								buffer[7] = found->Data[4] ;
+								buffer[8] = found->Data[5] ;
+								Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
+
+							}
+								break;
+
+						case Angular_Velocity_Data:
+							{
+								buffer[0] = IMUv100_Modbus.Device_Address;
+								buffer[1] = Read_Input_Registers;
+								buffer[2] = 6;
+								buffer[3] = found->Data[0] ;
+								buffer[4] = found->Data[1] ;
+								buffer[5] = found->Data[2] ;
+								buffer[6] = found->Data[3] ;
+								buffer[7] = found->Data[4] ;
+								buffer[8] = found->Data[5] ;
+								Modbus_Send_Slave_Packet(&IMUv100_Modbus, buffer, 9);
+
+							}
+								break;
 						default:
 						{
 
@@ -150,6 +263,68 @@ void IMUV100_Modbus_Command_Process(void){
 							break;
 					}
 
+				}
+				break;
+
+				case Write_Single_Register:
+				{
+					switch (found->Register_Address)
+					{
+						case Reset_Device:
+						{
+
+						}
+
+							break;
+
+						case Start_Calibration:
+						{
+
+						}
+
+							break;
+
+						default:
+						{
+
+						}
+							break;
+					}
+
+				}
+				break;
+
+				case Write_Multiple_Registers:
+				{
+					switch (found->Register_Address)
+					{
+						case Accelerometer_Scaling_Factor:
+						{
+
+						}
+
+							break;
+
+						case Gyroscope_Scaling_Factor:
+						{
+
+						}
+
+							break;
+
+						case Magnetometer_Scaling_Factor:
+						{
+
+						}
+
+							break;
+
+						default:
+						{
+
+						}
+							break;
+					}
 				}
 				break;
 
