@@ -55,7 +55,7 @@ typedef struct Modbus_Register_Map_Instance
 {
 	Modbus_Function_Codes Function_Code;
 	uint16_t Register_Address;
-	uint16_t Data[10];
+	uint8_t Data[10];
 
 }Modbus_Register_Map_Instance;
 
