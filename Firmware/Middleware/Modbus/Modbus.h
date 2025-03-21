@@ -31,7 +31,7 @@ typedef enum {
 typedef enum {
 
 	Illegal_Function = 0x01,
-	Illegal_Data_Address = 0x02,
+	Illegal_Address = 0x02,
 	Illegal_Data_Value = 0x03,
 	Slave_Device_Failure = 0x04,
 	Accepted_but_Delayed_Processing = 0x05,
