@@ -8,13 +8,14 @@
 #include "Modbus/Modbus.h"
 #include "App.h"
 
+volatile uint16_t commSwitch = 0;
+volatile bool commSelection = 0;
 
 
 typedef enum IMUV100_States
 {
 	Compute_Data = 0,
-	Process_Modbus_Command,
-	Send_Data,
+	Process_Command,
 	Send_Diagnostic_Data,
 
 }IMUV100_States;
@@ -84,12 +85,26 @@ int main(void)
 			GPIO_Configuration.Pull.None,
 			GPIO_Configuration.Alternate_Functions.None);
 
+
+	commSwitch = GPIO_Read_Pin(GPIOA, 7);
+	if(commSwitch)
+	{
+		commSelection = 1; //CAN
+	}
+	else
+	{
+		commSelection = 0; //MODBUS
+		IMUV100_Modbus_Comm_Setup();
+	}
+
 	for(;;)
 	{
 		switch (State) {
 			case Compute_Data:
 			{
 				// Get Accelerometer Data
+
+
 
 				// Get Gyroscope Data
 
@@ -107,17 +122,25 @@ int main(void)
 
 				// Compute Angular Velocity
 
+
+				State = Process_Command;
+
 			}
 				break;
 
-			case Process_Modbus_Command:
+			case Process_Command:
 			{
-//				IMUV100_Modbus_Command_Process();
-			}
-			break;
 
-			case Send_Data:
-			{
+				if(commSelection)
+				{
+					IMUV100_CAN_Command_Process();
+				}
+				else
+				{
+					IMUV100_Modbus_Command_Process();
+				}
+
+
 
 			}
 			break;

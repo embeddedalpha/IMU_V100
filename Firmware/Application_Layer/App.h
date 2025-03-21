@@ -30,9 +30,9 @@ extern volatile uint32_t Life_Time_Counter_Value;
 
 extern Modbus_Register_Map_Instance Register_Table[MAX_Registers];
 
-#define		IMU_Device_Version						(0x101)
+#define		IMU_Device_Version					(0x101)
 #define		IMUV100_Address						(0x102)
-#define		IMU_Firmware_Version					(0x103)
+#define		IMU_Firmware_Version				(0x103)
 #define		Power_Health_Check					(0x104)
 #define		Life_Time_Counter					(0x105)
 #define		System_Up_Time						(0x106)
@@ -40,7 +40,6 @@ extern Modbus_Register_Map_Instance Register_Table[MAX_Registers];
 #define		Scaling_Factors_Accelerometer		(0x108)
 #define		Scaling_Factors_Gyroscope			(0x109)
 #define		Scaling_Factors_Magnetometer		(0x10A)
-
 #define		Accelerometer_Data					(0x10B)
 #define		Gyroscope_Data						(0x10C)
 #define		Magnetometer_Data					(0x10D)
@@ -57,41 +56,11 @@ extern Modbus_Register_Map_Instance Register_Table[MAX_Registers];
 extern Modbus_Register_Map_Instance RTable[MAX_Registers];
 
 
-// struct IMU_Register_Map{
-//
-//
-//	// Holding Registers
-//	Modbus_Register_Map_Instance Device_Version; 		//R 0x100
-//	Modbus_Register_Map_Instance Device_Address;		//R 0x101
-//	Modbus_Register_Map_Instance Firmware_Version;		//R 0x102
-//	Modbus_Register_Map_Instance Power_Health_Check;	//R 0x103
-//	Modbus_Register_Map_Instance Life_Time_Counter;		//R 0x104
-//	Modbus_Register_Map_Instance System_Up_Time;		//R 0x105
-//	Modbus_Register_Map_Instance Device_Health_Check;	//R 0x106
-//
-//	// Write Single Holding Register
-//	Modbus_Register_Map_Instance Reset_Device;			//W 0x201
-//
-//	// Read Input Registers
-//	Modbus_Register_Map_Instance Accelerometer_Data;//R
-//	Modbus_Register_Map_Instance Gyroscope_Data;//R
-//	Modbus_Register_Map_Instance Magnetometer_Data;//R
-//	Modbus_Register_Map_Instance Quaternions_Data;//R
-//	Modbus_Register_Map_Instance Euler_Angles_Data;
-//	Modbus_Register_Map_Instance Linear_Velocity_Data; //R
-//	Modbus_Register_Map_Instance Angular_Velocity_Data; //R
-//
-//	// Write Multiple Holding Registers
-//	Modbus_Register_Map_Instance Accelerometer_Scaling_Factor;
-//	Modbus_Register_Map_Instance Gyroscope_Scaling_Factor;
-//	Modbus_Register_Map_Instance Magnetometer_Scaling_Factor;
-//
-//
-//
-//}IMU_Register_Map;
-
-void IMUV100_Modbus_Register_Map_Setup(void);
 void IMUV100_Modbus_Comm_Setup(void);
+void IMUV100_Modbus_Command_Process(void);
+
+void IMUV100_CAN_Comm_Setup(void);
+void IMUV100_CAN_Command_Process(void);
 //void IMUV100_Modbus_Command_Process(void);
 
 #endif /* APP_H_ */
