@@ -15,1102 +15,1226 @@
 
 #include "DMA.h"
 
-// DMA Flags for each stream of DMA1 and DMA2
-volatile DMA_Flags_Typedef I2S2_RX_DMA_Flag;
-volatile DMA_Flags_Typedef I2S2_TX_DMA_Flag;
-volatile DMA_Flags_Typedef I2S3_RX_DMA_Flag;
-volatile DMA_Flags_Typedef I2S3_TX_DMA_Flag;
-volatile DMA_Flags_Typedef I2C1_RX_DMA_Flag;
-volatile DMA_Flags_Typedef I2C1_TX_DMA_Flag;
-volatile DMA_Flags_Typedef I2C2_RX_DMA_Flag;
-volatile DMA_Flags_Typedef I2C2_TX_DMA_Flag;
-volatile DMA_Flags_Typedef I2C3_RX_DMA_Flag;
-volatile DMA_Flags_Typedef I2C3_TX_DMA_Flag;
-volatile DMA_Flags_Typedef SPI1_RX_DMA_Flag;
-volatile DMA_Flags_Typedef SPI2_RX_DMA_Flag;
-volatile DMA_Flags_Typedef SPI3_RX_DMA_Flag;
-volatile DMA_Flags_Typedef SPI1_TX_DMA_Flag;
-volatile DMA_Flags_Typedef SPI2_TX_DMA_Flag;
-volatile DMA_Flags_Typedef SPI3_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART1_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART1_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART2_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART2_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART3_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART3_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART4_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART4_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART5_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART5_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART6_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART6_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART7_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART7_TX_DMA_Flag;
-volatile DMA_Flags_Typedef USART8_RX_DMA_Flag;
-volatile DMA_Flags_Typedef USART8_TX_DMA_Flag;
-volatile DMA_Flags_Typedef TIM1_UP_DMA_Flag;
-volatile DMA_Flags_Typedef TIM1_CH1_DMA_Flag;
-volatile DMA_Flags_Typedef TIM1_CH2_DMA_Flag;
-volatile DMA_Flags_Typedef TIM1_CH3_DMA_Flag;
-volatile DMA_Flags_Typedef TIM1_CH4_DMA_Flag;
-volatile DMA_Flags_Typedef TIM1_TRIG_DMA_Flag;
-volatile DMA_Flags_Typedef TIM1_COM_DMA_Flag;
-volatile DMA_Flags_Typedef TIM8_UP_DMA_Flag;
-volatile DMA_Flags_Typedef TIM8_CH1_DMA_Flag;
-volatile DMA_Flags_Typedef TIM8_CH2_DMA_Flag;
-volatile DMA_Flags_Typedef TIM8_CH3_DMA_Flag;
-volatile DMA_Flags_Typedef TIM8_CH4_DMA_Flag;
-volatile DMA_Flags_Typedef TIM8_TRIG_DMA_Flag;
-volatile DMA_Flags_Typedef TIM8_COM_DMA_Flag;
-volatile DMA_Flags_Typedef TIM2_UP_DMA_Flag;
-volatile DMA_Flags_Typedef TIM2_CH1_DMA_Flag;
-volatile DMA_Flags_Typedef TIM2_CH2_DMA_Flag;
-volatile DMA_Flags_Typedef TIM2_CH3_DMA_Flag;
-volatile DMA_Flags_Typedef TIM2_CH4_DMA_Flag;
-volatile DMA_Flags_Typedef TIM3_CH1_DMA_Flag;
-volatile DMA_Flags_Typedef TIM3_CH2_DMA_Flag;
-volatile DMA_Flags_Typedef TIM3_CH3_DMA_Flag;
-volatile DMA_Flags_Typedef TIM3_CH4_DMA_Flag;
-volatile DMA_Flags_Typedef TIM3_UP_DMA_Flag;
-volatile DMA_Flags_Typedef TIM3_TRIG_DMA_Flag;
-volatile DMA_Flags_Typedef TIM4_CH1_DMA_Flag;
-volatile DMA_Flags_Typedef TIM4_CH2_DMA_Flag;
-volatile DMA_Flags_Typedef TIM4_CH3_DMA_Flag;
-volatile DMA_Flags_Typedef TIM4_UP_DMA_Flag;
-volatile DMA_Flags_Typedef TIM5_CH1_DMA_Flag;
-volatile DMA_Flags_Typedef TIM5_CH2_DMA_Flag;
-volatile DMA_Flags_Typedef TIM5_CH3_DMA_Flag;
-volatile DMA_Flags_Typedef TIM5_CH4_DMA_Flag;
-volatile DMA_Flags_Typedef TIM5_UP_DMA_Flag;
-volatile DMA_Flags_Typedef TIM5_TRIG_DMA_Flag;
-volatile DMA_Flags_Typedef TIM6_UP_DMA_Flag;
-volatile DMA_Flags_Typedef TIM7_UP_DMA_Flag;
-volatile DMA_Flags_Typedef DAC1_DMA_Flag;
-volatile DMA_Flags_Typedef DAC2_DMA_Flag;
-volatile DMA_Flags_Typedef SDIO_RXTX_DMA_Flag;
-volatile DMA_Flags_Typedef DCMI_DMA_Flag;
-volatile DMA_Flags_Typedef ADC1_DMA_Flag;
-volatile DMA_Flags_Typedef ADC2_DMA_Flag;
-volatile DMA_Flags_Typedef ADC3_DMA_Flag;
 
-volatile DMA_Flags_Typedef DMA1_Stream0_Flag;
-volatile DMA_Flags_Typedef DMA1_Stream1_Flag;
-volatile DMA_Flags_Typedef DMA1_Stream2_Flag;
-volatile DMA_Flags_Typedef DMA1_Stream3_Flag;
-volatile DMA_Flags_Typedef DMA1_Stream4_Flag;
-volatile DMA_Flags_Typedef DMA1_Stream5_Flag;
-volatile DMA_Flags_Typedef DMA1_Stream6_Flag;
-volatile DMA_Flags_Typedef DMA1_Stream7_Flag;
+DMA_Config *__DMA1_Stream0_Config__;
+DMA_Config *__DMA1_Stream1_Config__;
+DMA_Config *__DMA1_Stream2_Config__;
+DMA_Config *__DMA1_Stream3_Config__;
+DMA_Config *__DMA1_Stream4_Config__;
+DMA_Config *__DMA1_Stream5_Config__;
+DMA_Config *__DMA1_Stream6_Config__;
+DMA_Config *__DMA1_Stream7_Config__;
 
-volatile DMA_Flags_Typedef DMA2_Stream0_Flag;
-volatile DMA_Flags_Typedef DMA2_Stream1_Flag;
-volatile DMA_Flags_Typedef DMA2_Stream2_Flag;
-volatile DMA_Flags_Typedef DMA2_Stream3_Flag;
-volatile DMA_Flags_Typedef DMA2_Stream4_Flag;
-volatile DMA_Flags_Typedef DMA2_Stream5_Flag;
-volatile DMA_Flags_Typedef DMA2_Stream6_Flag;
-volatile DMA_Flags_Typedef DMA2_Stream7_Flag;
+DMA_Config *__DMA2_Stream0_Config__;
+DMA_Config *__DMA2_Stream1_Config__;
+DMA_Config *__DMA2_Stream2_Config__;
+DMA_Config *__DMA2_Stream3_Config__;
+DMA_Config *__DMA2_Stream4_Config__;
+DMA_Config *__DMA2_Stream5_Config__;
+DMA_Config *__DMA2_Stream6_Config__;
+DMA_Config *__DMA2_Stream7_Config__;
 
-/**
- * @brief DMA1 Stream 0 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 0. It checks the
- * status flags for FIFO error, direct mode error, transfer error, half
- * transfer complete, and transfer complete, and clears the respective
- * interrupt flag after handling it.
- */
+
+
+volatile uint32_t DMA_LISR = 0;
+volatile uint32_t DMA_HISR = 0;
+
+
 void DMA1_Stream0_IRQHandler(void)
 {
-	if(DMA1 -> LISR & DMA_LISR_FEIF0)
+	DMA_LISR = DMA1 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF0)
 	{
-		TIM5_CH3_DMA_Flag.Fifo_Error_Flag = true;
-		TIM4_CH1_DMA_Flag.Fifo_Error_Flag = true;
-		USART8_RX_DMA_Flag.Fifo_Error_Flag = true;
-		USART5_RX_DMA_Flag.Fifo_Error_Flag = true;
-		I2C1_RX_DMA_Flag.Fifo_Error_Flag = true;
-		SPI3_RX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA1_Stream0_Flag.Fifo_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CFEIF0;
+	    if (__DMA1_Stream0_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream0_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CFEIF0;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_DMEIF0)
+
+	if(DMA_LISR & DMA_LISR_DMEIF0)
 	{
-		TIM5_CH3_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM4_CH1_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART8_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART5_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		I2C1_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		SPI3_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream0_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF0;
+	    if (__DMA1_Stream0_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream0_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF0;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TEIF0)
+
+	if(DMA_LISR & DMA_LISR_TEIF0)
 	{
-		TIM5_CH3_DMA_Flag.Transfer_Error_Flag= true;
-		TIM4_CH1_DMA_Flag.Transfer_Error_Flag = true;
-		USART8_RX_DMA_Flag.Transfer_Error_Flag = true;
-		USART5_RX_DMA_Flag.Transfer_Error_Flag = true;
-		I2C1_RX_DMA_Flag.Transfer_Error_Flag = true;
-		SPI3_RX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream0_Flag.Transfer_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTEIF0;
+	    if (__DMA1_Stream0_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream0_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTEIF0;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_HTIF0)
+
+	if(DMA_LISR & DMA_LISR_HTIF0)
 	{
-		TIM5_CH3_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM4_CH1_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART8_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART5_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		I2C1_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		SPI3_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream0_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CHTIF0;
+	    if (__DMA1_Stream0_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream0_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CHTIF0;
+
+	    	if(__DMA1_Stream0_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream0_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TCIF0)
+
+	if(DMA_LISR & DMA_LISR_TCIF0)
 	{
-		TIM5_CH3_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM4_CH1_DMA_Flag.Transfer_Complete_Flag = true;
-		USART8_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		USART5_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		I2C1_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		SPI3_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream0_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTCIF0;
+	    if (__DMA1_Stream0_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream0_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTCIF0;
+
+	    	if(__DMA1_Stream0_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream0_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA1 Stream 1 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 1. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA1_Stream1_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
 void DMA1_Stream1_IRQHandler(void)
 {
-	if(DMA1 -> LISR & DMA_LISR_FEIF1)
+	DMA_LISR = DMA1 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF1)
 	{
-		TIM2_CH3_DMA_Flag.Fifo_Error_Flag = true;
-		TIM6_UP_DMA_Flag.Fifo_Error_Flag = true;
-		USART7_RX_DMA_Flag.Fifo_Error_Flag = true;
-		USART3_RX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA1_Stream1_Flag.Fifo_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CFEIF1;
+	    if (__DMA1_Stream1_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream1_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CFEIF1;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_DMEIF1)
+
+	if(DMA_LISR & DMA_LISR_DMEIF1)
 	{
-		TIM2_CH3_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM6_UP_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART7_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART3_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream1_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF1;
+	    if (__DMA1_Stream1_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream1_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF1;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TEIF1)
+
+	if(DMA_LISR & DMA_LISR_TEIF1)
 	{
-		TIM2_CH3_DMA_Flag.Transfer_Error_Flag = true;
-		TIM6_UP_DMA_Flag.Transfer_Error_Flag = true;
-		USART7_RX_DMA_Flag.Transfer_Error_Flag = true;
-		USART3_RX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream1_Flag.Transfer_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTEIF1;
+	    if (__DMA1_Stream1_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream1_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTEIF1;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_HTIF1)
+
+	if(DMA_LISR & DMA_LISR_HTIF1)
 	{
-		TIM2_CH3_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM6_UP_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART7_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART3_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream1_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CHTIF1;
+	    if (__DMA1_Stream1_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream1_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CHTIF1;
+
+	    	if(__DMA1_Stream1_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream1_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TCIF1)
+
+	if(DMA_LISR & DMA_LISR_TCIF1)
 	{
-		TIM2_CH3_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM6_UP_DMA_Flag.Transfer_Complete_Flag = true;
-		USART7_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		USART3_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream1_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTCIF1;
+	    if (__DMA1_Stream1_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream1_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTCIF1;
+
+	    	if(__DMA1_Stream1_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream1_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
-/**
- * @brief DMA1 Stream 2 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 2. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA1_Stream2_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
+
 void DMA1_Stream2_IRQHandler(void)
 {
-	if(DMA1 -> LISR & DMA_LISR_FEIF2)
+	DMA_LISR = DMA1 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF2)
 	{
-		USART3_TX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA1_Stream2_Flag.Fifo_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CFEIF2;
+	    if (__DMA1_Stream2_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream2_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CFEIF2;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_DMEIF2)
+
+	if(DMA_LISR & DMA_LISR_DMEIF2)
 	{
-		USART3_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream2_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF2;
+	    if (__DMA1_Stream2_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream2_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF2;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TEIF2)
+
+	if(DMA_LISR & DMA_LISR_TEIF2)
 	{
-		USART3_TX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream2_Flag.Transfer_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTEIF2;
+	    if (__DMA1_Stream2_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream2_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTEIF2;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_HTIF2)
+
+	if(DMA_LISR & DMA_LISR_HTIF2)
 	{
-		USART3_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream2_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CHTIF2;
+	    if (__DMA1_Stream2_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream2_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CHTIF2;
+
+	    	if(__DMA1_Stream2_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream2_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TCIF2)
+
+	if(DMA_LISR & DMA_LISR_TCIF2)
 	{
-		USART3_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream2_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTCIF2;
+	    if (__DMA1_Stream2_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream2_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTCIF2;
+
+	    	if(__DMA1_Stream2_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream2_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA1 Stream 3 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 3. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA1_Stream3_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
 void DMA1_Stream3_IRQHandler(void)
 {
-	if(DMA1 -> LISR & DMA_LISR_FEIF3)
+	DMA_LISR = DMA1 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF3)
 	{
-		TIM5_TRIG_DMA_Flag.Fifo_Error_Flag = true;
-		TIM4_CH2_DMA_Flag.Fifo_Error_Flag = true;
-		USART7_RX_DMA_Flag.Fifo_Error_Flag = true;
-		USART3_TX_DMA_Flag.Fifo_Error_Flag = true;
-		I2S2_RX_DMA_Flag.Fifo_Error_Flag = true;
-		SPI2_RX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA1_Stream3_Flag.Fifo_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CFEIF3;
+	    if (__DMA1_Stream3_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream3_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CFEIF3;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_DMEIF3)
+
+	if(DMA_LISR & DMA_LISR_DMEIF3)
 	{
-		TIM5_TRIG_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM4_CH2_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART7_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART3_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		I2S2_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		SPI2_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream3_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF3;
+	    if (__DMA1_Stream3_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream3_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CDMEIF3;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TEIF3)
+
+	if(DMA_LISR & DMA_LISR_TEIF3)
 	{
-		TIM5_TRIG_DMA_Flag.Transfer_Error_Flag = true;
-		TIM4_CH2_DMA_Flag.Transfer_Error_Flag = true;
-		USART7_RX_DMA_Flag.Transfer_Error_Flag = true;
-		USART3_TX_DMA_Flag.Transfer_Error_Flag = true;
-		I2S2_RX_DMA_Flag.Transfer_Error_Flag = true;
-		SPI2_RX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream3_Flag.Transfer_Error_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTEIF3;
+	    if (__DMA1_Stream3_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream3_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTEIF3;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_HTIF3)
+
+	if(DMA_LISR & DMA_LISR_HTIF3)
 	{
-		TIM5_TRIG_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM4_CH2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART7_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART3_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		I2S2_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		SPI2_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream3_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CHTIF3;
+	    if (__DMA1_Stream3_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream3_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CHTIF3;
+
+	    	if(__DMA1_Stream3_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream3_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> LISR & DMA_LISR_TCIF3)
+
+	if(DMA_LISR & DMA_LISR_TCIF3)
 	{
-		TIM5_TRIG_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM4_CH2_DMA_Flag.Transfer_Complete_Flag = true;
-		USART7_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		USART3_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		I2S2_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		SPI2_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream3_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> LIFCR |= DMA_LIFCR_CTCIF3;
+	    if (__DMA1_Stream3_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream3_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> LIFCR |= DMA_LIFCR_CTCIF3;
+
+	    	if(__DMA1_Stream3_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream3_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA1 Stream 4 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 4. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA1_Stream4_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
 void DMA1_Stream4_IRQHandler(void)
 {
-	if(DMA1 -> HISR & DMA_HISR_FEIF4)
+	DMA_HISR = DMA1 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF4)
 	{
-		TIM5_CH2_DMA_Flag.Fifo_Error_Flag = true;
-		TIM3_CH1_DMA_Flag.Fifo_Error_Flag = true;
-		USART4_TX_DMA_Flag.Fifo_Error_Flag = true;
-		I2C3_TX_DMA_Flag.Fifo_Error_Flag = true;
-		I2S2_TX_DMA_Flag.Fifo_Error_Flag = true;
-		SPI2_TX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA1_Stream4_Flag.Fifo_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CFEIF4;
+	    if (__DMA1_Stream4_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream4_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> LIFCR |= DMA_HIFCR_CFEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_DMEIF4)
+
+	if(DMA_HISR & DMA_HISR_DMEIF4)
 	{
-		TIM5_CH2_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM3_CH1_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART4_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		I2C3_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		I2S2_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		SPI2_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream4_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF4;
+	    if (__DMA1_Stream4_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream4_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF4;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TEIF4)
+
+	if(DMA_HISR & DMA_HISR_TEIF4)
 	{
-		TIM5_CH2_DMA_Flag.Transfer_Error_Flag = true;
-		TIM3_CH1_DMA_Flag.Transfer_Error_Flag = true;
-		USART4_TX_DMA_Flag.Transfer_Error_Flag = true;
-		I2C3_TX_DMA_Flag.Transfer_Error_Flag = true;
-		I2S2_TX_DMA_Flag.Transfer_Error_Flag = true;
-		SPI2_TX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream4_Flag.Transfer_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTEIF4;
+	    if (__DMA1_Stream4_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream4_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTEIF4;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_HTIF4)
+
+	if(DMA_HISR & DMA_HISR_HTIF4)
 	{
-		TIM5_CH2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM3_CH1_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART4_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		I2C3_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		I2S2_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		SPI2_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream4_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CHTIF4;
+	    if (__DMA1_Stream4_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream4_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CHTIF4;
+
+	    	if(__DMA1_Stream4_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream4_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TCIF4)
+
+	if(DMA_HISR & DMA_HISR_TCIF4)
 	{
-		TIM5_CH2_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM3_CH1_DMA_Flag.Transfer_Complete_Flag = true;
-		USART4_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		I2C3_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		I2S2_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		SPI2_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream4_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTCIF4;
+	    if (__DMA1_Stream4_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream4_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTCIF4;
+
+	    	if(__DMA1_Stream4_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream4_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA1 Stream 5 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 5. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA1_Stream5_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
+
+
 void DMA1_Stream5_IRQHandler(void)
 {
-	if(DMA1 -> HISR & DMA_HISR_FEIF5)
+	DMA_HISR = DMA1 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF5)
 	{
-		SPI3_TX_DMA_Flag.Fifo_Error_Flag = true;
-		TIM3_TRIG_DMA_Flag.Fifo_Error_Flag = true;
-		TIM2_CH1_DMA_Flag.Fifo_Error_Flag =  true;
-		DAC2_DMA_Flag.Fifo_Error_Flag = true;
-		TIM3_CH2_DMA_Flag.Fifo_Error_Flag = true;
-		USART2_RX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA1_Stream5_Flag.Fifo_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CFEIF5;
+	    if (__DMA1_Stream5_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream5_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CFEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_DMEIF5)
+
+	if(DMA_HISR & DMA_HISR_DMEIF5)
 	{
-		SPI3_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM3_TRIG_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM2_CH1_DMA_Flag.Direct_Mode_Error_Flag =  true;
-		DAC2_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM3_CH2_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART2_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream5_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF5;
+	    if (__DMA1_Stream5_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream5_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TEIF5)
+
+	if(DMA_HISR & DMA_HISR_TEIF5)
 	{
-		SPI3_TX_DMA_Flag.Transfer_Error_Flag = true;
-		TIM3_TRIG_DMA_Flag.Transfer_Error_Flag = true;
-		TIM2_CH1_DMA_Flag.Transfer_Error_Flag =  true;
-		DAC2_DMA_Flag.Transfer_Error_Flag = true;
-		TIM3_CH2_DMA_Flag.Transfer_Error_Flag = true;
-		USART2_RX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream5_Flag.Transfer_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTEIF5;
+	    if (__DMA1_Stream5_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream5_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_HTIF5)
+
+	if(DMA_HISR & DMA_HISR_HTIF5)
 	{
-		SPI3_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM3_TRIG_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM2_CH1_DMA_Flag.Half_Transfer_Complete_Flag =  true;
-		DAC2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM3_CH2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART2_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream5_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CHTIF5;
+	    if (__DMA1_Stream5_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream5_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CHTIF5;
+
+	    	if(__DMA1_Stream5_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream5_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TCIF5)
+
+	if(DMA_HISR & DMA_HISR_TCIF5)
 	{
-		I2C1_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		SPI3_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM3_TRIG_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM2_CH1_DMA_Flag.Transfer_Complete_Flag =  true;
-		DAC2_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM3_CH2_DMA_Flag.Transfer_Complete_Flag = true;
-		USART2_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream5_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTCIF5;
+	    if (__DMA1_Stream5_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream5_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTCIF5;
+
+	    	if(__DMA1_Stream5_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream5_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA1 Stream 6 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 6. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA1_Stream6_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
+
 void DMA1_Stream6_IRQHandler(void)
 {
-	if(DMA1 -> HISR & DMA_HISR_FEIF6)
+	DMA_HISR = DMA1 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF6)
 	{
-		TIM3_CH3_DMA_Flag.Fifo_Error_Flag = true;
-		TIM2_UP_DMA_Flag.Fifo_Error_Flag = true;
-		USART8_RX_DMA_Flag.Fifo_Error_Flag = true;
-		USART2_TX_DMA_Flag.Fifo_Error_Flag =  true;
-		I2C1_TX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA1_Stream6_Flag.Fifo_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CFEIF6;
+	    if (__DMA1_Stream6_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream6_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CFEIF6;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_DMEIF6)
+
+	if(DMA_HISR & DMA_HISR_DMEIF6)
 	{
-		TIM2_UP_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART8_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART2_TX_DMA_Flag.Direct_Mode_Error_Flag =  true;
-		I2C1_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream6_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF6;
+	    if (__DMA1_Stream6_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream6_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF6;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TEIF6)
+
+	if(DMA_HISR & DMA_HISR_TEIF6)
 	{
-		TIM2_UP_DMA_Flag.Transfer_Error_Flag = true;
-		USART8_RX_DMA_Flag.Transfer_Error_Flag = true;
-		USART2_TX_DMA_Flag.Transfer_Error_Flag =  true;
-		I2C1_TX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream6_Flag.Transfer_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTEIF6;
+	    if (__DMA1_Stream6_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream6_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTEIF6;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_HTIF6)
+
+	if(DMA_HISR & DMA_HISR_HTIF6)
 	{
-		TIM2_UP_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART8_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART2_TX_DMA_Flag.Half_Transfer_Complete_Flag =  true;
-		I2C1_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream6_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CHTIF6;
+	    if (__DMA1_Stream6_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream6_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CHTIF6;
+
+	    	if(__DMA1_Stream6_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream6_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TCIF6)
+
+	if(DMA_HISR & DMA_HISR_TCIF6)
 	{
-		TIM2_UP_DMA_Flag.Transfer_Complete_Flag = true;
-		USART8_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		USART2_TX_DMA_Flag.Transfer_Complete_Flag =  true;
-		I2C1_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream6_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTCIF6;
+	    if (__DMA1_Stream6_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream6_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTCIF6;
+
+	    	if(__DMA1_Stream6_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream6_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA1 Stream 7 Interrupt Handler
- *
- * This function handles the interrupt for DMA1 Stream 7. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA1_Stream7_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
 void DMA1_Stream7_IRQHandler(void)
 {
-	if(DMA1 -> HISR & DMA_HISR_FEIF7)
-	{
-		I2S3_TX_DMA_Flag.Fifo_Error_Flag = true;
-		I2C2_TX_DMA_Flag.Fifo_Error_Flag = true;
-		USART5_TX_DMA_Flag.Fifo_Error_Flag = true;
-		TIM4_CH3_DMA_Flag.Fifo_Error_Flag = true;
-		TIM2_CH2_DMA_Flag.Fifo_Error_Flag = true;
-		TIM2_CH4_DMA_Flag.Fifo_Error_Flag = true;
+	DMA_HISR = DMA1 -> HISR;
 
-		DMA1_Stream7_Flag.Fifo_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CFEIF7;
-	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_DMEIF7)
+	if(DMA_HISR & DMA_HISR_FEIF7)
 	{
-		I2S3_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		I2C2_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART5_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM4_CH3_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM2_CH2_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM2_CH4_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA1_Stream7_Flag.Direct_Mode_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF7;
+	    if (__DMA1_Stream7_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA1_Stream7_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CFEIF7;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TEIF7)
+
+	if(DMA_HISR & DMA_HISR_DMEIF7)
 	{
-		I2S3_TX_DMA_Flag.Transfer_Error_Flag = true;
-		I2C2_TX_DMA_Flag.Transfer_Error_Flag = true;
-		USART5_TX_DMA_Flag.Transfer_Error_Flag = true;
-		TIM4_CH3_DMA_Flag.Transfer_Error_Flag = true;
-		TIM2_CH2_DMA_Flag.Transfer_Error_Flag = true;
-		TIM2_CH4_DMA_Flag.Transfer_Error_Flag = true;
-		DMA1_Stream7_Flag.Transfer_Error_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTEIF7;
+	    if (__DMA1_Stream7_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA1_Stream7_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CDMEIF7;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_HTIF7)
+
+	if(DMA_HISR & DMA_HISR_TEIF7)
 	{
-		I2S3_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		I2C2_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART5_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM4_CH3_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM2_CH2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM2_CH4_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1_Stream7_Flag.Half_Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CHTIF7;
+	    if (__DMA1_Stream7_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA1_Stream7_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTEIF7;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA1 -> HISR & DMA_HISR_TCIF7)
+
+	if(DMA_HISR & DMA_HISR_HTIF7)
 	{
-		I2S3_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		I2C2_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		USART5_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM4_CH3_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM2_CH2_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM2_CH4_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA1_Stream7_Flag.Transfer_Complete_Flag = true;
-		DMA1 -> HIFCR |= DMA_HIFCR_CTCIF7;
+	    if (__DMA1_Stream7_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA1_Stream7_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CHTIF7;
+
+	    	if(__DMA1_Stream7_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream7_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TCIF7)
+	{
+	    if (__DMA1_Stream7_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA1_Stream7_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA1 -> HIFCR |= DMA_HIFCR_CTCIF7;
+
+	    	if(__DMA1_Stream7_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA1_Stream7_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA1_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA1_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 0 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 0. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream0_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
 void DMA2_Stream0_IRQHandler(void)
 {
-	if(DMA2 -> LISR & DMA_LISR_FEIF0)
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF0)
 	{
-		SPI1_RX_DMA_Flag.Fifo_Error_Flag = true;
-		ADC1_DMA_Flag.Fifo_Error_Flag = true;
-		TIM1_TRIG_DMA_Flag.Fifo_Error_Flag = true;
-		TIM1_COM_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream0_Flag.Fifo_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CFEIF0;
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF0;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_DMEIF0)
+
+	if(DMA_LISR & DMA_LISR_DMEIF0)
 	{
-		SPI1_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		ADC1_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM1_TRIG_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM1_COM_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream0_Flag.Direct_Mode_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF0;
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF0;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TEIF0)
+
+	if(DMA_LISR & DMA_LISR_TEIF0)
 	{
-		SPI1_RX_DMA_Flag.Transfer_Error_Flag = true;
-		ADC1_DMA_Flag.Transfer_Error_Flag = true;
-		TIM1_TRIG_DMA_Flag.Transfer_Error_Flag = true;
-		TIM1_COM_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream0_Flag.Transfer_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTEIF0;
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF0;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_HTIF0)
+
+	if(DMA_LISR & DMA_LISR_HTIF0)
 	{
-		SPI1_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		ADC1_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM1_TRIG_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM1_COM_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream0_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CHTIF0;
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF0;
+
+	    	if(__DMA2_Stream0_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream0_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TCIF0)
+
+	if(DMA_LISR & DMA_LISR_TCIF0)
 	{
-		SPI1_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		ADC1_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM1_TRIG_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM1_COM_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream0_Flag.Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTCIF0;
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF0;
+
+	    	if(__DMA2_Stream0_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream0_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 1 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 1. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream1_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
 void DMA2_Stream1_IRQHandler(void)
 {
-	if(DMA2 -> LISR & DMA_LISR_FEIF1)
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF1)
 	{
-		ADC3_DMA_Flag.Fifo_Error_Flag = true;
-		TIM1_CH1_DMA_Flag.Fifo_Error_Flag = true;
-		TIM8_UP_DMA_Flag.Fifo_Error_Flag = true;
-		TIM8_TRIG_DMA_Flag.Fifo_Error_Flag = true;
-		TIM8_COM_DMA_Flag.Fifo_Error_Flag = true;
-		DCMI_DMA_Flag.Fifo_Error_Flag = true;
-		USART6_RX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream1_Flag.Fifo_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CFEIF1;
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF1;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_DMEIF1)
+
+	if(DMA_LISR & DMA_LISR_DMEIF1)
 	{
-		ADC3_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM1_CH1_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM8_UP_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM8_TRIG_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM8_COM_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DCMI_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART6_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream1_Flag.Direct_Mode_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF1;
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF1;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TEIF1)
+
+	if(DMA_LISR & DMA_LISR_TEIF1)
 	{
-		ADC3_DMA_Flag.Transfer_Error_Flag = true;
-		TIM1_CH1_DMA_Flag.Transfer_Error_Flag = true;
-		TIM8_UP_DMA_Flag.Transfer_Error_Flag = true;
-		TIM8_TRIG_DMA_Flag.Transfer_Error_Flag = true;
-		TIM8_COM_DMA_Flag.Transfer_Error_Flag = true;
-		DCMI_DMA_Flag.Transfer_Error_Flag = true;
-		USART6_RX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream1_Flag.Transfer_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTEIF1;
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF1;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_HTIF1)
+
+	if(DMA_LISR & DMA_LISR_HTIF1)
 	{
-		ADC3_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM1_CH1_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM8_UP_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM8_TRIG_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM8_COM_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DCMI_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART6_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream1_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CHTIF1;
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF1;
+
+	    	if(__DMA2_Stream1_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream1_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TCIF1)
+
+	if(DMA_LISR & DMA_LISR_TCIF1)
 	{
-		ADC3_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM1_CH1_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM8_UP_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM8_TRIG_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM8_COM_DMA_Flag.Transfer_Complete_Flag = true;
-		DCMI_DMA_Flag.Transfer_Complete_Flag = true;
-		USART6_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream1_Flag.Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTCIF1;
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF1;
+
+	    	if(__DMA2_Stream1_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream1_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 2 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 2. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream2_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
 void DMA2_Stream2_IRQHandler(void)
 {
-	if(DMA2 -> LISR & DMA_LISR_FEIF2)
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF2)
 	{
-		TIM8_CH1_DMA_Flag.Fifo_Error_Flag = true;
-		USART1_RX_DMA_Flag.Fifo_Error_Flag = true;
-		ADC2_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream2_Flag.Fifo_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CFEIF2;
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF2;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_DMEIF2)
+
+	if(DMA_LISR & DMA_LISR_DMEIF2)
 	{
-		TIM8_CH1_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART1_RX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		ADC2_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream2_Flag.Direct_Mode_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF2;
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF2;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TEIF2)
+
+	if(DMA_LISR & DMA_LISR_TEIF2)
 	{
-		TIM8_CH1_DMA_Flag.Transfer_Error_Flag = true;
-		USART1_RX_DMA_Flag.Transfer_Error_Flag = true;
-		ADC2_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream2_Flag.Transfer_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTEIF2;
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF2;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_HTIF2)
+
+	if(DMA_LISR & DMA_LISR_HTIF2)
 	{
-		TIM8_CH1_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART1_RX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		ADC2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream2_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CHTIF2;
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF2;
+
+	    	if(__DMA2_Stream2_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream2_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TCIF2)
+
+	if(DMA_LISR & DMA_LISR_TCIF2)
 	{
-		TIM8_CH1_DMA_Flag.Transfer_Complete_Flag = true;
-		USART1_RX_DMA_Flag.Transfer_Complete_Flag = true;
-		ADC2_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream2_Flag.Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTCIF2;
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF2;
+
+	    	if(__DMA2_Stream2_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream2_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 3 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 3. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream3_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
 void DMA2_Stream3_IRQHandler(void)
 {
-	if(DMA2 -> LISR & DMA_LISR_FEIF3)
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF3)
 	{
-		SDIO_RXTX_DMA_Flag.Fifo_Error_Flag = true;
-		SPI1_TX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream3_Flag.Fifo_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CFEIF3;
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF3;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_DMEIF3)
+
+	if(DMA_LISR & DMA_LISR_DMEIF3)
 	{
-		SDIO_RXTX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		SPI1_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream3_Flag.Direct_Mode_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF3;
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF3;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TEIF3)
+
+	if(DMA_LISR & DMA_LISR_TEIF3)
 	{
-		SDIO_RXTX_DMA_Flag.Transfer_Error_Flag = true;
-		SPI1_TX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream3_Flag.Transfer_Error_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTEIF3;
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF3;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_HTIF3)
+
+	if(DMA_LISR & DMA_LISR_HTIF3)
 	{
-		SDIO_RXTX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		SPI1_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream3_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CHTIF3;
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF3;
+
+	    	if(__DMA2_Stream3_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream3_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> LISR & DMA_LISR_TCIF3)
+
+	if(DMA_LISR & DMA_LISR_TCIF3)
 	{
-		SDIO_RXTX_DMA_Flag.Transfer_Complete_Flag = true;
-		SPI1_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream3_Flag.Transfer_Complete_Flag = true;
-		DMA2 -> LIFCR |= DMA_LIFCR_CTCIF3;
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF3;
+
+	    	if(__DMA2_Stream3_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream3_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 4 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 4. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream4_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
 void DMA2_Stream4_IRQHandler(void)
 {
-	if(DMA2 -> HISR & DMA_HISR_FEIF4)
+	DMA_HISR = DMA2 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF4)
 	{
-		TIM1_CH4_DMA_Flag.Fifo_Error_Flag = true;
-		TIM8_CH2_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream4_Flag.Fifo_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CFEIF4;
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_HIFCR_CFEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_DMEIF4)
+
+	if(DMA_HISR & DMA_HISR_DMEIF4)
 	{
-		TIM1_CH4_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM8_CH2_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream4_Flag.Direct_Mode_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF4;
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF4;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TEIF4)
+
+	if(DMA_HISR & DMA_HISR_TEIF4)
 	{
-		TIM1_CH4_DMA_Flag.Transfer_Error_Flag = true;
-		TIM8_CH2_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream4_Flag.Transfer_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTEIF4;
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF4;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_HTIF4)
+
+	if(DMA_HISR & DMA_HISR_HTIF4)
 	{
-		TIM1_CH4_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM8_CH2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream4_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CHTIF4;
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF4;
+
+	    	if(__DMA2_Stream4_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream4_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TCIF4)
+
+	if(DMA_HISR & DMA_HISR_TCIF4)
 	{
-		TIM1_CH4_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM8_CH2_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream4_Flag.Transfer_Complete_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTCIF4;
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF4;
+
+	    	if(__DMA2_Stream4_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream4_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 5 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 5. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream5_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
+
+
 void DMA2_Stream5_IRQHandler(void)
 {
-	if(DMA2 -> HISR & DMA_HISR_FEIF5)
+	DMA_HISR = DMA2 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF5)
 	{
-		TIM1_UP_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream5_Flag.Fifo_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CFEIF5;
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CFEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_DMEIF5)
+
+	if(DMA_HISR & DMA_HISR_DMEIF5)
 	{
-		TIM1_UP_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream5_Flag.Direct_Mode_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF5;
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TEIF5)
+
+	if(DMA_HISR & DMA_HISR_TEIF5)
 	{
-		TIM1_UP_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream5_Flag.Transfer_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTEIF5;
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF5;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_HTIF5)
+
+	if(DMA_HISR & DMA_HISR_HTIF5)
 	{
-		TIM1_UP_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream5_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CHTIF5;
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF5;
+
+	    	if(__DMA2_Stream5_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream5_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TCIF5)
+
+	if(DMA_HISR & DMA_HISR_TCIF5)
 	{
-		TIM1_UP_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream5_Flag.Transfer_Complete_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTCIF5;
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF5;
+
+	    	if(__DMA2_Stream5_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream5_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 6 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 6. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream6_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
+
 void DMA2_Stream6_IRQHandler(void)
 {
-	if(DMA2 -> HISR & DMA_HISR_FEIF6)
+	DMA_HISR = DMA2 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF6)
 	{
-		TIM1_CH2_DMA_Flag.Fifo_Error_Flag = true;
-		TIM1_CH3_DMA_Flag.Fifo_Error_Flag = true;
-		TIM8_CH3_DMA_Flag.Fifo_Error_Flag = true;
-		USART6_TX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream6_Flag.Fifo_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CFEIF6;
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CFEIF6;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_DMEIF6)
+
+	if(DMA_HISR & DMA_HISR_DMEIF6)
 	{
-		TIM1_CH2_DMA_Flag.Direct_Mode_Error_Flag= true;
-		TIM1_CH3_DMA_Flag.Direct_Mode_Error_Flag = true;
-		TIM8_CH3_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART6_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream6_Flag.Direct_Mode_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF6;
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF6;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TEIF6)
+
+	if(DMA_HISR & DMA_HISR_TEIF6)
 	{
-		TIM1_CH2_DMA_Flag.Transfer_Error_Flag = true;
-		TIM1_CH3_DMA_Flag.Transfer_Error_Flag = true;
-		TIM8_CH3_DMA_Flag.Transfer_Error_Flag = true;
-		USART6_TX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream6_Flag.Transfer_Error_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTEIF6;
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF6;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_HTIF6)
+
+	if(DMA_HISR & DMA_HISR_HTIF6)
 	{
-		TIM1_CH2_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM1_CH3_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		TIM8_CH3_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART6_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream6_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CHTIF6;
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF6;
+
+	    	if(__DMA2_Stream6_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream6_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TCIF6)
+
+	if(DMA_HISR & DMA_HISR_TCIF6)
 	{
-		TIM1_CH2_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM1_CH3_DMA_Flag.Transfer_Complete_Flag = true;
-		TIM8_CH3_DMA_Flag.Transfer_Complete_Flag = true;
-		USART6_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream6_Flag.Transfer_Complete_Flag = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTCIF6;
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF6;
+
+	    	if(__DMA2_Stream6_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream6_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 
-/**
- * @brief DMA2 Stream 7 Interrupt Handler
- *
- * This function handles the interrupt for DMA2 Stream 7. It checks the
- * status flags for different events such as FIFO error, direct mode error,
- * transfer error, half transfer complete, and transfer complete. For each
- * event, it sets the corresponding flag in the `DMA2_Stream7_Flag` structure
- * and clears the respective interrupt flag in the DMA interrupt flag clear register.
- */
+
 void DMA2_Stream7_IRQHandler(void)
 {
-	if(DMA2 -> HISR & DMA_HISR_FEIF7)
-	{
-		USART1_TX_DMA_Flag.Triggered = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CFEIF7;
-		TIM8_CH4_DMA_Flag.Fifo_Error_Flag = true;
-		USART1_TX_DMA_Flag.Fifo_Error_Flag = true;
-		DMA2_Stream7_Flag.Fifo_Error_Flag = true;
+	DMA_HISR = DMA2 -> HISR;
 
+	if(DMA_HISR & DMA_HISR_FEIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CFEIF7;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_DMEIF7)
-	{
-		USART1_TX_DMA_Flag.Triggered = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF7;
-		TIM8_CH4_DMA_Flag.Direct_Mode_Error_Flag = true;
-		USART1_TX_DMA_Flag.Direct_Mode_Error_Flag = true;
-		DMA2_Stream7_Flag.Direct_Mode_Error_Flag = true;
 
+	if(DMA_HISR & DMA_HISR_DMEIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF7;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TEIF7)
-	{
-		USART1_TX_DMA_Flag.Triggered = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTEIF7;
-		TIM8_CH4_DMA_Flag.Transfer_Error_Flag = true;
-		USART1_TX_DMA_Flag.Transfer_Error_Flag = true;
-		DMA2_Stream7_Flag.Transfer_Error_Flag = true;
 
+	if(DMA_HISR & DMA_HISR_TEIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF7;
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_HTIF7)
-	{
-		USART1_TX_DMA_Flag.Triggered = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CHTIF7;
-		TIM8_CH4_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		USART1_TX_DMA_Flag.Half_Transfer_Complete_Flag = true;
-		DMA2_Stream7_Flag.Half_Transfer_Complete_Flag = true;
 
+	if(DMA_HISR & DMA_HISR_HTIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF7;
+
+	    	if(__DMA2_Stream7_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream7_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
-	/************************************************************************************************************/
-	if(DMA2 -> HISR & DMA_HISR_TCIF7)
-	{
-		USART1_TX_DMA_Flag.Triggered = true;
-		DMA2 -> HIFCR |= DMA_HIFCR_CTCIF7;
-		TIM8_CH4_DMA_Flag.Transfer_Complete_Flag = true;
-		USART1_TX_DMA_Flag.Transfer_Complete_Flag = true;
-		DMA2_Stream7_Flag.Transfer_Complete_Flag = true;
 
+	if(DMA_HISR & DMA_HISR_TCIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF7;
+
+	    	if(__DMA2_Stream7_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream7_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
 	}
 }
 

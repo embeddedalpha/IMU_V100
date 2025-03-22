@@ -259,8 +259,19 @@ static const struct DMA_Configuration {
         uint32_t Disable; /**< Disable peripheral pointer increment */
     } Peripheral_Pointer_Increment;
 
+    struct Double_Buffer_Mode{
+    	uint32_t Enable;
+    	uint32_t Disable;
+
+    }Double_Buffer_Mode;
+
 
 } DMA_Configuration = {
+
+		.Double_Buffer_Mode ={
+			.Enable = 1 << DMA_SxCR_DBM_Pos,
+			.Disable = 1 << DMA_SxCR_DBM_Pos,
+		},
 
 		.Circular_Mode = {
 
