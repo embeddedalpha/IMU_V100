@@ -1,0 +1,598 @@
+void DMA2_Stream0_IRQHandler(void)
+{
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF0)
+	{
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF0;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_DMEIF0)
+	{
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF0;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TEIF0)
+	{
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF0;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_HTIF0)
+	{
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF0;
+
+	    	if(__DMA2_Stream0_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream0_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TCIF0)
+	{
+	    if (__DMA2_Stream0_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream0_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF0;
+
+	    	if(__DMA2_Stream0_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream0_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream0_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
+
+void DMA2_Stream1_IRQHandler(void)
+{
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF1)
+	{
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF1;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_DMEIF1)
+	{
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF1;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TEIF1)
+	{
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF1;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_HTIF1)
+	{
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF1;
+
+	    	if(__DMA2_Stream1_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream1_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TCIF1)
+	{
+	    if (__DMA2_Stream1_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream1_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF1;
+
+	    	if(__DMA2_Stream1_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream1_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream1_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
+
+
+void DMA2_Stream2_IRQHandler(void)
+{
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF2)
+	{
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF2;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_DMEIF2)
+	{
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF2;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TEIF2)
+	{
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF2;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_HTIF2)
+	{
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF2;
+
+	    	if(__DMA2_Stream2_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream2_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TCIF2)
+	{
+	    if (__DMA2_Stream2_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream2_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF2;
+
+	    	if(__DMA2_Stream2_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream2_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream2_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
+
+void DMA2_Stream3_IRQHandler(void)
+{
+	DMA_LISR = DMA2 -> LISR;
+
+	if(DMA_LISR & DMA_LISR_FEIF3)
+	{
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CFEIF3;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_DMEIF3)
+	{
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CDMEIF3;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TEIF3)
+	{
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTEIF3;
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_HTIF3)
+	{
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CHTIF3;
+
+	    	if(__DMA2_Stream3_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream3_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_LISR & DMA_LISR_TCIF3)
+	{
+	    if (__DMA2_Stream3_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream3_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF3;
+
+	    	if(__DMA2_Stream3_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream3_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream3_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
+
+void DMA2_Stream4_IRQHandler(void)
+{
+	DMA_HISR = DMA2 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF4)
+	{
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> LIFCR |= DMA_HIFCR_CFEIF5;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_DMEIF4)
+	{
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF4;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TEIF4)
+	{
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF4;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_HTIF4)
+	{
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF4;
+
+	    	if(__DMA2_Stream4_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream4_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TCIF4)
+	{
+	    if (__DMA2_Stream4_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream4_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF4;
+
+	    	if(__DMA2_Stream4_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream4_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream4_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
+
+
+
+
+void DMA2_Stream5_IRQHandler(void)
+{
+	DMA_HISR = DMA2 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF5)
+	{
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CFEIF5;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_DMEIF5)
+	{
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF5;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TEIF5)
+	{
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF5;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_HTIF5)
+	{
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF5;
+
+	    	if(__DMA2_Stream5_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream5_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TCIF5)
+	{
+	    if (__DMA2_Stream5_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream5_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF5;
+
+	    	if(__DMA2_Stream5_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream5_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream5_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
+
+
+
+void DMA2_Stream6_IRQHandler(void)
+{
+	DMA_HISR = DMA2 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF6)
+	{
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CFEIF6;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_DMEIF6)
+	{
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF6;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TEIF6)
+	{
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF6;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_HTIF6)
+	{
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF6;
+
+	    	if(__DMA2_Stream6_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream6_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TCIF6)
+	{
+	    if (__DMA2_Stream6_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream6_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF6;
+
+	    	if(__DMA2_Stream6_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream6_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream6_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
+
+
+void DMA2_Stream7_IRQHandler(void)
+{
+	DMA_HISR = DMA2 -> HISR;
+
+	if(DMA_HISR & DMA_HISR_FEIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.FIFO_Error_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.FIFO_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CFEIF7;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_DMEIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Direct_Mode_Error_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Direct_Mode_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CDMEIF7;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TEIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Transfer_Error_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Transfer_Error_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTEIF7;
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_HTIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Half_Transfer_Complete_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CHTIF7;
+
+	    	if(__DMA2_Stream7_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream7_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+
+	if(DMA_HISR & DMA_HISR_TCIF7)
+	{
+	    if (__DMA2_Stream7_Config__ -> ISR_Routines.Full_Transfer_Commplete_ISR)
+	    {
+	    	__DMA2_Stream7_Config__ ->ISR_Routines.Half_Transfer_Complete_ISR();
+	    	DMA2 -> HIFCR |= DMA_HIFCR_CTCIF7;
+
+	    	if(__DMA2_Stream7_Config__->double_buffer_mode == DMA_Configuration.Double_Buffer_Mode.Enable )
+	    	{
+	    		if((__DMA2_Stream7_Config__->Request.Stream->CR & DMA_SxCR_DBM_Msk) != 0)
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_1_ISR();
+	    		}
+	    		else
+	    		{
+	    			__DMA2_Stream7_Config__ -> ISR_Routines.Double_Buffer_Mode_Target_2_ISR();
+	    		}
+	    	}
+	    }
+	}
+}
