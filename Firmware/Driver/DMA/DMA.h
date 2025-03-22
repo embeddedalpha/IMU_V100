@@ -235,6 +235,18 @@ typedef struct DMA_Config
     uint32_t peripheral_address;        /**< Peripheral base address */
     uint32_t memory_address;            /**< Memory base address */
     uint16_t buffer_length;             /**< Number of data items to transfer */
+    uint32_t double_buffer_mode;		/**< Enables Double Buffer Mode> */
+
+	struct __DMA_Interrupts__{
+		void (*FIFO_Error_ISR)(void);
+		void (*Direct_Mode_Error_ISR)(void);
+		void (*Transfer_Error_ISR)(void);
+		void (*Half_Transfer_Complete_ISR)(void);
+		void (*Full_Transfer_Commplete_ISR)(void);
+		void (*Double_Buffer_Mode_Target_1_ISR)(void);
+		void (*Double_Buffer_Mode_Target_2_ISR)(void);
+	}ISR_Routines;
+
 } DMA_Config;
 
 /**
