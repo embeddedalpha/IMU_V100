@@ -1,2 +1,4 @@
-../Application_Layer/App.c:41:6:IMUV100_Modbus_Command_Process	112	static
-../Application_Layer/App.c:461:6:IMUV100_Modbus_Comm_Setup	8	static
+../Application_Layer/App.c:40:6:IMUV100_Modbus_Comm_Setup	8	static
+../Application_Layer/App.c:61:6:IMUV100_Modbus_Command_Process	112	static
+../Application_Layer/App.c:482:6:IMUV100_CAN_Comm_Setup	4	static
+../Application_Layer/App.c:488:6:IMUV100_CAN_Command_Process	4	static
