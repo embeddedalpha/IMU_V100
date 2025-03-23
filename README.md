@@ -12,6 +12,7 @@
     📁 Media
     📁 PCB
     📁 Software
+    📁 Simulations
     📁 Wires and Cables
     📄 README.md
 
