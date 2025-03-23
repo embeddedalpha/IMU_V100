@@ -1,4 +1,4 @@
-24739086400567266
+24740829169746014
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -57469,6 +57469,13 @@ Integrated Circuit
 0
 28
 28
+Footprints
+SOIC127P600X175-8N
+D0008A
+Integrated Circuit
+0
+8
+8
 Fuse
 FuseHolder_Blade_ATO_Littelfuse_FLR_178.6165
 Littelfuse fuse holder for ATO/FKS blade fuses, 80V, vertical, 20 x 6mm, PCB thickness up to 1.5mm, http://www.littelfuse.com/~/media/commercial-vehicle/datasheets/automotive-fuse-holders/ato/littelfuse-fuse-holder-ato-flr-pcb-datasheet.pdf
