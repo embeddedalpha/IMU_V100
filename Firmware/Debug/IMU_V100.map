@@ -1261,6 +1261,26 @@ Discarded input sections
                 0x00000000        0x1 ./Driver/USART/USART.o
  .rodata.Low_Power_USART
                 0x00000000        0x2 ./Driver/USART/USART.o
+ .bss.USART1_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART2_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART3_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART4_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART5_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART6_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART7_RX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART7_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART8_RX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
+ .bss.USART8_TX_DMA_Flag
+                0x00000000        0x6 ./Driver/USART/USART.o
  .bss.__usart_5_config__
                 0x00000000        0x4 ./Driver/USART/USART.o
  .bss.__usart_6_config__
@@ -3386,7 +3406,7 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x10000000                        _eccmram = .
                 0x10000000                        . = ALIGN (0x4)
 
-.bss            0x2000011c      0xf54
+.bss            0x2000011c      0xf84
                 0x2000011c                        _sbss = .
                 0x2000011c                        __bss_start__ = _sbss
  *(.bss)
@@ -3497,63 +3517,87 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .bss.__timer_14_config__
                 0x200005ec        0x4 ./Driver/Timer/Timer.o
                 0x200005ec                __timer_14_config__
+ .bss.USART1_RX_DMA_Flag
+                0x200005f0        0x6 ./Driver/USART/USART.o
+                0x200005f0                USART1_RX_DMA_Flag
+ *fill*         0x200005f6        0x2 
+ .bss.USART2_RX_DMA_Flag
+                0x200005f8        0x6 ./Driver/USART/USART.o
+                0x200005f8                USART2_RX_DMA_Flag
+ *fill*         0x200005fe        0x2 
+ .bss.USART3_RX_DMA_Flag
+                0x20000600        0x6 ./Driver/USART/USART.o
+                0x20000600                USART3_RX_DMA_Flag
+ *fill*         0x20000606        0x2 
+ .bss.USART4_RX_DMA_Flag
+                0x20000608        0x6 ./Driver/USART/USART.o
+                0x20000608                USART4_RX_DMA_Flag
+ *fill*         0x2000060e        0x2 
+ .bss.USART5_RX_DMA_Flag
+                0x20000610        0x6 ./Driver/USART/USART.o
+                0x20000610                USART5_RX_DMA_Flag
+ *fill*         0x20000616        0x2 
+ .bss.USART6_RX_DMA_Flag
+                0x20000618        0x6 ./Driver/USART/USART.o
+                0x20000618                USART6_RX_DMA_Flag
+ *fill*         0x2000061e        0x2 
  .bss.xUSART_RX
-                0x200005f0      0x210 ./Driver/USART/USART.o
-                0x200005f0                xUSART_RX
+                0x20000620      0x210 ./Driver/USART/USART.o
+                0x20000620                xUSART_RX
  .bss.xUSART_TX
-                0x20000800      0x210 ./Driver/USART/USART.o
-                0x20000800                xUSART_TX
+                0x20000830      0x210 ./Driver/USART/USART.o
+                0x20000830                xUSART_TX
  .bss.usart_dma_instance_number
-                0x20000a10        0x1 ./Driver/USART/USART.o
-                0x20000a10                usart_dma_instance_number
- *fill*         0x20000a11        0x3 
+                0x20000a40        0x1 ./Driver/USART/USART.o
+                0x20000a40                usart_dma_instance_number
+ *fill*         0x20000a41        0x3 
  .bss.__usart_1_config__
-                0x20000a14        0x4 ./Driver/USART/USART.o
-                0x20000a14                __usart_1_config__
+                0x20000a44        0x4 ./Driver/USART/USART.o
+                0x20000a44                __usart_1_config__
  .bss.__usart_2_config__
-                0x20000a18        0x4 ./Driver/USART/USART.o
-                0x20000a18                __usart_2_config__
+                0x20000a48        0x4 ./Driver/USART/USART.o
+                0x20000a48                __usart_2_config__
  .bss.__usart_3_config__
-                0x20000a1c        0x4 ./Driver/USART/USART.o
-                0x20000a1c                __usart_3_config__
+                0x20000a4c        0x4 ./Driver/USART/USART.o
+                0x20000a4c                __usart_3_config__
  .bss.__usart_4_config__
-                0x20000a20        0x4 ./Driver/USART/USART.o
-                0x20000a20                __usart_4_config__
- .bss.USART_SR  0x20000a24        0x2 ./Driver/USART/USART.o
-                0x20000a24                USART_SR
- *fill*         0x20000a26        0x2 
+                0x20000a50        0x4 ./Driver/USART/USART.o
+                0x20000a50                __usart_4_config__
+ .bss.USART_SR  0x20000a54        0x2 ./Driver/USART/USART.o
+                0x20000a54                USART_SR
+ *fill*         0x20000a56        0x2 
  .bss.modbus_Instance
-                0x20000a28      0x630 ./Middleware/Modbus/Modbus.o
-                0x20000a28                modbus_Instance
+                0x20000a58      0x630 ./Middleware/Modbus/Modbus.o
+                0x20000a58                modbus_Instance
  .bss.commSwitch
-                0x20001058        0x2 ./Src/main.o
-                0x20001058                commSwitch
+                0x20001088        0x2 ./Src/main.o
+                0x20001088                commSwitch
  .bss.commSelection
-                0x2000105a        0x1 ./Src/main.o
-                0x2000105a                commSelection
- .bss.State     0x2000105b        0x1 ./Src/main.o
-                0x2000105b                State
- .bss.mpu6050   0x2000105c       0x10 ./Src/main.o
-                0x2000105c                mpu6050
+                0x2000108a        0x1 ./Src/main.o
+                0x2000108a                commSelection
+ .bss.State     0x2000108b        0x1 ./Src/main.o
+                0x2000108b                State
+ .bss.mpu6050   0x2000108c       0x10 ./Src/main.o
+                0x2000108c                mpu6050
  .bss.mpu_data_ready_flag
-                0x2000106c        0x1 ./Src/main.o
-                0x2000106c                mpu_data_ready_flag
+                0x2000109c        0x1 ./Src/main.o
+                0x2000109c                mpu_data_ready_flag
  *(COMMON)
-                0x20001070                        . = ALIGN (0x4)
- *fill*         0x2000106d        0x3 
-                0x20001070                        _ebss = .
-                0x20001070                        __bss_end__ = _ebss
+                0x200010a0                        . = ALIGN (0x4)
+ *fill*         0x2000109d        0x3 
+                0x200010a0                        _ebss = .
+                0x200010a0                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20001070      0x600
-                0x20001070                        . = ALIGN (0x8)
+                0x200010a0      0x600
+                0x200010a0                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
-                0x20001070                        PROVIDE (_end = .)
-                0x20001270                        . = (. + _Min_Heap_Size)
- *fill*         0x20001070      0x200 
-                0x20001670                        . = (. + _Min_Stack_Size)
- *fill*         0x20001270      0x400 
-                0x20001670                        . = ALIGN (0x8)
+                0x200010a0                        PROVIDE (_end = .)
+                0x200012a0                        . = (. + _Min_Heap_Size)
+ *fill*         0x200010a0      0x200 
+                0x200016a0                        . = (. + _Min_Stack_Size)
+ *fill*         0x200012a0      0x400 
+                0x200016a0                        . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -3617,29 +3661,29 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000     0xfe58
+.debug_info     0x00000000     0xfef2
  .debug_info    0x00000000     0x1cb3 ./Application_Layer/App.o
  .debug_info    0x00001cb3     0x1411 ./Driver/DMA/DMA.o
  .debug_info    0x000030c4      0xfca ./Driver/GPIO/GPIO.o
  .debug_info    0x0000408e     0x19c2 ./Driver/I2C/I2C.o
  .debug_info    0x00005a50     0x25e9 ./Driver/Timer/Timer.o
- .debug_info    0x00008039     0x25fe ./Driver/USART/USART.o
- .debug_info    0x0000a637     0x26b4 ./Middleware/Modbus/Modbus.o
- .debug_info    0x0000cceb     0x2c32 ./Src/main.o
- .debug_info    0x0000f91d      0x50b ./Src/system_stm32f4xx.o
- .debug_info    0x0000fe28       0x30 ./Startup/startup_stm32f407vgtx.o
+ .debug_info    0x00008039     0x2698 ./Driver/USART/USART.o
+ .debug_info    0x0000a6d1     0x26b4 ./Middleware/Modbus/Modbus.o
+ .debug_info    0x0000cd85     0x2c32 ./Src/main.o
+ .debug_info    0x0000f9b7      0x50b ./Src/system_stm32f4xx.o
+ .debug_info    0x0000fec2       0x30 ./Startup/startup_stm32f407vgtx.o
 
-.debug_abbrev   0x00000000     0x1856
+.debug_abbrev   0x00000000     0x185a
  .debug_abbrev  0x00000000      0x24d ./Application_Layer/App.o
  .debug_abbrev  0x0000024d      0x237 ./Driver/DMA/DMA.o
  .debug_abbrev  0x00000484      0x275 ./Driver/GPIO/GPIO.o
  .debug_abbrev  0x000006f9      0x339 ./Driver/I2C/I2C.o
  .debug_abbrev  0x00000a32      0x30f ./Driver/Timer/Timer.o
- .debug_abbrev  0x00000d41      0x351 ./Driver/USART/USART.o
- .debug_abbrev  0x00001092      0x35f ./Middleware/Modbus/Modbus.o
- .debug_abbrev  0x000013f1      0x327 ./Src/main.o
- .debug_abbrev  0x00001718      0x11a ./Src/system_stm32f4xx.o
- .debug_abbrev  0x00001832       0x24 ./Startup/startup_stm32f407vgtx.o
+ .debug_abbrev  0x00000d41      0x355 ./Driver/USART/USART.o
+ .debug_abbrev  0x00001096      0x35f ./Middleware/Modbus/Modbus.o
+ .debug_abbrev  0x000013f5      0x327 ./Src/main.o
+ .debug_abbrev  0x0000171c      0x11a ./Src/system_stm32f4xx.o
+ .debug_abbrev  0x00001836       0x24 ./Startup/startup_stm32f407vgtx.o
 
 .debug_aranges  0x00000000      0x5a0
  .debug_aranges
@@ -3761,7 +3805,7 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x0000a27f      0x531 ./Src/system_stm32f4xx.o
  .debug_line    0x0000a7b0       0x7b ./Startup/startup_stm32f407vgtx.o
 
-.debug_str      0x00000000    0x91892
+.debug_str      0x00000000    0x918de
  .debug_str     0x00000000    0x8eaea ./Application_Layer/App.o
                               0x8eed7 (size before relaxing)
  .debug_str     0x0008eaea      0xab8 ./Driver/DMA/DMA.o
@@ -3772,15 +3816,15 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                               0x8e810 (size before relaxing)
  .debug_str     0x0008fc7b      0xc40 ./Driver/Timer/Timer.o
                               0x8f60a (size before relaxing)
- .debug_str     0x000908bb      0x32d ./Driver/USART/USART.o
-                              0x8f332 (size before relaxing)
- .debug_str     0x00090be8      0x447 ./Middleware/Modbus/Modbus.o
+ .debug_str     0x000908bb      0x379 ./Driver/USART/USART.o
+                              0x8f37e (size before relaxing)
+ .debug_str     0x00090c34      0x447 ./Middleware/Modbus/Modbus.o
                               0x8efcc (size before relaxing)
- .debug_str     0x0009102f      0x795 ./Src/main.o
+ .debug_str     0x0009107b      0x795 ./Src/main.o
                               0x8fa2b (size before relaxing)
- .debug_str     0x000917c4       0x8f ./Src/system_stm32f4xx.o
+ .debug_str     0x00091810       0x8f ./Src/system_stm32f4xx.o
                               0x88582 (size before relaxing)
- .debug_str     0x00091853       0x3f ./Startup/startup_stm32f407vgtx.o
+ .debug_str     0x0009189f       0x3f ./Startup/startup_stm32f407vgtx.o
                                  0x64 (size before relaxing)
 
 .comment        0x00000000       0x43

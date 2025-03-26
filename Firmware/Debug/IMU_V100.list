@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  0000911c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00010641  00000000  00000000  0000914c  2**0
+ 13 .debug_info   0000fef2  00000000  00000000  0000914c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 0000187c  00000000  00000000  0001978d  2**0
+ 14 .debug_abbrev 0000185a  00000000  00000000  0001903e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 000005a0  00000000  00000000  0001b010  2**3
+ 15 .debug_aranges 000005a0  00000000  00000000  0001a898  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000454  00000000  00000000  0001b5b0  2**0
+ 16 .debug_rnglists 00000454  00000000  00000000  0001ae38  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0001aa9d  00000000  00000000  0001ba04  2**0
+ 17 .debug_macro  0001aa9d  00000000  00000000  0001b28c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000a82c  00000000  00000000  000364a1  2**0
+ 18 .debug_line   0000a82b  00000000  00000000  00035d29  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00091e0b  00000000  00000000  00040ccd  2**0
+ 19 .debug_str    000918de  00000000  00000000  00040554  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  000d2ad8  2**0
+ 20 .comment      00000043  00000000  00000000  000d1e32  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  0000183c  00000000  00000000  000d2b1c  2**2
+ 21 .debug_frame  0000183c  00000000  00000000  000d1e78  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000048  00000000  00000000  000d4358  2**0
+ 22 .debug_line_str 00000048  00000000  00000000  000d36b4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2568,7 +2568,7 @@ void DMA1_Stream0_IRQHandler(void)
  8001524:	bd80      	pop	{r7, pc}
  8001526:	bf00      	nop
  8001528:	40026000 	.word	0x40026000
- 800152c:	20000498 	.word	0x20000498
+ 800152c:	20000468 	.word	0x20000468
  8001530:	20000428 	.word	0x20000428
 
 08001534 <DMA1_Stream1_IRQHandler>:
@@ -2794,7 +2794,7 @@ void DMA1_Stream1_IRQHandler(void)
  8001674:	bd80      	pop	{r7, pc}
  8001676:	bf00      	nop
  8001678:	40026000 	.word	0x40026000
- 800167c:	20000498 	.word	0x20000498
+ 800167c:	20000468 	.word	0x20000468
  8001680:	2000042c 	.word	0x2000042c
 
 08001684 <DMA1_Stream2_IRQHandler>:
@@ -3021,7 +3021,7 @@ void DMA1_Stream2_IRQHandler(void)
  80017c4:	bd80      	pop	{r7, pc}
  80017c6:	bf00      	nop
  80017c8:	40026000 	.word	0x40026000
- 80017cc:	20000498 	.word	0x20000498
+ 80017cc:	20000468 	.word	0x20000468
  80017d0:	20000430 	.word	0x20000430
 
 080017d4 <DMA1_Stream3_IRQHandler>:
@@ -3247,7 +3247,7 @@ void DMA1_Stream3_IRQHandler(void)
  8001914:	bd80      	pop	{r7, pc}
  8001916:	bf00      	nop
  8001918:	40026000 	.word	0x40026000
- 800191c:	20000498 	.word	0x20000498
+ 800191c:	20000468 	.word	0x20000468
  8001920:	20000434 	.word	0x20000434
 
 08001924 <DMA1_Stream4_IRQHandler>:
@@ -3473,7 +3473,7 @@ void DMA1_Stream4_IRQHandler(void)
  8001a64:	bd80      	pop	{r7, pc}
  8001a66:	bf00      	nop
  8001a68:	40026000 	.word	0x40026000
- 8001a6c:	2000049c 	.word	0x2000049c
+ 8001a6c:	2000046c 	.word	0x2000046c
  8001a70:	20000438 	.word	0x20000438
 
 08001a74 <DMA1_Stream5_IRQHandler>:
@@ -3702,7 +3702,7 @@ void DMA1_Stream5_IRQHandler(void)
  8001bb4:	bd80      	pop	{r7, pc}
  8001bb6:	bf00      	nop
  8001bb8:	40026000 	.word	0x40026000
- 8001bbc:	2000049c 	.word	0x2000049c
+ 8001bbc:	2000046c 	.word	0x2000046c
  8001bc0:	2000043c 	.word	0x2000043c
 
 08001bc4 <DMA1_Stream6_IRQHandler>:
@@ -3930,7 +3930,7 @@ void DMA1_Stream6_IRQHandler(void)
  8001d04:	bd80      	pop	{r7, pc}
  8001d06:	bf00      	nop
  8001d08:	40026000 	.word	0x40026000
- 8001d0c:	2000049c 	.word	0x2000049c
+ 8001d0c:	2000046c 	.word	0x2000046c
  8001d10:	20000440 	.word	0x20000440
 
 08001d14 <DMA1_Stream7_IRQHandler>:
@@ -4157,7 +4157,7 @@ void DMA1_Stream7_IRQHandler(void)
  8001e54:	bd80      	pop	{r7, pc}
  8001e56:	bf00      	nop
  8001e58:	40026000 	.word	0x40026000
- 8001e5c:	2000049c 	.word	0x2000049c
+ 8001e5c:	2000046c 	.word	0x2000046c
  8001e60:	20000444 	.word	0x20000444
 
 08001e64 <DMA2_Stream0_IRQHandler>:
@@ -4383,7 +4383,7 @@ void DMA2_Stream0_IRQHandler(void)
  8001fa4:	bd80      	pop	{r7, pc}
  8001fa6:	bf00      	nop
  8001fa8:	40026400 	.word	0x40026400
- 8001fac:	20000498 	.word	0x20000498
+ 8001fac:	20000468 	.word	0x20000468
  8001fb0:	20000448 	.word	0x20000448
 
 08001fb4 <DMA2_Stream1_IRQHandler>:
@@ -4609,7 +4609,7 @@ void DMA2_Stream1_IRQHandler(void)
  80020f4:	bd80      	pop	{r7, pc}
  80020f6:	bf00      	nop
  80020f8:	40026400 	.word	0x40026400
- 80020fc:	20000498 	.word	0x20000498
+ 80020fc:	20000468 	.word	0x20000468
  8002100:	2000044c 	.word	0x2000044c
 
 08002104 <DMA2_Stream2_IRQHandler>:
@@ -4836,7 +4836,7 @@ void DMA2_Stream2_IRQHandler(void)
  8002244:	bd80      	pop	{r7, pc}
  8002246:	bf00      	nop
  8002248:	40026400 	.word	0x40026400
- 800224c:	20000498 	.word	0x20000498
+ 800224c:	20000468 	.word	0x20000468
  8002250:	20000450 	.word	0x20000450
 
 08002254 <DMA2_Stream3_IRQHandler>:
@@ -5062,7 +5062,7 @@ void DMA2_Stream3_IRQHandler(void)
  8002394:	bd80      	pop	{r7, pc}
  8002396:	bf00      	nop
  8002398:	40026400 	.word	0x40026400
- 800239c:	20000498 	.word	0x20000498
+ 800239c:	20000468 	.word	0x20000468
  80023a0:	20000454 	.word	0x20000454
 
 080023a4 <DMA2_Stream4_IRQHandler>:
@@ -5288,7 +5288,7 @@ void DMA2_Stream4_IRQHandler(void)
  80024e4:	bd80      	pop	{r7, pc}
  80024e6:	bf00      	nop
  80024e8:	40026400 	.word	0x40026400
- 80024ec:	2000049c 	.word	0x2000049c
+ 80024ec:	2000046c 	.word	0x2000046c
  80024f0:	20000458 	.word	0x20000458
 
 080024f4 <DMA2_Stream5_IRQHandler>:
@@ -5517,7 +5517,7 @@ void DMA2_Stream5_IRQHandler(void)
  8002634:	bd80      	pop	{r7, pc}
  8002636:	bf00      	nop
  8002638:	40026400 	.word	0x40026400
- 800263c:	2000049c 	.word	0x2000049c
+ 800263c:	2000046c 	.word	0x2000046c
  8002640:	2000045c 	.word	0x2000045c
 
 08002644 <DMA2_Stream6_IRQHandler>:
@@ -5745,7 +5745,7 @@ void DMA2_Stream6_IRQHandler(void)
  8002784:	bd80      	pop	{r7, pc}
  8002786:	bf00      	nop
  8002788:	40026400 	.word	0x40026400
- 800278c:	2000049c 	.word	0x2000049c
+ 800278c:	2000046c 	.word	0x2000046c
  8002790:	20000460 	.word	0x20000460
 
 08002794 <DMA2_Stream7_IRQHandler>:
@@ -5972,7 +5972,7 @@ void DMA2_Stream7_IRQHandler(void)
  80028d4:	bd80      	pop	{r7, pc}
  80028d6:	bf00      	nop
  80028d8:	40026400 	.word	0x40026400
- 80028dc:	2000049c 	.word	0x2000049c
+ 80028dc:	2000046c 	.word	0x2000046c
  80028e0:	20000464 	.word	0x20000464
 
 080028e4 <DMA_Clock_Enable>:
@@ -6985,7 +6985,7 @@ void EXTI0_IRQHandler(void) {
  8002f72:	bf00      	nop
  8002f74:	bd80      	pop	{r7, pc}
  8002f76:	bf00      	nop
- 8002f78:	200004a0 	.word	0x200004a0
+ 8002f78:	20000470 	.word	0x20000470
  8002f7c:	40013c00 	.word	0x40013c00
 
 08002f80 <EXTI1_IRQHandler>:
@@ -7014,7 +7014,7 @@ void EXTI1_IRQHandler(void) {
  8002f9e:	bf00      	nop
  8002fa0:	bd80      	pop	{r7, pc}
  8002fa2:	bf00      	nop
- 8002fa4:	200004a0 	.word	0x200004a0
+ 8002fa4:	20000470 	.word	0x20000470
  8002fa8:	40013c00 	.word	0x40013c00
 
 08002fac <EXTI2_IRQHandler>:
@@ -7043,7 +7043,7 @@ void EXTI2_IRQHandler(void) {
  8002fca:	bf00      	nop
  8002fcc:	bd80      	pop	{r7, pc}
  8002fce:	bf00      	nop
- 8002fd0:	200004a0 	.word	0x200004a0
+ 8002fd0:	20000470 	.word	0x20000470
  8002fd4:	40013c00 	.word	0x40013c00
 
 08002fd8 <EXTI3_IRQHandler>:
@@ -7072,7 +7072,7 @@ void EXTI3_IRQHandler(void) {
  8002ff6:	bf00      	nop
  8002ff8:	bd80      	pop	{r7, pc}
  8002ffa:	bf00      	nop
- 8002ffc:	200004a0 	.word	0x200004a0
+ 8002ffc:	20000470 	.word	0x20000470
  8003000:	40013c00 	.word	0x40013c00
 
 08003004 <EXTI4_IRQHandler>:
@@ -7101,7 +7101,7 @@ void EXTI4_IRQHandler(void) {
  8003022:	bf00      	nop
  8003024:	bd80      	pop	{r7, pc}
  8003026:	bf00      	nop
- 8003028:	200004a0 	.word	0x200004a0
+ 8003028:	20000470 	.word	0x20000470
  800302c:	40013c00 	.word	0x40013c00
 
 08003030 <EXTI9_5_IRQHandler>:
@@ -7164,7 +7164,7 @@ void EXTI9_5_IRQHandler(void) {
  800308c:	bd80      	pop	{r7, pc}
  800308e:	bf00      	nop
  8003090:	40013c00 	.word	0x40013c00
- 8003094:	200004a0 	.word	0x200004a0
+ 8003094:	20000470 	.word	0x20000470
 
 08003098 <EXTI15_10_IRQHandler>:
 /**
@@ -7226,7 +7226,7 @@ void EXTI15_10_IRQHandler(void) {
  80030f4:	bd80      	pop	{r7, pc}
  80030f6:	bf00      	nop
  80030f8:	40013c00 	.word	0x40013c00
- 80030fc:	200004a0 	.word	0x200004a0
+ 80030fc:	20000470 	.word	0x20000470
 
 08003100 <GPIO_Interrupt_Setup>:
  * @param pin Pin number (0-15) to configure.
@@ -7490,7 +7490,7 @@ void GPIO_Interrupt_Setup(GPIO_TypeDef *Port, int pin, int edge_select, uint32_t
  80032e8:	40022000 	.word	0x40022000
  80032ec:	40013800 	.word	0x40013800
  80032f0:	40013c00 	.word	0x40013c00
- 80032f4:	200004a0 	.word	0x200004a0
+ 80032f4:	20000470 	.word	0x20000470
 
 080032f8 <GPIO_Clock_Enable>:
  * @brief Enables the clock for a specific GPIO port.
@@ -8458,12 +8458,12 @@ void I2C_Init(I2C_Config *config)
  8003978:	bd90      	pop	{r4, r7, pc}
  800397a:	bf00      	nop
  800397c:	40005400 	.word	0x40005400
- 8003980:	200004e0 	.word	0x200004e0
+ 8003980:	200004b0 	.word	0x200004b0
  8003984:	08006b98 	.word	0x08006b98
  8003988:	40005800 	.word	0x40005800
- 800398c:	20000538 	.word	0x20000538
+ 800398c:	20000508 	.word	0x20000508
  8003990:	40005c00 	.word	0x40005c00
- 8003994:	20000590 	.word	0x20000590
+ 8003994:	20000560 	.word	0x20000560
 
 08003998 <I2C_Master_Start>:
 
@@ -9200,9 +9200,9 @@ void TIM1_BRK_TIM9_IRQHandler(void) {
  8003de6:	bf00      	nop
  8003de8:	bd80      	pop	{r7, pc}
  8003dea:	bf00      	nop
- 8003dec:	200005e8 	.word	0x200005e8
+ 8003dec:	200005b8 	.word	0x200005b8
  8003df0:	40010000 	.word	0x40010000
- 8003df4:	20000608 	.word	0x20000608
+ 8003df4:	200005d8 	.word	0x200005d8
  8003df8:	40014000 	.word	0x40014000
 
 08003dfc <TIM1_UP_TIM10_IRQHandler>:
@@ -9271,9 +9271,9 @@ void TIM1_UP_TIM10_IRQHandler(void) {
  8003e66:	bf00      	nop
  8003e68:	bd80      	pop	{r7, pc}
  8003e6a:	bf00      	nop
- 8003e6c:	200005e8 	.word	0x200005e8
+ 8003e6c:	200005b8 	.word	0x200005b8
  8003e70:	40010000 	.word	0x40010000
- 8003e74:	2000060c 	.word	0x2000060c
+ 8003e74:	200005dc 	.word	0x200005dc
  8003e78:	40014400 	.word	0x40014400
 
 08003e7c <TIM1_TRG_COM_TIM11_IRQHandler>:
@@ -9362,9 +9362,9 @@ void TIM1_TRG_COM_TIM11_IRQHandler(void) {
 }
  8003f08:	bf00      	nop
  8003f0a:	bd80      	pop	{r7, pc}
- 8003f0c:	200005e8 	.word	0x200005e8
+ 8003f0c:	200005b8 	.word	0x200005b8
  8003f10:	40010000 	.word	0x40010000
- 8003f14:	20000610 	.word	0x20000610
+ 8003f14:	200005e0 	.word	0x200005e0
  8003f18:	40014800 	.word	0x40014800
 
 08003f1c <TIM1_CC_IRQHandler>:
@@ -9454,7 +9454,7 @@ void TIM1_CC_IRQHandler(void) {
 }
  8003fa8:	bf00      	nop
  8003faa:	bd80      	pop	{r7, pc}
- 8003fac:	200005e8 	.word	0x200005e8
+ 8003fac:	200005b8 	.word	0x200005b8
  8003fb0:	40010000 	.word	0x40010000
 
 08003fb4 <TIM2_IRQHandler>:
@@ -9581,7 +9581,7 @@ void TIM2_IRQHandler(void)
 }
  800409c:	bf00      	nop
  800409e:	bd80      	pop	{r7, pc}
- 80040a0:	200005ec 	.word	0x200005ec
+ 80040a0:	200005bc 	.word	0x200005bc
 
 080040a4 <TIM3_IRQHandler>:
 
@@ -9706,7 +9706,7 @@ void TIM3_IRQHandler(void)
 }
  8004174:	bf00      	nop
  8004176:	bd80      	pop	{r7, pc}
- 8004178:	200005f0 	.word	0x200005f0
+ 8004178:	200005c0 	.word	0x200005c0
  800417c:	40000400 	.word	0x40000400
 
 08004180 <TIM4_IRQHandler>:
@@ -9832,7 +9832,7 @@ void TIM4_IRQHandler(void)
 }
  8004250:	bf00      	nop
  8004252:	bd80      	pop	{r7, pc}
- 8004254:	200005f4 	.word	0x200005f4
+ 8004254:	200005c4 	.word	0x200005c4
  8004258:	40000800 	.word	0x40000800
 
 0800425c <TIM5_IRQHandler>:
@@ -9958,7 +9958,7 @@ void TIM5_IRQHandler(void)
 }
  800432c:	bf00      	nop
  800432e:	bd80      	pop	{r7, pc}
- 8004330:	200005f8 	.word	0x200005f8
+ 8004330:	200005c8 	.word	0x200005c8
  8004334:	40000c00 	.word	0x40000c00
 
 08004338 <TIM6_DAC_IRQHandler>:
@@ -9991,7 +9991,7 @@ void TIM6_DAC_IRQHandler(void)
  800435e:	bf00      	nop
  8004360:	bd80      	pop	{r7, pc}
  8004362:	bf00      	nop
- 8004364:	200005fc 	.word	0x200005fc
+ 8004364:	200005cc 	.word	0x200005cc
  8004368:	40001000 	.word	0x40001000
 
 0800436c <TIM7_IRQHandler>:
@@ -10023,7 +10023,7 @@ void TIM7_IRQHandler(void)
  8004392:	bf00      	nop
  8004394:	bd80      	pop	{r7, pc}
  8004396:	bf00      	nop
- 8004398:	20000600 	.word	0x20000600
+ 8004398:	200005d0 	.word	0x200005d0
  800439c:	40001400 	.word	0x40001400
 
 080043a0 <TIM8_BRK_TIM12_IRQHandler>:
@@ -10134,9 +10134,9 @@ void TIM8_BRK_TIM12_IRQHandler(void) {
  800444e:	bf00      	nop
  8004450:	bd80      	pop	{r7, pc}
  8004452:	bf00      	nop
- 8004454:	20000604 	.word	0x20000604
+ 8004454:	200005d4 	.word	0x200005d4
  8004458:	40010000 	.word	0x40010000
- 800445c:	20000614 	.word	0x20000614
+ 800445c:	200005e4 	.word	0x200005e4
  8004460:	40014000 	.word	0x40014000
 
 08004464 <TIM8_UP_TIM13_IRQHandler>:
@@ -10205,9 +10205,9 @@ void TIM8_UP_TIM13_IRQHandler(void) {
  80044ce:	bf00      	nop
  80044d0:	bd80      	pop	{r7, pc}
  80044d2:	bf00      	nop
- 80044d4:	200005e8 	.word	0x200005e8
+ 80044d4:	200005b8 	.word	0x200005b8
  80044d8:	40010000 	.word	0x40010000
- 80044dc:	20000618 	.word	0x20000618
+ 80044dc:	200005e8 	.word	0x200005e8
  80044e0:	40001c00 	.word	0x40001c00
 
 080044e4 <TIM8_TRG_COM_TIM14_IRQHandler>:
@@ -10296,9 +10296,9 @@ void TIM8_TRG_COM_TIM14_IRQHandler(void) {
 }
  8004570:	bf00      	nop
  8004572:	bd80      	pop	{r7, pc}
- 8004574:	20000604 	.word	0x20000604
+ 8004574:	200005d4 	.word	0x200005d4
  8004578:	40010400 	.word	0x40010400
- 800457c:	2000061c 	.word	0x2000061c
+ 800457c:	200005ec 	.word	0x200005ec
  8004580:	40002000 	.word	0x40002000
 
 08004584 <TIM8_CC_IRQHandler>:
@@ -10388,7 +10388,7 @@ void TIM8_CC_IRQHandler(void) {
 }
  8004610:	bf00      	nop
  8004612:	bd80      	pop	{r7, pc}
- 8004614:	20000604 	.word	0x20000604
+ 8004614:	200005d4 	.word	0x200005d4
  8004618:	40010400 	.word	0x40010400
 
 0800461c <__NVIC_EnableIRQ>:
@@ -10504,9 +10504,9 @@ __STATIC_INLINE	void separateFractionAndIntegral(double number, double *fraction
  80046f6:	bd80      	pop	{r7, pc}
 
 080046f8 <UART4_IRQHandler>:
-USART_Config *__usart_6_config__;
 
-volatile uint16_t USART_SR = 0;
+
+
 
 void UART4_IRQHandler(void)
 {
@@ -13868,17 +13868,17 @@ int8_t USART_RX_Buffer(USART_Config *config, uint8_t *rx_buffer, uint16_t length
  8005f3c:	20000a40 	.word	0x20000a40
  8005f40:	20000620 	.word	0x20000620
  8005f44:	40011000 	.word	0x40011000
- 8005f48:	20000468 	.word	0x20000468
+ 8005f48:	200005f0 	.word	0x200005f0
  8005f4c:	40004400 	.word	0x40004400
- 8005f50:	20000470 	.word	0x20000470
+ 8005f50:	200005f8 	.word	0x200005f8
  8005f54:	40004800 	.word	0x40004800
- 8005f58:	20000478 	.word	0x20000478
+ 8005f58:	20000600 	.word	0x20000600
  8005f5c:	40004c00 	.word	0x40004c00
- 8005f60:	20000480 	.word	0x20000480
+ 8005f60:	20000608 	.word	0x20000608
  8005f64:	40005000 	.word	0x40005000
- 8005f68:	20000488 	.word	0x20000488
+ 8005f68:	20000610 	.word	0x20000610
  8005f6c:	40011400 	.word	0x40011400
- 8005f70:	20000490 	.word	0x20000490
+ 8005f70:	20000618 	.word	0x20000618
 
 08005f74 <USART_TX_Single_Byte>:
 

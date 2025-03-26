@@ -9,7 +9,22 @@
 #include "main.h"
 #include "USART.h"
 
-
+ volatile  DMA_Flags_Typedef USART1_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART1_TX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART2_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART2_TX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART3_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART3_TX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART4_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART4_TX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART5_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART5_TX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART6_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART6_TX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART7_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART7_TX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART8_RX_DMA_Flag;
+ volatile  DMA_Flags_Typedef USART8_TX_DMA_Flag;
 
 
 DMA_Config xUSART_RX[6];
@@ -26,6 +41,9 @@ USART_Config *__usart_5_config__;
 USART_Config *__usart_6_config__;
 
 volatile uint16_t USART_SR = 0;
+
+
+
 
 void UART4_IRQHandler(void)
 {
