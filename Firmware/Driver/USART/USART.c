@@ -440,6 +440,17 @@ static void PIN_Setup(USART_Config *config)
 			else if(config->RX_Pin == UART4_RX_Pin.PC11)GPIO_Pin_Init(GPIOC, UART4_RX_Pin.PC11, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.USART_4);
 		}
 	}
+	else if(config -> Port == UART5)
+	{
+		__usart_5_config__ = config;
+		if((config->mode == USART_Configuration.Mode.Asynchronous) ||
+		   (config->mode == USART_Configuration.Mode.IrDA) ||
+		   (config->mode == USART_Configuration.Mode.LIN))
+		{
+			GPIO_Pin_Init(GPIOA, UART5_TX_Pin.PD2, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.UART_5);
+			GPIO_Pin_Init(GPIOA, UART5_RX_Pin.PC12, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.UART_5);
+		}
+	}
 
 //	else if(config->Port == UART4)
 //	{
