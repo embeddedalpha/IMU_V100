@@ -1289,7 +1289,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "42d50c98-bdcb-4ed7-9d5c-20a69837f3bb")
-		(property "Reference" "H3"
+		(property "Reference" "H2"
 			(at 228.6 171.4499 0)
 			(effects
 				(font
@@ -1337,7 +1337,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661"
-					(reference "H3")
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -1353,7 +1353,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5eface5b-4cfc-4c7a-8cb7-11764277ab83")
-		(property "Reference" "H2"
+		(property "Reference" "H1"
 			(at 209.55 171.4499 0)
 			(effects
 				(font
@@ -1401,7 +1401,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661"
-					(reference "H2")
+					(reference "H1")
 					(unit 1)
 				)
 			)
@@ -1417,7 +1417,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c6f16362-ce06-4d18-902f-6c6f0c93e6e7")
-		(property "Reference" "H4"
+		(property "Reference" "H3"
 			(at 247.65 171.4499 0)
 			(effects
 				(font
@@ -1465,7 +1465,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661"
-					(reference "H4")
+					(reference "H3")
 					(unit 1)
 				)
 			)

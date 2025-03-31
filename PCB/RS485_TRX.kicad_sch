@@ -2775,7 +2775,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "00c49363-2de5-489b-b9b9-f158e9f99fb0")
-		(property "Reference" "R21"
+		(property "Reference" "R17"
 			(at 153.67 102.87 90)
 			(effects
 				(font
@@ -2848,7 +2848,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "R21")
+					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -2864,7 +2864,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0607158f-2efd-4ad4-9534-adc2293c2520")
-		(property "Reference" "#PWR028"
+		(property "Reference" "#PWR029"
 			(at 104.14 78.74 0)
 			(effects
 				(font
@@ -2914,7 +2914,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "#PWR028")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -2996,7 +2996,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4c5733cf-3b8b-4ced-87a9-3055c95b1954")
-		(property "Reference" "#PWR029"
+		(property "Reference" "#PWR030"
 			(at 118.11 53.34 0)
 			(effects
 				(font
@@ -3046,7 +3046,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "#PWR029")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -3062,7 +3062,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "693d1f4a-c860-48c6-9299-46d291264122")
-		(property "Reference" "D8"
+		(property "Reference" "D7"
 			(at 188.6585 80.01 0)
 			(effects
 				(font
@@ -3117,7 +3117,7 @@
 		(instances
 			(project ""
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "D8")
+					(reference "D7")
 					(unit 1)
 				)
 			)
@@ -3133,7 +3133,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "693d831d-ec67-4255-8ffa-ccbb1d6abbaa")
-		(property "Reference" "#PWR035"
+		(property "Reference" "#PWR031"
 			(at 176.53 104.14 0)
 			(effects
 				(font
@@ -3183,7 +3183,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "#PWR035")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -3199,7 +3199,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7814cc86-aca5-47b0-be16-b87f4ca144df")
-		(property "Reference" "U6"
+		(property "Reference" "U5"
 			(at 120.3041 80.01 0)
 			(effects
 				(font
@@ -3280,7 +3280,7 @@
 		(instances
 			(project ""
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "U6")
+					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -3296,7 +3296,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8e3efb5a-9117-438b-8bf8-8614d13bd16c")
-		(property "Reference" "C18"
+		(property "Reference" "C19"
 			(at 107.95 63.4999 0)
 			(effects
 				(font
@@ -3370,7 +3370,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "C18")
+					(reference "C19")
 					(unit 1)
 				)
 			)
@@ -3455,7 +3455,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "93818d8a-2577-4ae5-ac00-6958b394e813")
-		(property "Reference" "#PWR026"
+		(property "Reference" "#PWR028"
 			(at 96.52 139.7 0)
 			(effects
 				(font
@@ -3505,7 +3505,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "#PWR026")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -3675,7 +3675,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "adb05530-47e3-461e-b71c-71e5ce2dba31")
-		(property "Reference" "R20"
+		(property "Reference" "R16"
 			(at 153.67 71.12 90)
 			(effects
 				(font
@@ -3748,7 +3748,7 @@
 		(instances
 			(project ""
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "R20")
+					(reference "R16")
 					(unit 1)
 				)
 			)
@@ -3853,7 +3853,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bf05da45-2033-4e35-a4fc-39bea4d035cc")
-		(property "Reference" "#PWR031"
+		(property "Reference" "#PWR032"
 			(at 243.84 124.46 0)
 			(effects
 				(font
@@ -3903,7 +3903,7 @@
 		(instances
 			(project "IMU_V100"
 				(path "/b6a8d14b-6e32-4628-bf0c-2046877d1cfa/205555cc-3b86-4915-975e-3a7e3eed6661/84e3f5e1-ab68-44f3-8700-c3af58140fdb"
-					(reference "#PWR031")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
