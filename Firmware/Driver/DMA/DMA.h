@@ -132,7 +132,22 @@ extern volatile  DMA_Flags_Typedef SPI3_RX_DMA_Flag;
 extern volatile  DMA_Flags_Typedef SPI1_TX_DMA_Flag;
 extern volatile  DMA_Flags_Typedef SPI2_TX_DMA_Flag;
 extern volatile  DMA_Flags_Typedef SPI3_TX_DMA_Flag;
-
+extern volatile  DMA_Flags_Typedef USART1_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART1_TX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART2_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART2_TX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART3_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART3_TX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART4_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART4_TX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART5_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART5_TX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART6_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART6_TX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART7_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART7_TX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART8_RX_DMA_Flag;
+extern volatile  DMA_Flags_Typedef USART8_TX_DMA_Flag;
 extern volatile  DMA_Flags_Typedef TIM1_UP_DMA_Flag;
 extern volatile  DMA_Flags_Typedef TIM1_CH1_DMA_Flag;
 extern volatile  DMA_Flags_Typedef TIM1_CH2_DMA_Flag;
@@ -220,18 +235,6 @@ typedef struct DMA_Config
     uint32_t peripheral_address;        /**< Peripheral base address */
     uint32_t memory_address;            /**< Memory base address */
     uint16_t buffer_length;             /**< Number of data items to transfer */
-    uint32_t double_buffer_mode;		/**< Enables Double Buffer Mode> */
-
-	struct __DMA_Interrupts__{
-		void (*FIFO_Error_ISR)(void);
-		void (*Direct_Mode_Error_ISR)(void);
-		void (*Transfer_Error_ISR)(void);
-		void (*Half_Transfer_Complete_ISR)(void);
-		void (*Full_Transfer_Commplete_ISR)(void);
-		void (*Double_Buffer_Mode_Target_1_ISR)(void);
-		void (*Double_Buffer_Mode_Target_2_ISR)(void);
-	}ISR_Routines;
-
 } DMA_Config;
 
 /**

@@ -14,7 +14,6 @@
 #include "I2C_Defs.h"
 
 
-
 typedef struct I2C_Config
 {
 	I2C_TypeDef *Port;
@@ -25,8 +24,6 @@ typedef struct I2C_Config
 	uint8_t Interrupts;
 	uint8_t DMA_Control;
 }I2C_Config;
-
-
 
 void I2C_Init(I2C_Config *config);
 void I2C_Clock_Enable(I2C_Config *config);
@@ -55,9 +52,6 @@ void I2C_Master_Stop(I2C_Config *config);
 
 void I2C_Master_Write_Register_Block(I2C_Config *config, uint8_t device_address, uint8_t reg_address, uint8_t *data, int length);
 
-int I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address, uint8_t *data, uint16_t length);
 
-int I2C_Read_Register(I2C_Config *config, uint16_t device_address, uint8_t reg_address);
 
-//int I2C_Read_Register_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address,volatile uint8_t *data, uint16_t length);
 #endif /* I2C_I2C_H_ */

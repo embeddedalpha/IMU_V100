@@ -22,19 +22,17 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Application_Layer \
-Driver/CAN \
+Driver/ADC \
 Driver/Console \
 Driver/DMA \
+Driver/Devices/Seven_Segement_Display \
+Driver/Devices/Thermistor \
 Driver/GPIO \
 Driver/I2C \
 Driver/Logs \
 Driver/Timer \
 Driver/USART \
-Middleware/Modbus \
-Modules/Barometer \
-Modules/LC76G \
-Modules/MPU6050 \
 Src \
 Startup \
+WSHP \
 

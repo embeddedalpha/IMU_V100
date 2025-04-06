@@ -187,6 +187,7 @@ void Console_Init(int32_t baudrate) {
          return -1;
      }
 
+
      // Null-terminate the received string
      TRX_Buffer[RX_Length - 1] = '\0';
 

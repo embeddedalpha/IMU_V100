@@ -9,21 +9,19 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include WSHP/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
--include Modules/MPU6050/subdir.mk
--include Modules/LC76G/subdir.mk
--include Modules/Barometer/subdir.mk
--include Middleware/Modbus/subdir.mk
 -include Driver/USART/subdir.mk
 -include Driver/Timer/subdir.mk
 -include Driver/Logs/subdir.mk
 -include Driver/I2C/subdir.mk
 -include Driver/GPIO/subdir.mk
+-include Driver/Devices/Thermistor/subdir.mk
+-include Driver/Devices/Seven_Segement_Display/subdir.mk
 -include Driver/DMA/subdir.mk
 -include Driver/Console/subdir.mk
--include Driver/CAN/subdir.mk
--include Application_Layer/subdir.mk
+-include Driver/ADC/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -46,34 +44,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := IMU_V100
+BUILD_ARTIFACT_NAME := Water_Source_Heat_Pump_V100
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-IMU_V100.elf \
+Water_Source_Heat_Pump_V100.elf \
 
 MAP_FILES += \
-IMU_V100.map \
+Water_Source_Heat_Pump_V100.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-IMU_V100.list \
+Water_Source_Heat_Pump_V100.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: IMU_V100.elf secondary-outputs
+main-build: Water_Source_Heat_Pump_V100.elf secondary-outputs
 
 # Tool invocations
-IMU_V100.elf IMU_V100.map: $(OBJS) $(USER_OBJS) D:\STM32F407_Projects\IMU_V100\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "IMU_V100.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\STM32F407_Projects\IMU_V100\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IMU_V100.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Water_Source_Heat_Pump_V100.elf Water_Source_Heat_Pump_V100.map: $(OBJS) $(USER_OBJS) D:\STM32F407_Projects\Water_Source_Heat_Pump_V100\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Water_Source_Heat_Pump_V100.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\STM32F407_Projects\Water_Source_Heat_Pump_V100\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Water_Source_Heat_Pump_V100.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -82,14 +80,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-IMU_V100.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "IMU_V100.list"
+Water_Source_Heat_Pump_V100.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Water_Source_Heat_Pump_V100.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) IMU_V100.elf IMU_V100.list IMU_V100.map default.size.stdout
+	-$(RM) Water_Source_Heat_Pump_V100.elf Water_Source_Heat_Pump_V100.list Water_Source_Heat_Pump_V100.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

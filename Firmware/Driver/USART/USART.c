@@ -9,22 +9,7 @@
 #include "main.h"
 #include "USART.h"
 
- volatile  DMA_Flags_Typedef USART1_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART1_TX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART2_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART2_TX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART3_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART3_TX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART4_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART4_TX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART5_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART5_TX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART6_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART6_TX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART7_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART7_TX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART8_RX_DMA_Flag;
- volatile  DMA_Flags_Typedef USART8_TX_DMA_Flag;
+
 
 
 DMA_Config xUSART_RX[6];
@@ -41,9 +26,6 @@ USART_Config *__usart_5_config__;
 USART_Config *__usart_6_config__;
 
 volatile uint16_t USART_SR = 0;
-
-
-
 
 void UART4_IRQHandler(void)
 {
@@ -174,7 +156,7 @@ void USART1_IRQHandler(void)
 
 
 
-int8_t USART_Get_Instance_Number(USART_Config *config)
+static int8_t Get_USART_Instance_Number(USART_Config *config)
 {
 	if(config->Port == USART1) {return 0;}
 	else if(config->Port == USART2) {return 1;}
@@ -440,37 +422,48 @@ static void PIN_Setup(USART_Config *config)
 			else if(config->RX_Pin == UART4_RX_Pin.PC11)GPIO_Pin_Init(GPIOC, UART4_RX_Pin.PC11, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.USART_4);
 		}
 	}
-	else if(config -> Port == UART5)
-	{
-		__usart_5_config__ = config;
-		if((config->mode == USART_Configuration.Mode.Asynchronous) ||
-		   (config->mode == USART_Configuration.Mode.IrDA) ||
-		   (config->mode == USART_Configuration.Mode.LIN))
-		{
-			if(config->TX_Pin == UART5_TX_Pin.PD2)GPIO_Pin_Init(GPIOA, UART5_TX_Pin.PD2, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.UART_5);
-			if(config->RX_Pin == UART5_RX_Pin.PC12)GPIO_Pin_Init(GPIOA, UART5_RX_Pin.PC12, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.UART_5);
-		}
-	}
-	else if(config->Port == USART6)
-	{
-		if((config->mode == USART_Configuration.Mode.Asynchronous) ||
-		   (config->mode == USART_Configuration.Mode.Synchronous) ||
-		   (config->mode == USART_Configuration.Mode.IrDA) ||
-		   (config->mode == USART_Configuration.Mode.LIN) )
-		{
-			if(config->TX_Pin == USART6_TX_Pin.PC6)GPIO_Pin_Init(GPIOC, USART6_TX_Pin.PC6, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.USART_6);
-			if(config->RX_Pin == USART6_RX_Pin.PC7)GPIO_Pin_Init(GPIOC, USART6_RX_Pin.PC7, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.USART_6);
-			if(config->CLK_Pin == USART6_CLK_Pin.PC8)GPIO_Pin_Init(GPIOC, USART6_CLK_Pin.PC8, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.USART_6);
-		}
-		else if((config->mode == USART_Configuration.Mode.SmartCard) ||
-		   (config->mode == USART_Configuration.Mode.SmartCard_Clock) ||
-		   (config->mode == USART_Configuration.Mode.Single_Wire_Half_Duplex) )
-		{
-			if(config->TX_Pin == USART6_TX_Pin.PC6)GPIO_Pin_Init(GPIOA, USART6_TX_Pin.PC6, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.USART_6);
-			if((config->mode == USART_Configuration.Mode.SmartCard_Clock))GPIO_Pin_Init(GPIOA, USART6_CLK_Pin.PC8, GPIO_Configuration.Mode.Alternate_Function, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.USART_6);
 
-		}
-	}
+//	else if(config->Port == UART4)
+//	{
+//		if((config->mode == USART_Mode.Asynchronous) ||
+//		   (config->mode == USART_Mode.IrDA) ||
+//		   (config->mode == USART_Mode.LIN) )
+//		{
+//			if(config->TX_Pin == UART4_TX_Pin.PA0)GPIO_Pin_Init(GPIOA, UART4_TX_Pin.PA0, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_4);
+//			else if(config->TX_Pin == UART4_TX_Pin.PC10)GPIO_Pin_Init(GPIOC, UART4_TX_Pin.PC10, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_4);
+//
+//			if(config->RX_Pin == UART4_RX_Pin.PA1)GPIO_Pin_Init(GPIOA, UART4_RX_Pin.PA1, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_4);
+//			else if(config->RX_Pin == UART4_RX_Pin.PC11)GPIO_Pin_Init(GPIOC, UART4_RX_Pin.PC11, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_4);
+//		}
+//		else if((config->mode == USART_Mode.SmartCard) ||
+//		   (config->mode == USART_Mode.SmartCard_Clock) ||
+//		   (config->mode == USART_Mode.Single_Wire_Half_Duplex) )
+//		{
+//			if(config->TX_Pin == UART4_TX_Pin.PA0)GPIO_Pin_Init(GPIOA, UART4_TX_Pin.PA0, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_4);
+//			if((config->mode == USART_Mode.SmartCard_Clock))GPIO_Pin_Init(GPIOA, USART3_CLK_Pin.PB12, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_4);
+//
+//		}
+//	}
+//	else if(config->Port == USART6)
+//	{
+//		if((config->mode == USART_Mode.Asynchronous) ||
+//		   (config->mode == USART_Mode.Synchronous) ||
+//		   (config->mode == USART_Mode.IrDA) ||
+//		   (config->mode == USART_Mode.LIN) )
+//		{
+//			if(config->TX_Pin == USART6_TX_Pin.PC6)GPIO_Pin_Init(GPIOC, USART6_TX_Pin.PC6, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_6);
+//			if(config->RX_Pin == USART6_RX_Pin.PC7)GPIO_Pin_Init(GPIOC, USART6_RX_Pin.PC7, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_6);
+//			if(config->CLK_Pin == USART6_CLK_Pin.PC8)GPIO_Pin_Init(GPIOC, USART6_CLK_Pin.PC8, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_6);
+//		}
+//		else if((config->mode == USART_Mode.SmartCard) ||
+//		   (config->mode == USART_Mode.SmartCard_Clock) ||
+//		   (config->mode == USART_Mode.Single_Wire_Half_Duplex) )
+//		{
+//			if(config->TX_Pin == USART6_TX_Pin.PC6)GPIO_Pin_Init(GPIOA, USART6_TX_Pin.PC6, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_6);
+//			if((config->mode == USART_Mode.SmartCard_Clock))GPIO_Pin_Init(GPIOA, USART6_CLK_Pin.PC8, MODE.Alternate_Function, Output_Type.Push_Pull, Speed.High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.USART_6);
+//
+//		}
+//	}
 
 
 }
@@ -480,7 +473,7 @@ int8_t USART_Init(USART_Config *config)
 	USART_Clock_Enable(config);
 	PIN_Setup(config);
 
-	usart_dma_instance_number = USART_Get_Instance_Number(config);
+	usart_dma_instance_number = Get_USART_Instance_Number(config);
 	if(usart_dma_instance_number == -1) return -1;
 
 //	USART1 -> CR1 |= USART_CR1_UE;
@@ -880,10 +873,4 @@ uint16_t USART_RX_Single_Byte(USART_Config *config)
 	data = config->Port->DR ;
 	while(!(config->Port->SR & USART_SR_RXNE));
 	return data;
-}
-
-void USART_Clear_Status_Regs(USART_Config *config)
-{
-    (void)config->Port->SR; // Read the status register to clear flags
-    (void)config->Port->DR; // Read the data register to clear flags
 }

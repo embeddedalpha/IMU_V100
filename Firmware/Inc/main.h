@@ -128,7 +128,7 @@ __STATIC_INLINE void Delay_DeInit(void)
 }
 
 
-__STATIC_INLINE uint32_t Delay_us(volatile float us)
+__STATIC_INLINE uint32_t Delay_us(float us)
 {
 
 	SysTick->LOAD = 168 * us;
@@ -137,7 +137,7 @@ __STATIC_INLINE uint32_t Delay_us(volatile float us)
 	return (0UL);                                                     /* Function successful */
 }
 
-__STATIC_INLINE uint32_t Delay_ms(volatile float ms)
+__STATIC_INLINE uint32_t Delay_ms(float ms)
 {
 	unsigned long x =0x29040 * (ms);
 	SysTick->LOAD =  x ;
@@ -245,12 +245,6 @@ __STATIC_INLINE int Log_Scan(int buffer_length, char * msg, ...)
 }
 
 
-typedef struct Time_Typedef
-{
-	uint8_t Hours;
-	uint8_t Minutes;
-	uint8_t Seconds;
 
-}Time_Typedef;
 
 #endif /* MAIN_H_ */

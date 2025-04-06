@@ -43,7 +43,7 @@ typedef struct Timer_Config{
 	DMA_Config DMA_Timer;
 	uint32_t Encoder_Resolution;
 
-	struct __Timer_Interrupts__{
+	struct __Interrupts__{
 		void (*Update_ISR)(void);
 		void (*Capture_Compare_1_ISR)(void);
 		void (*Capture_Compare_2_ISR)(void);
