@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MC33063ADR
+D 1.5-A Peak Boost/Buck/Inverting Switching Regulator
+K
+F http://www.ti.com/lit/gpn/mc33063a
+$ENDCMP
+#
+#End Doc Library

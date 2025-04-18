@@ -1,0 +1,49 @@
+\chapter{Console Module for STM32\+F407\+VGT6}
+\hypertarget{index}{}\label{index}\index{Console Module for STM32F407VGT6@{Console Module for STM32F407VGT6}}
+\hypertarget{index_intro_sec}{}\doxysection{\texorpdfstring{Introduction}{Introduction}}\label{index_intro_sec}
+The Console module provides an abstraction layer for UART communication on the STM32\+F407\+VGT6 microcontroller. It is designed for efficient data handling using DMA and provides easy-\/to-\/use functions for formatted printing and reading through a serial interface.\hypertarget{index_features_sec}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_features_sec}
+
+\begin{DoxyItemize}
+\item UART initialization with custom baud rate
+\item Formatted printing using {\ttfamily print\+Console}
+\item Formatted input using {\ttfamily read\+Console}
+\item DMA-\/based UART reception for high efficiency
+\item Designed to support common debugging and communication tasks
+\end{DoxyItemize}\hypertarget{index_dependencies_sec}{}\doxysection{\texorpdfstring{Dependencies}{Dependencies}}\label{index_dependencies_sec}
+The Console module depends on the following components\+:
+\begin{DoxyItemize}
+\item GPIO for UART pin configuration
+\item USART for UART initialization and communication
+\item DMA for efficient UART data handling
+\end{DoxyItemize}
+
+Include the following headers in your project to use the Console module\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{_console_8h}{Console.\+h}}
+\item {\ttfamily GPIO.\+h} (for GPIO configuration)
+\item {\ttfamily USART.\+h} (for UART initialization and communication)
+\item {\ttfamily DMA.\+h} (for DMA configuration)
+\end{DoxyItemize}\hypertarget{index_usage_sec}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{index_usage_sec}
+To use the Console module, include the {\ttfamily \doxylink{_console_8h}{Console.\+h}} header in your application code. Initialize the console with a desired baud rate using {\ttfamily Console\+\_\+\+Init}. Use {\ttfamily print\+Console} for sending formatted messages and {\ttfamily read\+Console} for receiving formatted input.
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_console_8h}{Console.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\ \ \ \ Console\_Init(9600);\ \textcolor{comment}{//\ Initialize\ UART\ with\ 9600\ baud\ rate}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ printConsole(\textcolor{stringliteral}{"{}Hello,\ STM32!\(\backslash\)n"{}});\ \textcolor{comment}{//\ Send\ a\ message}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{char}\ buffer[20];}
+\DoxyCodeLine{\ \ \ \ readConsole(\textcolor{stringliteral}{"{}\%s"{}},\ buffer);\ \textcolor{comment}{//\ Read\ user\ input\ into\ buffer}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ printConsole(\textcolor{stringliteral}{"{}You\ entered:\ \%s\(\backslash\)n"{}},\ buffer);\ \textcolor{comment}{//\ Echo\ the\ input}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Application\ code}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

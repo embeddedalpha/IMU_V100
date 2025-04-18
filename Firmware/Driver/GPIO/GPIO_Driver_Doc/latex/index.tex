@@ -1,0 +1,37 @@
+\chapter{GPIO Driver for STM32\+F407\+VGT6}
+\hypertarget{index}{}\label{index}\index{GPIO Driver for STM32F407VGT6@{GPIO Driver for STM32F407VGT6}}
+\hypertarget{index_intro_sec}{}\doxysection{\texorpdfstring{Introduction}{Introduction}}\label{index_intro_sec}
+This documentation provides an overview of the GPIO driver implementation for the STM32\+F407\+VGT6 microcontroller. The GPIO driver includes functions for setting up and controlling the GPIO pins, including setting pins high or low, reading pin or port states, writing to a port, and configuring GPIO interrupts.\hypertarget{index_features_sec}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_features_sec}
+
+\begin{DoxyItemize}
+\item Enable or disable GPIO clocks
+\item Initialize GPIO pins with specific configurations
+\item Set or clear individual GPIO pins
+\item Read the state of GPIO pins or the entire port
+\item Configure GPIO interrupts with edge selection and priority
+\end{DoxyItemize}\hypertarget{index_usage_sec}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{index_usage_sec}
+Include the {\ttfamily \doxylink{_g_p_i_o_8h_source}{GPIO.\+h}} and {\ttfamily \doxylink{_g_p_i_o___defs_8h}{GPIO\+\_\+\+Defs.\+h}} headers in your application code to access the GPIO functions and configurations. Use the provided functions to initialize GPIO pins, control their states, and handle interrupts as needed.
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_g_p_i_o_8c_a011e573b1622c77fcbbb315d4fe8441e}{GPIO\_Pin\_Init}}(GPIOA,\ 5,\ GPIO\_Configuration.Mode.General\_Purpose\_Output,\ GPIO\_Configuration.Output\_Type.Push\_Pull,\ GPIO\_Configuration.Speed.High\_Speed,\ GPIO\_Configuration.Pull.No\_Pull\_Up\_Down,\ 0);}
+\DoxyCodeLine{GPIO\_Pin\_High(GPIOA,\ 5);\ \ \ \ \textcolor{comment}{//\ Set\ GPIOA\ pin\ 5\ high}}
+
+\end{DoxyCode}
+\hypertarget{index_dependencies_sec}{}\doxysection{\texorpdfstring{Dependencies}{Dependencies}}\label{index_dependencies_sec}
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{_g_p_i_o___defs_8h}{GPIO\+\_\+\+Defs.\+h}}\+: Contains the definitions and configurations for the GPIO driver.
+\item {\ttfamily main.\+h}\+: Include this to provide the necessary microcontroller-\/specific includes.
+\end{DoxyItemize}\hypertarget{index_author_sec}{}\doxysection{\texorpdfstring{Author}{Author}}\label{index_author_sec}
+Author\+: Your Name
+
+\begin{DoxyDate}{Date}
+2024-\/08-\/21 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}

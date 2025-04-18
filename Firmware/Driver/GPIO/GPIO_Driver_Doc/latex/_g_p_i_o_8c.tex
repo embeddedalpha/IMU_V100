@@ -1,0 +1,338 @@
+\doxysection{GPIO.\+c File Reference}
+\hypertarget{_g_p_i_o_8c}{}\label{_g_p_i_o_8c}\index{GPIO.c@{GPIO.c}}
+
+
+GPIO Driver Implementation for STM32\+F407\+VGT6.  
+
+
+{\ttfamily \#include "{}GPIO.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_p_i_o_8c_a3184b14b2cea8fa4fb5004d46e29e6b4}{PORT\+\_\+\+TO\+\_\+\+INDEX}}(port)
+\item 
+\#define \mbox{\hyperlink{_g_p_i_o_8c_adc29f81e0605beaaa2da01d54b142777}{GPIO\+\_\+\+AF\+\_\+\+SPLIT\+\_\+\+POINT}}~8
+\item 
+\#define \mbox{\hyperlink{_g_p_i_o_8c_a9ac7385c4662a7c10ae3a28a1492cb88}{PIN\+\_\+\+POS}}(pin)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_a17e9789a29a87d2df54f12b94dd1a0b6}{EXTI0\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em Interrupt handler for EXTI line 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_a49cfdd46eb8d0ef3e1987514aa9343dc}{EXTI1\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em Interrupt handler for EXTI line 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14}{EXTI2\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em Interrupt handler for EXTI line 2. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_a30c045de96d18ec9c67a7b9e4350920f}{EXTI3\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em Interrupt handler for EXTI line 3. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_a290cb997018c8d85d4b965b4a242842f}{EXTI4\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em Interrupt handler for EXTI line 4. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_a7b2096b8b2643286dc3a7e5110e5ae85}{EXTI9\+\_\+5\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em Interrupt handler for EXTI lines 5 to 9. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_a738473a5b43f6c92b80ce1d3d6f77ed9}{EXTI15\+\_\+10\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em Interrupt handler for EXTI lines 10 to 15. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_p_i_o_8c_abae7c55d2c56bbd7be4376a5df013a37}{GPIO\+\_\+\+Interrupt\+\_\+\+Setup}} (GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}Port, int pin, int edge\+\_\+select, uint32\+\_\+t priority, void(\texorpdfstring{$\ast$}{*}attach\+\_\+\+ISR))
+\begin{DoxyCompactList}\small\item\em Configures an interrupt for a specific GPIO pin. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_p_i_o_8c_a3fbe31fd75292573be572f053d633e74}{GPIO\+\_\+\+Clock\+\_\+\+Disable}} (GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}PORT)
+\begin{DoxyCompactList}\small\item\em Disables the clock for a specific GPIO port. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_g_p_i_o_8c_a7bff8f9cb7f776aff4556e1cc6cd9ecb}{GPIO\+\_\+\+Clock\+\_\+\+Enable}} (GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}PORT)
+\begin{DoxyCompactList}\small\item\em Enables the clock for a specific GPIO port. \end{DoxyCompactList}\item 
+GPIO\+\_\+\+Status \mbox{\hyperlink{_g_p_i_o_8c_a011e573b1622c77fcbbb315d4fe8441e}{GPIO\+\_\+\+Pin\+\_\+\+Init}} (GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}Port, uint8\+\_\+t pin, uint8\+\_\+t mode, uint8\+\_\+t output\+\_\+type, uint8\+\_\+t speed, uint8\+\_\+t pull, uint8\+\_\+t alternate\+\_\+function)
+\begin{DoxyCompactList}\small\item\em Initializes a specific pin with given parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_p_i_o_8c_a7ad3ec1a05b66a286b8a849a460b80b0}{EXTI\+\_\+\+ISR}} \mbox{[}16\mbox{]})(void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+GPIO Driver Implementation for STM32\+F407\+VGT6. 
+
+This file provides the implementation of the GPIO driver for the STM32\+F407\+VGT6 microcontroller. It includes functions to initialize GPIO pins, handle GPIO interrupts, and manage GPIO port configurations.
+
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/08-\/21
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Your Name 
+\end{DoxyAuthor}
+
+
+Definition in file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_p_i_o_8c_adc29f81e0605beaaa2da01d54b142777}\index{GPIO.c@{GPIO.c}!GPIO\_AF\_SPLIT\_POINT@{GPIO\_AF\_SPLIT\_POINT}}
+\index{GPIO\_AF\_SPLIT\_POINT@{GPIO\_AF\_SPLIT\_POINT}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{GPIO\_AF\_SPLIT\_POINT}{GPIO\_AF\_SPLIT\_POINT}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_adc29f81e0605beaaa2da01d54b142777} 
+\#define GPIO\+\_\+\+AF\+\_\+\+SPLIT\+\_\+\+POINT~8}
+
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00028}{28}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a9ac7385c4662a7c10ae3a28a1492cb88}\index{GPIO.c@{GPIO.c}!PIN\_POS@{PIN\_POS}}
+\index{PIN\_POS@{PIN\_POS}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{PIN\_POS}{PIN\_POS}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a9ac7385c4662a7c10ae3a28a1492cb88} 
+\#define PIN\+\_\+\+POS(\begin{DoxyParamCaption}\item[{}]{pin}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((pin)\ *\ 2)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00031}{31}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a3184b14b2cea8fa4fb5004d46e29e6b4}\index{GPIO.c@{GPIO.c}!PORT\_TO\_INDEX@{PORT\_TO\_INDEX}}
+\index{PORT\_TO\_INDEX@{PORT\_TO\_INDEX}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{PORT\_TO\_INDEX}{PORT\_TO\_INDEX}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a3184b14b2cea8fa4fb5004d46e29e6b4} 
+\#define PORT\+\_\+\+TO\+\_\+\+INDEX(\begin{DoxyParamCaption}\item[{}]{port}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((port\ ==\ GPIOA)\ ?\ 0\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOB)\ ?\ 1\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOC)\ ?\ 2\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOD)\ ?\ 3\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOE)\ ?\ 4\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOF)\ ?\ 5\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOG)\ ?\ 6\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOH)\ ?\ 7\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (port\ ==\ GPIOI)\ ?\ 8\ :\ -\/1)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00017}{17}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_p_i_o_8c_a17e9789a29a87d2df54f12b94dd1a0b6}\index{GPIO.c@{GPIO.c}!EXTI0\_IRQHandler@{EXTI0\_IRQHandler}}
+\index{EXTI0\_IRQHandler@{EXTI0\_IRQHandler}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI0\_IRQHandler()}{EXTI0\_IRQHandler()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a17e9789a29a87d2df54f12b94dd1a0b6} 
+void EXTI0\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt handler for EXTI line 0. 
+
+This ISR handles interrupts for pin 0, invoking the associated callback function if one is registered. 
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00042}{42}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a738473a5b43f6c92b80ce1d3d6f77ed9}\index{GPIO.c@{GPIO.c}!EXTI15\_10\_IRQHandler@{EXTI15\_10\_IRQHandler}}
+\index{EXTI15\_10\_IRQHandler@{EXTI15\_10\_IRQHandler}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI15\_10\_IRQHandler()}{EXTI15\_10\_IRQHandler()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a738473a5b43f6c92b80ce1d3d6f77ed9} 
+void EXTI15\+\_\+10\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt handler for EXTI lines 10 to 15. 
+
+Handles interrupts for pins 10 to 15, checking each pin for active flags. 
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00098}{98}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a49cfdd46eb8d0ef3e1987514aa9343dc}\index{GPIO.c@{GPIO.c}!EXTI1\_IRQHandler@{EXTI1\_IRQHandler}}
+\index{EXTI1\_IRQHandler@{EXTI1\_IRQHandler}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI1\_IRQHandler()}{EXTI1\_IRQHandler()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a49cfdd46eb8d0ef3e1987514aa9343dc} 
+void EXTI1\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt handler for EXTI line 1. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00050}{50}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14}\index{GPIO.c@{GPIO.c}!EXTI2\_IRQHandler@{EXTI2\_IRQHandler}}
+\index{EXTI2\_IRQHandler@{EXTI2\_IRQHandler}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI2\_IRQHandler()}{EXTI2\_IRQHandler()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_ab5a1d9e9c8ef50e0cb9ddb5745a20a14} 
+void EXTI2\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt handler for EXTI line 2. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00058}{58}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a30c045de96d18ec9c67a7b9e4350920f}\index{GPIO.c@{GPIO.c}!EXTI3\_IRQHandler@{EXTI3\_IRQHandler}}
+\index{EXTI3\_IRQHandler@{EXTI3\_IRQHandler}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI3\_IRQHandler()}{EXTI3\_IRQHandler()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a30c045de96d18ec9c67a7b9e4350920f} 
+void EXTI3\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt handler for EXTI line 3. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00066}{66}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a290cb997018c8d85d4b965b4a242842f}\index{GPIO.c@{GPIO.c}!EXTI4\_IRQHandler@{EXTI4\_IRQHandler}}
+\index{EXTI4\_IRQHandler@{EXTI4\_IRQHandler}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI4\_IRQHandler()}{EXTI4\_IRQHandler()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a290cb997018c8d85d4b965b4a242842f} 
+void EXTI4\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt handler for EXTI line 4. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00074}{74}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a7b2096b8b2643286dc3a7e5110e5ae85}\index{GPIO.c@{GPIO.c}!EXTI9\_5\_IRQHandler@{EXTI9\_5\_IRQHandler}}
+\index{EXTI9\_5\_IRQHandler@{EXTI9\_5\_IRQHandler}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI9\_5\_IRQHandler()}{EXTI9\_5\_IRQHandler()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a7b2096b8b2643286dc3a7e5110e5ae85} 
+void EXTI9\+\_\+5\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt handler for EXTI lines 5 to 9. 
+
+Handles interrupts for pins 5 to 9, checking each pin for active flags. 
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00084}{84}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a3fbe31fd75292573be572f053d633e74}\index{GPIO.c@{GPIO.c}!GPIO\_Clock\_Disable@{GPIO\_Clock\_Disable}}
+\index{GPIO\_Clock\_Disable@{GPIO\_Clock\_Disable}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{GPIO\_Clock\_Disable()}{GPIO\_Clock\_Disable()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a3fbe31fd75292573be572f053d633e74} 
+int GPIO\+\_\+\+Clock\+\_\+\+Disable (\begin{DoxyParamCaption}\item[{GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}}]{PORT}{}\end{DoxyParamCaption})}
+
+
+
+Disables the clock for a specific GPIO port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em PORT} & Pointer to GPIO port base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+GPIO\+\_\+\+SUCCESS on success, GPIO\+\_\+\+INVALID\+\_\+\+PORT on failure. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00163}{163}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a7bff8f9cb7f776aff4556e1cc6cd9ecb}\index{GPIO.c@{GPIO.c}!GPIO\_Clock\_Enable@{GPIO\_Clock\_Enable}}
+\index{GPIO\_Clock\_Enable@{GPIO\_Clock\_Enable}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{GPIO\_Clock\_Enable()}{GPIO\_Clock\_Enable()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a7bff8f9cb7f776aff4556e1cc6cd9ecb} 
+int GPIO\+\_\+\+Clock\+\_\+\+Enable (\begin{DoxyParamCaption}\item[{GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}}]{PORT}{}\end{DoxyParamCaption})}
+
+
+
+Enables the clock for a specific GPIO port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em PORT} & Pointer to GPIO port base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+GPIO\+\_\+\+SUCCESS on success, GPIO\+\_\+\+INVALID\+\_\+\+PORT on failure. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00183}{183}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_abae7c55d2c56bbd7be4376a5df013a37}\index{GPIO.c@{GPIO.c}!GPIO\_Interrupt\_Setup@{GPIO\_Interrupt\_Setup}}
+\index{GPIO\_Interrupt\_Setup@{GPIO\_Interrupt\_Setup}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{GPIO\_Interrupt\_Setup()}{GPIO\_Interrupt\_Setup()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_abae7c55d2c56bbd7be4376a5df013a37} 
+void GPIO\+\_\+\+Interrupt\+\_\+\+Setup (\begin{DoxyParamCaption}\item[{GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}}]{Port}{, }\item[{int}]{pin}{, }\item[{int}]{edge\+\_\+select}{, }\item[{uint32\+\_\+t}]{priority}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{attach\+\_\+\+ISR}{}\end{DoxyParamCaption})}
+
+
+
+Configures an interrupt for a specific GPIO pin. 
+
+Configures the interrupt for a specific pin.
+
+Sets up the EXTI line, enables interrupt handling, and registers a callback for a specified GPIO pin.
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & Pointer to GPIO port base address. \\
+\hline
+{\em pin} & Pin number (0-\/15) to configure. \\
+\hline
+{\em edge\+\_\+select} & Interrupt edge selection (rising, falling, or both). \\
+\hline
+{\em priority} & Interrupt priority level. \\
+\hline
+{\em attach\+\_\+\+ISR} & Pointer to the ISR function to invoke on interrupt. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00119}{119}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+\Hypertarget{_g_p_i_o_8c_a011e573b1622c77fcbbb315d4fe8441e}\index{GPIO.c@{GPIO.c}!GPIO\_Pin\_Init@{GPIO\_Pin\_Init}}
+\index{GPIO\_Pin\_Init@{GPIO\_Pin\_Init}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{GPIO\_Pin\_Init()}{GPIO\_Pin\_Init()}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a011e573b1622c77fcbbb315d4fe8441e} 
+GPIO\+\_\+\+Status GPIO\+\_\+\+Pin\+\_\+\+Init (\begin{DoxyParamCaption}\item[{GPIO\+\_\+\+Type\+Def \texorpdfstring{$\ast$}{*}}]{Port}{, }\item[{uint8\+\_\+t}]{pin}{, }\item[{uint8\+\_\+t}]{mode}{, }\item[{uint8\+\_\+t}]{output\+\_\+type}{, }\item[{uint8\+\_\+t}]{speed}{, }\item[{uint8\+\_\+t}]{pull}{, }\item[{uint8\+\_\+t}]{alternate\+\_\+function}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a specific pin with given parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & Pointer to GPIO port base address. \\
+\hline
+{\em pin} & Pin number to initialize (0-\/15). \\
+\hline
+{\em mode} & Pin mode (input, output, alternate function, analog). \\
+\hline
+{\em output\+\_\+type} & Output type (push-\/pull, open-\/drain). \\
+\hline
+{\em speed} & Speed level (low, medium, high, very high). \\
+\hline
+{\em pull} & Pull-\/up/pull-\/down configuration (none, pull-\/up, pull-\/down). \\
+\hline
+{\em alternate\+\_\+function} & Alternate function selection (0-\/15). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00198}{198}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_g_p_i_o_8c_a7ad3ec1a05b66a286b8a849a460b80b0}\index{GPIO.c@{GPIO.c}!EXTI\_ISR@{EXTI\_ISR}}
+\index{EXTI\_ISR@{EXTI\_ISR}!GPIO.c@{GPIO.c}}
+\doxysubsubsection{\texorpdfstring{EXTI\_ISR}{EXTI\_ISR}}
+{\footnotesize\ttfamily \label{_g_p_i_o_8c_a7ad3ec1a05b66a286b8a849a460b80b0} 
+void(\texorpdfstring{$\ast$}{*} EXTI\+\_\+\+ISR\mbox{[}16\mbox{]})(void) (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_p_i_o_8c_source_l00034}{34}} of file \mbox{\hyperlink{_g_p_i_o_8c_source}{GPIO.\+c}}.
+

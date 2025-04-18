@@ -1,0 +1,152 @@
+\doxysection{Console.\+h File Reference}
+\hypertarget{_console_8h}{}\label{_console_8h}\index{Console.h@{Console.h}}
+
+
+Console Interface for STM32\+F407\+VGT6.  
+
+
+{\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include "{}GPIO/\+GPIO.\+h"{}}\newline
+{\ttfamily \#include "{}USART/\+USART.\+h"{}}\newline
+{\ttfamily \#include "{}DMA/\+DMA.\+h"{}}\newline
+Include dependency graph for Console.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_console_8h_ae1300617e992fdeb481f89723b312b73}{Console\+\_\+\+Init}} (int32\+\_\+t baudrate)
+\begin{DoxyCompactList}\small\item\em Initializes the console interface with a specified baud rate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_console_8h_af6bcaf38945512a3798bb57cf7227fea}{print\+Console}} (char \texorpdfstring{$\ast$}{*}msg,...)
+\begin{DoxyCompactList}\small\item\em Sends a formatted message over the console. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_console_8h_a54acec17f75606ec1dd085582be0d328}{read\+Console}} (const char \texorpdfstring{$\ast$}{*}msg,...)
+\begin{DoxyCompactList}\small\item\em Reads a formatted input from the console. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Console Interface for STM32\+F407\+VGT6. 
+
+This header file provides the interface for the console module, enabling UART-\/based input and output for debugging and communication on the STM32\+F407\+VGT6 microcontroller. The console uses DMA for efficient data handling and supports formatted input/output functions similar to {\ttfamily printf} and {\ttfamily scanf}.
+
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/12-\/19
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Kunal 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{_console_8h_source}{Console.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_console_8h_ae1300617e992fdeb481f89723b312b73}\index{Console.h@{Console.h}!Console\_Init@{Console\_Init}}
+\index{Console\_Init@{Console\_Init}!Console.h@{Console.h}}
+\doxysubsubsection{\texorpdfstring{Console\_Init()}{Console\_Init()}}
+{\footnotesize\ttfamily \label{_console_8h_ae1300617e992fdeb481f89723b312b73} 
+void Console\+\_\+\+Init (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{baudrate}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the console interface with a specified baud rate. 
+
+This function configures the UART interface for communication, including setting the baud rate, enabling DMA, and configuring GPIO pins for UART.
+
+
+\begin{DoxyParams}{Parameters}
+{\em baudrate} & Desired baud rate for UART communication.\\
+\hline
+\end{DoxyParams}
+Initializes the console interface with a specified baud rate.
+
+This function configures UART4 for communication, sets up DMA for data handling, and prepares the GPIO pins for UART communication.
+
+
+\begin{DoxyParams}{Parameters}
+{\em baudrate} & Desired baud rate for UART communication. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_console_8c_source_l00062}{62}} of file \mbox{\hyperlink{_console_8c_source}{Console.\+c}}.
+
+\Hypertarget{_console_8h_af6bcaf38945512a3798bb57cf7227fea}\index{Console.h@{Console.h}!printConsole@{printConsole}}
+\index{printConsole@{printConsole}!Console.h@{Console.h}}
+\doxysubsubsection{\texorpdfstring{printConsole()}{printConsole()}}
+{\footnotesize\ttfamily \label{_console_8h_af6bcaf38945512a3798bb57cf7227fea} 
+void print\+Console (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{msg}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Sends a formatted message over the console. 
+
+This function formats a message using {\ttfamily vsprintf} and sends it over UART using DMA. It supports the same format specifiers as {\ttfamily printf}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Format string for the message to send. \\
+\hline
+{\em ...} & Variable arguments for the format string.\\
+\hline
+\end{DoxyParams}
+Sends a formatted message over the console.
+
+This function formats a string using {\ttfamily vsprintf} and sends it over UART using DMA. It supports formatted strings with variable arguments.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Format string for the message to send. \\
+\hline
+{\em ...} & Variable arguments for the format string. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_console_8c_source_l00092}{92}} of file \mbox{\hyperlink{_console_8c_source}{Console.\+c}}.
+
+\Hypertarget{_console_8h_a54acec17f75606ec1dd085582be0d328}\index{Console.h@{Console.h}!readConsole@{readConsole}}
+\index{readConsole@{readConsole}!Console.h@{Console.h}}
+\doxysubsubsection{\texorpdfstring{readConsole()}{readConsole()}}
+{\footnotesize\ttfamily \label{_console_8h_a54acec17f75606ec1dd085582be0d328} 
+int read\+Console (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{msg}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Reads a formatted input from the console. 
+
+This function waits for user input, processes it using {\ttfamily vsscanf}, and stores the result in the provided variables. DMA is used for efficient data reception.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Format string for the expected input. \\
+\hline
+{\em ...} & Pointers to variables where the input data will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of items successfully read and assigned, or -\/1 in case of an error.
+\end{DoxyReturn}
+This function waits for user input, processes it using {\ttfamily vsscanf}, and stores the parsed data in the provided variables.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Format string for the expected input. \\
+\hline
+{\em ...} & Pointers to variables where the input data will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of successfully parsed items or -\/1 in case of an error. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_console_8c_source_l00137}{137}} of file \mbox{\hyperlink{_console_8c_source}{Console.\+c}}.
+

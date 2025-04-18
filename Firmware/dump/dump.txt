@@ -1,0 +1,2 @@
+	if((code & 0x01) == 1)GPIO_Pin_High(temp_config->G->Port, temp_config->G->Pin_numer);
+	else if((code & 0x01) == 0)GPIO_Pin_Low(temp_config->G->Port, temp_config->G->Pin_numer);
