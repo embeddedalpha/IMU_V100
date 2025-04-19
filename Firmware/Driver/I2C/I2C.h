@@ -22,15 +22,25 @@ typedef struct I2C_Config
 	uint8_t SDA_Pin;
 	int32_t Speed_Mode;
 	uint8_t Mode;
-	uint8_t Interrupts;
+	uint8_t Interrupts_Enable;
 	uint8_t DMA_Control;
+
+	struct __I2C_Interrupts__{
+		void (*Error_ISR)(void);
+		void (*Event_ISR)(void);
+		void (*Buffer_ISR)(void);
+	}Interrupts;
+
 }I2C_Config;
 
 
 
 void I2C_Init(I2C_Config *config);
+
 void I2C_Clock_Enable(I2C_Config *config);
+
 void I2C_Clock_Disable(I2C_Config *config);
+
 void I2C_Reset(I2C_Config *config);
 
 int8_t I2C_Master_Start(I2C_Config *config);

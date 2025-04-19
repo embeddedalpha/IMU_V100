@@ -18,6 +18,46 @@ DMA_Config xI2C2_RX;
 DMA_Config xI2C3_RX;
 
 
+volatile bool I2C1_DMA_TX_ISR_Flag = 0;
+volatile bool I2C2_DMA_TX_ISR_Flag = 0;
+volatile bool I2C3_DMA_TX_ISR_Flag = 0;
+
+volatile bool I2C1_DMA_RX_ISR_Flag = 0;
+volatile bool I2C2_DMA_RX_ISR_Flag = 0;
+volatile bool I2C3_DMA_RX_ISR_Flag = 0;
+
+
+void I2C1_DMA_TX_ISR(void)
+{
+	I2C1_DMA_TX_ISR_Flag = 1;
+}
+
+void I2C2_DMA_TX_ISR(void)
+{
+	I2C2_DMA_TX_ISR_Flag = 1;
+}
+
+void I2C3_DMA_TX_ISR(void)
+{
+	I2C3_DMA_TX_ISR_Flag = 1;
+}
+
+void I2C1_DMA_RX_ISR(void)
+{
+	I2C1_DMA_RX_ISR_Flag = 1;
+}
+
+void I2C2_DMA_RX_ISR(void)
+{
+	I2C2_DMA_RX_ISR_Flag = 1;
+}
+
+void I2C3_DMA_RX_ISR(void)
+{
+	I2C3_DMA_RX_ISR_Flag = 1;
+}
+
+
 void I2C1_DMA_Config(uint8_t *pBuffer, uint32_t len)
 {
     // Enable clock for DMA1 if not already enabled
@@ -119,7 +159,7 @@ void I2C_Clock_Disable(I2C_Config *config)
 void I2C_Reset(I2C_Config *config)
 {
 	config->Speed_Mode = I2C_Configuration.Speed_Mode.FM_Mode;
-	config->Interrupts = I2C_Configuration.Interrupts.Disable;
+	config->Interrupts_Enable = I2C_Configuration.Interrupts_Enable.Disable;
 	config->Mode = I2C_Configuration.Mode.Master;
 	I2C_Clock_Disable(config);
 }
@@ -135,21 +175,21 @@ void I2C_Init(I2C_Config *config)
 	config -> Port -> CR1 &= ~I2C_CR1_NOSTRETCH;
 
 
-	if(config -> Interrupts == I2C_Configuration.Interrupts.Disable)
+	if(config -> Interrupts_Enable == I2C_Configuration.Interrupts_Enable.Disable)
 	{
 		config -> Port -> CR2 &= ~(I2C_CR2_ITBUFEN | I2C_CR2_ITERREN | I2C_CR2_ITEVTEN);
 	}
 	else
 	{
-		if(config->Interrupts == I2C_Configuration.Interrupts.Buffer)
+		if(config->Interrupts_Enable == I2C_Configuration.Interrupts_Enable.Buffer)
 		{
 			config -> Port -> CR2 |= I2C_CR2_ITBUFEN;
 		}
-		if(config->Interrupts == I2C_Configuration.Interrupts.Error)
+		if(config->Interrupts_Enable == I2C_Configuration.Interrupts_Enable.Error)
 		{
 			config -> Port -> CR2 |= I2C_CR2_ITERREN;
 		}
-		if(config->Interrupts == I2C_Configuration.Interrupts.Event)
+		if(config->Interrupts_Enable == I2C_Configuration.Interrupts_Enable.Event)
 		{
 			config -> Port -> CR2 |= I2C_CR2_ITEVTEN;
 		}
@@ -171,12 +211,13 @@ void I2C_Init(I2C_Config *config)
 		config->Port  -> TRISE = 43;
 	}
 
-	if(config -> DMA_Control == I2C_Configuration.DMA_Control.RX_DMA_Enable)
+	if((config -> DMA_Control & I2C_Configuration.DMA_Control.RX_DMA_Enable) == true)
 	{
 		config -> Port -> CR2 |= I2C_CR2_LAST;
 
 		if(config->Port == I2C1)
 		{
+			xI2C1_RX.ISR_Routines.Full_Transfer_Commplete_ISR = I2C1_DMA_RX_ISR;
 //			config -> Port -> CR2 |= I2C_CR2_DMAEN;
 			xI2C1_RX.Request = DMA_Configuration.Request.I2C1_RX;
 			xI2C1_RX.circular_mode = DMA_Configuration.Circular_Mode.Disable;
@@ -201,6 +242,7 @@ void I2C_Init(I2C_Config *config)
 			xI2C2_RX.peripheral_pointer_increment = DMA_Configuration.Peripheral_Pointer_Increment.Enable;
 			xI2C2_RX.transfer_direction = DMA_Configuration.Transfer_Direction.Peripheral_to_memory;
 			xI2C2_RX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			xI2C2_RX.ISR_Routines.Full_Transfer_Commplete_ISR = I2C2_DMA_RX_ISR;
 			DMA_Init(&xI2C2_RX);
 		}
 
@@ -215,7 +257,61 @@ void I2C_Init(I2C_Config *config)
 			xI2C3_RX.peripheral_pointer_increment = DMA_Configuration.Peripheral_Pointer_Increment.Enable;
 			xI2C3_RX.transfer_direction = DMA_Configuration.Transfer_Direction.Peripheral_to_memory;
 			xI2C3_RX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			xI2C3_RX.ISR_Routines.Full_Transfer_Commplete_ISR = I2C3_DMA_RX_ISR;
 			DMA_Init(&xI2C3_RX);
+		}
+
+	}
+
+	if((config -> DMA_Control & I2C_Configuration.DMA_Control.TX_DMA_Enable) == true)
+	{
+		config -> Port -> CR2 |= I2C_CR2_LAST;
+
+		if(config->Port == I2C1)
+		{
+			xI2C1_TX.ISR_Routines.Full_Transfer_Commplete_ISR = I2C1_DMA_TX_ISR;
+
+//			config -> Port -> CR2 |= I2C_CR2_DMAEN;
+			xI2C1_TX.Request = DMA_Configuration.Request.I2C1_TX;
+			xI2C1_TX.circular_mode = DMA_Configuration.Circular_Mode.Disable;
+			xI2C1_TX.flow_control = DMA_Configuration.Flow_Control.DMA_Control;
+			xI2C1_TX.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
+			xI2C1_TX.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;
+			xI2C1_TX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.byte;
+			xI2C1_TX.transfer_direction = DMA_Configuration.Transfer_Direction.Memory_to_peripheral;
+			xI2C1_TX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			DMA_Init(&xI2C1_TX);
+
+		}
+
+		else if(config->Port == I2C2)
+		{
+			xI2C2_TX.ISR_Routines.Full_Transfer_Commplete_ISR = I2C2_DMA_TX_ISR;
+			xI2C2_TX.Request = DMA_Configuration.Request.I2C2_TX;
+			xI2C2_TX.circular_mode = DMA_Configuration.Circular_Mode.Disable;
+			xI2C2_TX.flow_control = DMA_Configuration.Flow_Control.DMA_Control;
+			xI2C2_TX.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
+			xI2C2_TX.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;
+			xI2C2_TX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.byte;
+			xI2C2_TX.peripheral_pointer_increment = DMA_Configuration.Peripheral_Pointer_Increment.Enable;
+			xI2C2_TX.transfer_direction = DMA_Configuration.Transfer_Direction.Memory_to_peripheral;
+			xI2C2_TX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			DMA_Init(&xI2C2_TX);
+		}
+
+		else if(config->Port == I2C3)
+		{
+			xI2C3_TX.ISR_Routines.Full_Transfer_Commplete_ISR = I2C3_DMA_TX_ISR;
+			xI2C3_TX.Request = DMA_Configuration.Request.I2C3_TX;
+			xI2C3_TX.circular_mode = DMA_Configuration.Circular_Mode.Disable;
+			xI2C3_TX.flow_control = DMA_Configuration.Flow_Control.DMA_Control;
+			xI2C3_TX.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
+			xI2C3_TX.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;
+			xI2C3_TX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.byte;
+			xI2C3_TX.peripheral_pointer_increment = DMA_Configuration.Peripheral_Pointer_Increment.Enable;
+			xI2C3_TX.transfer_direction = DMA_Configuration.Transfer_Direction.Memory_to_peripheral;
+			xI2C3_TX.priority_level = DMA_Configuration.Priority_Level.Very_high;
+			DMA_Init(&xI2C3_TX);
 		}
 
 	}
@@ -534,18 +630,84 @@ int I2C_Master_Read_Registers_Bulk(I2C_Config *config, uint8_t device_address, u
 
 	if(config->Port == I2C1)
 	{
-		while (!(xI2C1_RX.Request.Controller->HISR & DMA_HISR_TCIF5));  // Wait for transfer complete flag (Stream0)
-		xI2C1_RX.Request.Controller->HIFCR |= DMA_HIFCR_CTCIF5;
+		while(I2C1_DMA_RX_ISR_Flag == false){}
+		I2C1_DMA_RX_ISR_Flag = true;
 	}
 	else if(config->Port == I2C2)
 	{
-		while (!(xI2C2_RX.Request.Controller->HISR & DMA_HISR_TCIF5));  // Wait for transfer complete flag (Stream0)
-		xI2C2_RX.Request.Controller->HIFCR |= DMA_HIFCR_CTCIF5;
+		while(I2C2_DMA_RX_ISR_Flag == false){}
+		I2C2_DMA_RX_ISR_Flag = true;
 	}
 	else if(config->Port == I2C3)
 	{
-		while (!(xI2C3_RX.Request.Controller->HISR & DMA_HISR_TCIF5));  // Wait for transfer complete flag (Stream0)
-		xI2C3_RX.Request.Controller->HIFCR |= DMA_HIFCR_CTCIF5;
+		while(I2C3_DMA_RX_ISR_Flag == false){}
+		I2C3_DMA_RX_ISR_Flag = true;
+	}
+
+
+	config->Port->CR2 &= ~I2C_CR2_DMAEN;
+	I2C_Master_Stop(config);
+
+	return 1;
+}
+
+
+
+int I2C_Master_Write_Registers_Bulk(I2C_Config *config, uint8_t device_address, uint8_t reg_address, uint8_t *data, uint16_t length)
+{
+
+	if(config->Port == I2C1)
+	{
+		xI2C1_TX.memory_address = (uint32_t)&data[0];
+		xI2C1_TX.peripheral_address = (uint32_t)&config->Port->DR;
+		xI2C1_TX.buffer_length = length;
+		DMA_Set_Target(&xI2C1_TX);
+		DMA_Set_Trigger(&xI2C1_TX);
+	}
+	else if(config->Port == I2C2)
+	{
+		xI2C2_TX.memory_address = (uint32_t)&data[0];
+		xI2C2_TX.peripheral_address = (uint32_t)&config->Port->DR;
+		xI2C2_TX.buffer_length = length;
+		DMA_Set_Target(&xI2C2_TX);
+		DMA_Set_Trigger(&xI2C2_TX);
+	}
+	else if(config->Port == I2C3)
+	{
+		xI2C3_TX.memory_address = (uint32_t)&data[0];
+		xI2C3_TX.peripheral_address = (uint32_t)&config->Port->DR;
+		xI2C3_TX.buffer_length = length;
+		DMA_Set_Target(&xI2C3_TX);
+		DMA_Set_Trigger(&xI2C3_TX);
+	}
+	else
+	{
+		return -1;
+	}
+
+
+
+
+	config->Port->CR2 |= I2C_CR2_DMAEN;
+	I2C_Master_Start(config);
+	I2C_Master_Address(config, device_address,0);
+	I2C_Master_Send_Byte(config, reg_address);
+
+
+	if(config->Port == I2C1)
+	{
+		while(I2C1_DMA_TX_ISR_Flag == false){}
+		I2C1_DMA_TX_ISR_Flag = true;
+	}
+	else if(config->Port == I2C2)
+	{
+		while(I2C2_DMA_TX_ISR_Flag == false){}
+		I2C2_DMA_TX_ISR_Flag = true;
+	}
+	else if(config->Port == I2C3)
+	{
+		while(I2C3_DMA_TX_ISR_Flag == false){}
+		I2C3_DMA_TX_ISR_Flag = true;
 	}
 
 

@@ -48,7 +48,7 @@ int main(void)
 
 	mpu6050.Port = I2C1;
 	mpu6050.Mode = I2C_Configuration.Mode.Master;
-	mpu6050.Interrupts = I2C_Configuration.Interrupts.Disable;
+	mpu6050.Interrupts_Enable = I2C_Configuration.Interrupts_Enable.Disable;
 	mpu6050.DMA_Control = I2C_Configuration.DMA_Control.RX_DMA_Enable;
 	mpu6050.SCL_Pin = I2C_Configuration.Pin.__I2C1__.SCL.PB6;
 	mpu6050.SDA_Pin = I2C_Configuration.Pin.__I2C1__.SDA.PB7;

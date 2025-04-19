@@ -66,12 +66,12 @@ typedef struct __I2C_Pin__{
 
 
 /***************************************************************************************************************/
-typedef struct __I2C_Interrupts__{
+typedef struct __I2C_Interrupt__{
 	uint16_t Disable;
 	uint16_t Error;
 	uint16_t Event;
 	uint16_t Buffer;
-}__I2C_Interrupts__;
+}__I2C_Interrupt__;
 /***************************************************************************************************************/
 typedef struct __I2C_Speed_Mode__{
 	uint8_t SM_Mode;
@@ -91,7 +91,7 @@ static const struct I2C_Configuration
 
 	__I2C_Pin__ Pin;
 
-	__I2C_Interrupts__ Interrupts;
+	__I2C_Interrupt__ Interrupts_Enable;
 
 	__I2C_Speed_Mode__ Speed_Mode;
 
@@ -111,7 +111,7 @@ static const struct I2C_Configuration
 				.FM_Mode = 1,
 		},
 
-		.Interrupts =
+		.Interrupts_Enable =
 		{
 				.Disable = 0,
 				.Error = 1,
